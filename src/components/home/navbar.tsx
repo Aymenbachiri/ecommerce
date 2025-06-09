@@ -7,7 +7,7 @@ import { useState } from "react";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "../ui/button";
 import { useTranslations } from "next-intl";
-import LocaleSwitcher from "./locale-switcher";
+import { LocaleSwitcher } from "./locale-switcher";
 
 export function Navbar(): React.JSX.Element {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);

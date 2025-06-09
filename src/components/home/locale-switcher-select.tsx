@@ -1,29 +1,40 @@
 "use client";
 
-import clsx from "clsx";
 import { useParams } from "next/navigation";
 import { Locale } from "next-intl";
 import { useTransition } from "react";
 import { usePathname, useRouter } from "@/i18n/navigation";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
-type Props = {
-  children: React.ReactNode;
-  defaultValue: string;
+type LocaleOption = {
+  value: string;
   label: string;
 };
 
-export default function LocaleSwitcherSelect({
-  children,
+type Props = {
+  defaultValue: string;
+  label: string;
+  options: LocaleOption[];
+};
+
+export function LocaleSwitcherSelect({
   defaultValue,
   label,
+  options,
 }: Props): React.JSX.Element {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const params = useParams();
 
-  function onSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    const nextLocale = event.target.value as Locale;
+  function onValueChange(value: string): void {
+    const nextLocale = value as Locale;
     startTransition(() => {
       router.replace(
         // @ts-expect-error -- TypeScript will validate that only known `params`
@@ -36,22 +47,24 @@ export default function LocaleSwitcherSelect({
   }
 
   return (
-    <label
-      className={clsx(
-        "relative text-gray-400",
-        isPending && "transition-opacity [&:disabled]:opacity-30",
-      )}
-    >
-      <p className="sr-only">{label}</p>
-      <select
-        className="inline-flex appearance-none bg-transparent py-3 pr-6 pl-2"
+    <div className="relative">
+      <Select
         defaultValue={defaultValue}
+        onValueChange={onValueChange}
         disabled={isPending}
-        onChange={onSelectChange}
       >
-        {children}
-      </select>
-      <span className="pointer-events-none absolute top-[8px] right-2">⌄</span>
-    </label>
+        <SelectTrigger className="w-auto border-none bg-transparent text-gray-400 shadow-none focus:ring-0">
+          <SelectValue aria-label={label} />
+        </SelectTrigger>
+        <SelectContent>
+          {options.map((option) => (
+            <SelectItem key={option.value} value={option.value}>
+              {option.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <span className="sr-only">{label}</span>
+    </div>
   );
 }
