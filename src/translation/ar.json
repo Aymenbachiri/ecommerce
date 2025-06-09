@@ -2,7 +2,7 @@
   "HomePage": {
     "LocaleSwitcher": {
       "label": "تغيير اللغة",
-      "locale": "{locale, select, en {🇺🇸 إنجليزية} fr {🇫🇷 فرنسية} other {غير معروف}}"
+      "locale": "{locale, select, en {🇺🇸 إنجليزية} fr {🇫🇷 فرنسية} ar {🇸🇦 العربية} other {غير معروف}}"
     },
     "navbar": {
       "features": "الميزات",
