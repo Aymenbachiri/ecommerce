@@ -1,5 +1,9 @@
 {
   "HomePage": {
+    "localeLayoutMetadata": {
+      "title": "ShopFlow - Modern Ecommerce Platform",
+      "description": "Experience the future of online shopping with our feature-rich ecommerce platform"
+    },
     "LocaleSwitcher": {
       "label": "Change language",
       "locale": "{locale, select, en {🇺🇸 English} fr {🇫🇷 Français} ar {🇸🇦 العربية} other {Unknown}}"
