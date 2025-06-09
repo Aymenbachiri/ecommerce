@@ -1,6 +1,14 @@
 {
   "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+    "LocaleSwitcher": {
+      "label": "Change language",
+      "locale": "{locale, select, en {🇺🇸 English} fr {🇫🇷 Français} ar {🇸🇦 العربية} other {Unknown}}"
+    },
+    "navbar": {
+      "features": "Features",
+      "demo": "Demo",
+      "pricing": "Pricing",
+      "signIn": "Sign In"
+    }
   }
 }

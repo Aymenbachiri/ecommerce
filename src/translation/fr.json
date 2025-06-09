@@ -1,0 +1,14 @@
+{
+  "HomePage": {
+    "LocaleSwitcher": {
+      "label": "Changer la langue",
+      "locale": "{locale, select, en {🇺🇸 Anglais} fr {🇫🇷 Français} other {Inconnu}}"
+    },
+    "navbar": {
+      "features": "Fonctionnalités",
+      "demo": "Démo",
+      "pricing": "Tarification",
+      "signIn": "Se connecter"
+    }
+  }
+}

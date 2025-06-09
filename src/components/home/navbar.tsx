@@ -6,9 +6,12 @@ import Link from "next/link";
 import { useState } from "react";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "../ui/button";
+import { useTranslations } from "next-intl";
+import LocaleSwitcher from "./locale-switcher";
 
 export function Navbar(): React.JSX.Element {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const t = useTranslations("HomePage.navbar");
 
   return (
     <>
@@ -36,30 +39,29 @@ export function Navbar(): React.JSX.Element {
               href="/#features"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
-              Features
+              {t("features")}
             </Link>
             <Link
               href="/#demo"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
-              Demo
+              {t("demo")}
             </Link>
             <Link
               href="/#pricing"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
-              Pricing
+              {t("pricing")}
             </Link>
           </div>
 
           <div className="flex items-center space-x-4">
             <ThemeToggle />
+            <LocaleSwitcher />
 
             <Button variant="outline" className="hidden sm:inline-flex">
-              Sign In
+              {t("signIn")}
             </Button>
-
-            <Button className="hidden sm:inline-flex">Get Started</Button>
 
             <button
               className="text-muted-foreground hover:text-foreground inline-flex items-center justify-center rounded-md p-2 focus:outline-none md:hidden"
@@ -88,27 +90,26 @@ export function Navbar(): React.JSX.Element {
                 className="text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Features
+                {t("features")}
               </Link>
               <Link
                 href="/#demo"
                 className="text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Demo
+                {t("demo")}
               </Link>
               <Link
                 href="/#pricing"
                 className="text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Pricing
+                {t("pricing")}
               </Link>
               <div className="flex flex-col space-y-2 pt-4">
                 <Button variant="outline" className="w-full">
-                  Sign In
+                  {t("signIn")}
                 </Button>
-                <Button className="w-full">Get Started</Button>
               </div>
             </div>
           </motion.div>
