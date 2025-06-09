@@ -26,24 +26,26 @@ export function Navbar(): React.JSX.Element {
             <div className="bg-primary flex h-8 w-8 items-center justify-center rounded-lg">
               <ShoppingCart className="text-primary-foreground h-5 w-5" />
             </div>
-            <span className="text-xl font-bold">ShopFlow</span>
+            <Link href="/#" className="text-xl font-bold transition-colors">
+              ShopFlow
+            </Link>
           </motion.div>
 
           <div className="hidden items-center space-x-8 md:flex">
             <Link
-              href="#features"
+              href="/#features"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
               Features
             </Link>
             <Link
-              href="#demo"
+              href="/#demo"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
               Demo
             </Link>
             <Link
-              href="#pricing"
+              href="/#pricing"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
               Pricing
@@ -82,21 +84,21 @@ export function Navbar(): React.JSX.Element {
           >
             <div className="flex flex-col space-y-4 px-4 py-6">
               <Link
-                href="#features"
+                href="/#features"
                 className="text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Features
               </Link>
               <Link
-                href="#demo"
+                href="/#demo"
                 className="text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Demo
               </Link>
               <Link
-                href="#pricing"
+                href="/#pricing"
                 className="text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
