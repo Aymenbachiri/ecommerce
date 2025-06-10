@@ -14,5 +14,13 @@
       "pricing": "Pricing",
       "signIn": "Sign In"
     }
+  },
+  "Hero": {
+    "new_advanced_analytics": "New: Advanced Analytics Dashboard",
+    "the_future_of": "The Future of",
+    "ecommerce": "Ecommerce",
+    "build_stunning_online_stores": "Build stunning online stores with our comprehensive platform featuring advanced analytics, seamless checkout, and powerful admin tools.",
+    "start_free_trial": "Start Free Trial",
+    "watch_demo": "Watch Demo"
   }
 }

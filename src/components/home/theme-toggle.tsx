@@ -2,10 +2,9 @@
 
 import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { type JSX } from "react";
 import { useNextTheme } from "@/lib/hooks/use-next-theme";
 
-export function ThemeToggle(): JSX.Element | null {
+export function ThemeToggle(): React.JSX.Element | null {
   const { theme, mounted, toggle } = useNextTheme();
   if (!mounted) return null;
 

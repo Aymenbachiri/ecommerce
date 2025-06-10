@@ -4,8 +4,11 @@ import { Badge } from "../ui/badge";
 import { ArrowRight, Star } from "lucide-react";
 import { Button } from "../ui/button";
 import { fadeInUp, scaleOnHover, staggerContainer } from "./animation";
+import { useTranslations } from "next-intl";
 
 export function Hero(): React.JSX.Element {
+  const t = useTranslations("Hero");
+
   return (
     <section className="pt-24 pb-12 md:pt-32 md:pb-20">
       <div className="container mx-auto px-4">
@@ -18,7 +21,7 @@ export function Hero(): React.JSX.Element {
           <motion.div variants={fadeInUp}>
             <Badge variant="secondary" className="mb-4">
               <Star className="mr-1 h-4 w-4" />
-              New: Advanced Analytics Dashboard
+              {t("new_advanced_analytics")}
             </Badge>
           </motion.div>
 
@@ -26,10 +29,10 @@ export function Hero(): React.JSX.Element {
             className="from-foreground to-muted-foreground mb-6 bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent md:text-6xl lg:text-7xl"
             variants={fadeInUp}
           >
-            The Future of
+            {t("the_future_of")}
             <br />
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Ecommerce
+              {t("ecommerce")}
             </span>
           </motion.h1>
 
@@ -37,9 +40,7 @@ export function Hero(): React.JSX.Element {
             className="text-muted-foreground mx-auto mb-8 max-w-2xl text-xl md:text-2xl"
             variants={fadeInUp}
           >
-            Build stunning online stores with our comprehensive platform
-            featuring advanced analytics, seamless checkout, and powerful admin
-            tools.
+            {t("build_stunning_online_stores")}
           </motion.p>
 
           <motion.div
@@ -47,7 +48,7 @@ export function Hero(): React.JSX.Element {
             variants={fadeInUp}
           >
             <Button size="lg" className="px-8 py-6 text-lg" {...scaleOnHover}>
-              Start Free Trial
+              {t("start_free_trial")}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button
@@ -56,7 +57,7 @@ export function Hero(): React.JSX.Element {
               className="px-8 py-6 text-lg"
               {...scaleOnHover}
             >
-              Watch Demo
+              {t("watch_demo")}
             </Button>
           </motion.div>
         </motion.div>

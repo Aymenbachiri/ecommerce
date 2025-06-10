@@ -5,11 +5,7 @@ export const fadeInUp = {
 };
 
 export const staggerContainer = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
+  animate: { transition: { staggerChildren: 0.1 } },
 };
 
 export const scaleOnHover = {

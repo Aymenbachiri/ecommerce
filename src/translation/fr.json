@@ -14,5 +14,13 @@
       "pricing": "Tarification",
       "signIn": "Se connecter"
     }
+  },
+  "Hero": {
+    "new_advanced_analytics": "Nouveau : Tableau de bord d'analytique avancée",
+    "the_future_of": "L'avenir de",
+    "ecommerce": "E-commerce",
+    "build_stunning_online_stores": "Créez des boutiques en ligne impressionnantes avec notre plateforme complète qui propose des analyses avancées, un processus de paiement fluide et des outils d'administration puissants.",
+    "start_free_trial": "Commencer l'essai gratuit",
+    "watch_demo": "Regarder la démo"
   }
 }
