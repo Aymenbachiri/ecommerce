@@ -118,5 +118,11 @@
     },
     "copyright": "© {year} ShopFlow. جميع الحقوق محفوظة.",
     "builtBy": "بنيت بـ <heartIcon></heartIcon> بواسطة"
+  },
+  "SigninPage": {
+    "SigninPageMetadata": {
+      "title": "تسجيل الدخول",
+      "description": "تسجيل الدخول إلى حسابك"
+    }
   }
 }

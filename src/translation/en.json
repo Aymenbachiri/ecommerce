@@ -118,5 +118,11 @@
     },
     "copyright": "© {year} ShopFlow. All rights reserved.",
     "builtBy": "Built with <heartIcon></heartIcon> by"
+  },
+  "SigninPage": {
+    "SigninPageMetadata": {
+      "title": "Sign In",
+      "description": "Sign in to your account"
+    }
   }
 }
