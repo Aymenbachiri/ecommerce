@@ -89,5 +89,11 @@
       "activeUsers": "Active Users",
       "conversionRate": "Conversion Rate"
     }
+  },
+  "Cta": {
+    "title": "Ready to Transform Your Business?",
+    "subtitle": "Join thousands of businesses already using ShopFlow to create amazing online shopping experiences.",
+    "primary_button": "Start Your Free Trial",
+    "secondary_button": "Schedule Demo"
   }
 }

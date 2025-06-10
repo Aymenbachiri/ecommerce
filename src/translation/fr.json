@@ -89,5 +89,11 @@
       "activeUsers": "Utilisateurs actifs",
       "conversionRate": "Taux de conversion"
     }
+  },
+  "Cta": {
+    "title": "Prêt à transformer votre entreprise ?",
+    "subtitle": "Rejoignez des milliers d'entreprises qui utilisent déjà ShopFlow pour créer des expériences d'achat en ligne incroyables.",
+    "primary_button": "Commencez votre essai gratuit",
+    "secondary_button": "Planifier une démo"
   }
 }
