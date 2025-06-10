@@ -28,5 +28,43 @@
     "response_time": "Response Time",
     "products_supported": "Products Supported",
     "support": "Support"
+  },
+  "Features": {
+    "title": "Everything You Need to Succeed",
+    "subtitle": "From product management to advanced analytics, our platform provides all the tools you need to build and scale your online business.",
+    "featureList": {
+      "productManagement": {
+        "title": "Product Management",
+        "description": "Comprehensive product listing with pagination and infinite scroll for a seamless Browse experience."
+      },
+      "smartSearch": {
+        "title": "Smart Search & Filters",
+        "description": "Advanced category filters and intelligent search functionality to help users find exactly what they need."
+      },
+      "dynamicCart": {
+        "title": "Dynamic Shopping Cart",
+        "description": "Powered by Jotai state management for lightning-fast cart operations and real-time updates."
+      },
+      "secureCheckout": {
+        "title": "Secure Checkout",
+        "description": "Robust validation and secure payment processing with a comprehensive order management system."
+      },
+      "analyticsDashboard": {
+        "title": "Analytics Dashboard",
+        "description": "Real-time sales analytics and order insights to help you make data-driven business decisions."
+      },
+      "adminPanel": {
+        "title": "Admin Panel",
+        "description": "Full CRUD operations for product management with an intuitive administrative interface."
+      },
+      "responsiveDesign": {
+        "title": "Responsive Design",
+        "description": "Perfectly optimized for all devices with a mobile-first approach and cross-platform compatibility."
+      },
+      "performanceOptimized": {
+        "title": "Performance Optimized",
+        "description": "Skeleton loaders, lazy loading, and optimized animations for a superior user experience."
+      }
+    }
   }
 }

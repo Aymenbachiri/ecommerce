@@ -28,5 +28,43 @@
     "response_time": "Temps de réponse",
     "products_supported": "Produits supportés",
     "support": "Support"
+  },
+  "Features": {
+    "title": "Tout ce dont vous avez besoin pour réussir",
+    "subtitle": "De la gestion des produits aux analyses avancées, notre plateforme fournit tous les outils dont vous avez besoin pour créer et développer votre activité en ligne.",
+    "featureList": {
+      "productManagement": {
+        "title": "Gestion des produits",
+        "description": "Liste complète des produits avec pagination et défilement infini pour une expérience de navigation fluide."
+      },
+      "smartSearch": {
+        "title": "Recherche et filtres intelligents",
+        "description": "Filtres de catégories avancés et fonctionnalité de recherche intelligente pour aider les utilisateurs à trouver exactement ce dont ils ont besoin."
+      },
+      "dynamicCart": {
+        "title": "Panier d'achat dynamique",
+        "description": "Propulsé par la gestion d'état Jotai pour des opérations de panier ultra-rapides et des mises à jour en temps réel."
+      },
+      "secureCheckout": {
+        "title": "Paiement sécurisé",
+        "description": "Validation robuste et traitement des paiements sécurisé avec un système complet de gestion des commandes."
+      },
+      "analyticsDashboard": {
+        "title": "Tableau de bord analytique",
+        "description": "Analyses des ventes en temps réel et informations sur les commandes pour vous aider à prendre des décisions commerciales basées sur les données."
+      },
+      "adminPanel": {
+        "title": "Panneau d'administration",
+        "description": "Opérations CRUD complètes pour la gestion des produits avec une interface administrative intuitive."
+      },
+      "responsiveDesign": {
+        "title": "Conception réactive",
+        "description": "Parfaitement optimisé pour tous les appareils avec une approche mobile-first et une compatibilité multiplateforme."
+      },
+      "performanceOptimized": {
+        "title": "Performance optimisée",
+        "description": "Chargeurs squelettes, chargement paresseux et animations optimisées pour une expérience utilisateur supérieure."
+      }
+    }
   }
 }
