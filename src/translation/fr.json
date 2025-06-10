@@ -130,5 +130,11 @@
       "title": "S'inscrire",
       "description": "Créez votre compte"
     }
+  },
+  "DashboardPage": {
+    "DashboardPageMetadata": {
+      "title": "ShopFlow Dashboard - Votre centre de commerce électronique",
+      "description": "Gérez votre boutique e-commerce ShopFlow en toute simplicité. Consultez les ventes, les commandes, les produits et les données clients en un seul endroit. Votre tableau de bord ultime pour développer votre activité en ligne."
+    }
   }
 }

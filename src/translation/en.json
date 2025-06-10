@@ -130,5 +130,11 @@
       "title": "Sign Up",
       "description": "Sign up to your account"
     }
+  },
+  "DashboardPage": {
+    "DashboardPageMetadata": {
+      "title": "ShopFlow Dashboard - Your Ecommerce Hub",
+      "description": "Manage your ShopFlow ecommerce store with ease. View sales, orders, products, and customer data all in one place. Your ultimate dashboard for growing your online business."
+    }
   }
 }
