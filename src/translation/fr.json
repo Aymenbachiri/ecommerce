@@ -95,5 +95,28 @@
     "subtitle": "Rejoignez des milliers d'entreprises qui utilisent déjà ShopFlow pour créer des expériences d'achat en ligne incroyables.",
     "primary_button": "Commencez votre essai gratuit",
     "secondary_button": "Planifier une démo"
+  },
+  "Footer": {
+    "description": "La plateforme e-commerce complète pour les entreprises modernes.",
+    "productSection": {
+      "title": "Produit",
+      "features": "Fonctionnalités",
+      "pricing": "Tarification",
+      "demo": "Démo"
+    },
+    "companySection": {
+      "title": "Entreprise",
+      "about": "À propos",
+      "blog": "Blog",
+      "careers": "Carrières"
+    },
+    "supportSection": {
+      "title": "Support",
+      "helpCenter": "Centre d'aide",
+      "contact": "Contact",
+      "status": "Statut"
+    },
+    "copyright": "© {year} ShopFlow. Tous droits réservés.",
+    "builtBy": "Construit avec <heartIcon></heartIcon> par"
   }
 }

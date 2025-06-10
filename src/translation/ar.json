@@ -95,5 +95,28 @@
     "subtitle": "انضم إلى آلاف الشركات التي تستخدم ShopFlow بالفعل لإنشاء تجارب تسوق مذهلة عبر الإنترنت.",
     "primary_button": "ابدأ تجربتك المجانية",
     "secondary_button": "احجز عرضًا تجريبيًا"
+  },
+  "Footer": {
+    "description": "منصة التجارة الإلكترونية المتكاملة للأعمال الحديثة.",
+    "productSection": {
+      "title": "المنتج",
+      "features": "الميزات",
+      "pricing": "التسعير",
+      "demo": "تجريبي"
+    },
+    "companySection": {
+      "title": "الشركة",
+      "about": "عنا",
+      "blog": "المدونة",
+      "careers": "الوظائف"
+    },
+    "supportSection": {
+      "title": "الدعم",
+      "helpCenter": "مركز المساعدة",
+      "contact": "اتصل بنا",
+      "status": "الحالة"
+    },
+    "copyright": "© {year} ShopFlow. جميع الحقوق محفوظة.",
+    "builtBy": "بنيت بـ <heartIcon></heartIcon> بواسطة"
   }
 }

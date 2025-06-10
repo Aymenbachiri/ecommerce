@@ -95,5 +95,28 @@
     "subtitle": "Join thousands of businesses already using ShopFlow to create amazing online shopping experiences.",
     "primary_button": "Start Your Free Trial",
     "secondary_button": "Schedule Demo"
+  },
+  "Footer": {
+    "description": "The complete ecommerce platform for modern businesses.",
+    "productSection": {
+      "title": "Product",
+      "features": "Features",
+      "pricing": "Pricing",
+      "demo": "Demo"
+    },
+    "companySection": {
+      "title": "Company",
+      "about": "About",
+      "blog": "Blog",
+      "careers": "Careers"
+    },
+    "supportSection": {
+      "title": "Support",
+      "helpCenter": "Help Center",
+      "contact": "Contact",
+      "status": "Status"
+    },
+    "copyright": "© {year} ShopFlow. All rights reserved.",
+    "builtBy": "Built with <heartIcon></heartIcon> by"
   }
 }
