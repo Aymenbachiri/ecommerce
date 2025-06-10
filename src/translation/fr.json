@@ -66,5 +66,28 @@
         "description": "Chargeurs squelettes, chargement paresseux et animations optimisées pour une expérience utilisateur supérieure."
       }
     }
+  },
+  "Demo": {
+    "title": "Voyez-le en action",
+    "description": "Découvrez la puissance de notre plateforme avec des démos interactives et des exemples concrets.",
+    "features": {
+      "productManagement": {
+        "title": "Gestion de produits intuitive",
+        "description": "Ajoutez, modifiez et organisez facilement vos produits grâce à notre interface glisser-déposer et nos opérations en masse."
+      },
+      "analytics": {
+        "title": "Analyses en temps réel",
+        "description": "Suivez les ventes, surveillez les stocks et analysez le comportement des clients avec des tableaux de bord complets."
+      },
+      "mobileFirst": {
+        "title": "Conception Mobile-First",
+        "description": "Optimisé pour tous les appareils avec un design réactif et des capacités d'application web progressive."
+      }
+    },
+    "stats": {
+      "salesGrowth": "Croissance des ventes",
+      "activeUsers": "Utilisateurs actifs",
+      "conversionRate": "Taux de conversion"
+    }
   }
 }

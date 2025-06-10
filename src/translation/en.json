@@ -66,5 +66,28 @@
         "description": "Skeleton loaders, lazy loading, and optimized animations for a superior user experience."
       }
     }
+  },
+  "Demo": {
+    "title": "See It in Action",
+    "description": "Experience the power of our platform with interactive demos and real-world examples.",
+    "features": {
+      "productManagement": {
+        "title": "Intuitive Product Management",
+        "description": "Easily add, edit, and organize your products with our drag-and-drop interface and bulk operations."
+      },
+      "analytics": {
+        "title": "Real-time Analytics",
+        "description": "Track sales, monitor inventory, and analyze customer behavior with comprehensive dashboards."
+      },
+      "mobileFirst": {
+        "title": "Mobile-First Design",
+        "description": "Optimized for all devices with responsive design and progressive web app capabilities."
+      }
+    },
+    "stats": {
+      "salesGrowth": "Sales Growth",
+      "activeUsers": "Active Users",
+      "conversionRate": "Conversion Rate"
+    }
   }
 }

@@ -2,8 +2,11 @@
 import { CheckCircle, TrendingUp, Users } from "lucide-react";
 import { fadeInUp, staggerContainer } from "./animation";
 import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
 
 export function Demo(): React.JSX.Element {
+  const t = useTranslations("Demo");
+
   return (
     <section id="demo" className="bg-muted/50 py-20">
       <div className="container mx-auto px-4">
@@ -14,12 +17,9 @@ export function Demo(): React.JSX.Element {
           whileInView="animate"
           viewport={{ once: true }}
         >
-          <h2 className="mb-4 text-3xl font-bold md:text-5xl">
-            See It in Action
-          </h2>
+          <h2 className="mb-4 text-3xl font-bold md:text-5xl">{t("title")}</h2>
           <p className="text-muted-foreground mx-auto max-w-2xl text-xl">
-            Experience the power of our platform with interactive demos and
-            real-world examples.
+            {t("description")}
           </p>
         </motion.div>
 
@@ -36,11 +36,10 @@ export function Demo(): React.JSX.Element {
                 <CheckCircle className="mt-1 h-6 w-6 flex-shrink-0 text-green-500" />
                 <div>
                   <h3 className="mb-2 text-lg font-semibold">
-                    Intuitive Product Management
+                    {t("features.productManagement.title")}
                   </h3>
                   <p className="text-muted-foreground">
-                    Easily add, edit, and organize your products with our
-                    drag-and-drop interface and bulk operations.
+                    {t("features.productManagement.description")}
                   </p>
                 </div>
               </div>
@@ -49,11 +48,10 @@ export function Demo(): React.JSX.Element {
                 <CheckCircle className="mt-1 h-6 w-6 flex-shrink-0 text-green-500" />
                 <div>
                   <h3 className="mb-2 text-lg font-semibold">
-                    Real-time Analytics
+                    {t("features.analytics.title")}
                   </h3>
                   <p className="text-muted-foreground">
-                    Track sales, monitor inventory, and analyze customer
-                    behavior with comprehensive dashboards.
+                    {t("features.analytics.description")}
                   </p>
                 </div>
               </div>
@@ -62,11 +60,10 @@ export function Demo(): React.JSX.Element {
                 <CheckCircle className="mt-1 h-6 w-6 flex-shrink-0 text-green-500" />
                 <div>
                   <h3 className="mb-2 text-lg font-semibold">
-                    Mobile-First Design
+                    {t("features.mobileFirst.title")}
                   </h3>
                   <p className="text-muted-foreground">
-                    Optimized for all devices with responsive design and
-                    progressive web app capabilities.
+                    {t("features.mobileFirst.description")}
                   </p>
                 </div>
               </div>
@@ -83,21 +80,27 @@ export function Demo(): React.JSX.Element {
                 <div className="rounded-lg bg-white/20 p-4">
                   <TrendingUp className="mb-2 h-8 w-8" />
                   <div className="text-2xl font-bold">+127%</div>
-                  <div className="text-sm opacity-90">Sales Growth</div>
+                  <div className="text-sm opacity-90">
+                    {t("stats.salesGrowth")}
+                  </div>
                 </div>
                 <div className="rounded-lg bg-white/20 p-4">
                   <Users className="mb-2 h-8 w-8" />
                   <div className="text-2xl font-bold">50K+</div>
-                  <div className="text-sm opacity-90">Active Users</div>
+                  <div className="text-sm opacity-90">
+                    {t("stats.activeUsers")}
+                  </div>
                 </div>
               </div>
               <div className="rounded-lg bg-white/20 p-4">
                 <div className="mb-2 flex items-center justify-between">
-                  <span className="text-sm opacity-90">Conversion Rate</span>
+                  <span className="text-sm opacity-90">
+                    {t("stats.conversionRate")}
+                  </span>
                   <span className="text-sm font-semibold">8.4%</span>
                 </div>
                 <div className="h-2 w-full rounded-full bg-white/20">
-                  <div className="h-2 w-4/5 rounded-full bg-white"></div>
+                  <div className="h-2 w-4/5 rounded-full bg-white" />
                 </div>
               </div>
             </div>
