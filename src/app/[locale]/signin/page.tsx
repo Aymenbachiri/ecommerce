@@ -1,7 +1,7 @@
 import { redirectIfAuthenticated } from "@/lib/helpers/helpers";
+import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import type { Locale } from "next-intl";
-import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
 
 type Props = { params: Promise<{ locale: Locale }> };
 

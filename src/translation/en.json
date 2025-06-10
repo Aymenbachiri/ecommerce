@@ -124,5 +124,11 @@
       "title": "Sign In",
       "description": "Sign in to your account"
     }
+  },
+  "SignupPage": {
+    "SignupPageMetadata": {
+      "title": "Sign Up",
+      "description": "Sign up to your account"
+    }
   }
 }

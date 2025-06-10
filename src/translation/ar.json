@@ -124,5 +124,11 @@
       "title": "تسجيل الدخول",
       "description": "تسجيل الدخول إلى حسابك"
     }
+  },
+  "SignupPage": {
+    "SignupPageMetadata": {
+      "title": "إنشاء حساب",
+      "description": "إنشاء حساب جديد"
+    }
   }
 }
