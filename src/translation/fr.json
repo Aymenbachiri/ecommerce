@@ -22,5 +22,11 @@
     "build_stunning_online_stores": "Créez des boutiques en ligne impressionnantes avec notre plateforme complète qui propose des analyses avancées, un processus de paiement fluide et des outils d'administration puissants.",
     "start_free_trial": "Commencer l'essai gratuit",
     "watch_demo": "Regarder la démo"
+  },
+  "Stats": {
+    "uptime": "Disponibilité",
+    "response_time": "Temps de réponse",
+    "products_supported": "Produits supportés",
+    "support": "Support"
   }
 }
