@@ -1,4 +1,3 @@
-import { Navbar } from "@/components/home/navbar";
 import { Hero } from "@/components/home/hero";
 import { Stats } from "@/components/home/stats";
 import { Features } from "@/components/home/features";
@@ -20,7 +19,6 @@ export default function LocaleHomePage({ params }: Props): React.JSX.Element {
 
   return (
     <div className="bg-background min-h-screen">
-      <Navbar />
       <Hero />
       <Stats />
       <Features />

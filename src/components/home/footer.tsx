@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { fadeInUp, staggerContainer } from "./animation";
 import { Heart, ShoppingCart } from "lucide-react";
 import { motion } from "motion/react";

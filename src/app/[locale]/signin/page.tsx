@@ -1,5 +1,6 @@
 import { redirectIfAuthenticated } from "@/lib/helpers/helpers";
 import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
+import { SigninPage } from "./_components/signin-page";
 import type { Metadata } from "next";
 import type { Locale } from "next-intl";
 
@@ -24,5 +25,5 @@ export default async function page(): Promise<React.JSX.Element> {
   await redirectIfAuthenticated(locale);
   setRequestLocale(locale);
 
-  return <div>page</div>;
+  return <SigninPage />;
 }

@@ -2,12 +2,12 @@
 
 import { ShoppingCart, Menu, X } from "lucide-react";
 import { motion } from "motion/react";
-import Link from "next/link";
 import { useState } from "react";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "../ui/button";
 import { useTranslations } from "next-intl";
 import { LocaleSwitcher } from "./locale-switcher";
+import { Link } from "@/i18n/navigation";
 
 export function Navbar(): React.JSX.Element {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);

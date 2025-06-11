@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Metadata } from "next";
+import { Navbar } from "@/components/home/navbar";
 
 type Props = {
   children: React.ReactNode;
@@ -38,7 +39,10 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <div lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
-      <NextIntlClientProvider>{children}</NextIntlClientProvider>
+      <NextIntlClientProvider>
+        <Navbar />
+        {children}
+      </NextIntlClientProvider>
     </div>
   );
 }
