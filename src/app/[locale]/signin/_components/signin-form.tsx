@@ -21,7 +21,7 @@ export function SigninForm(): React.JSX.Element {
     t,
     locale,
     form,
-    isLoading,
+    isPending,
     onSubmit,
     showPassword,
     setShowPassword,
@@ -102,11 +102,11 @@ export function SigninForm(): React.JSX.Element {
 
           <motion.div variants={itemVariants}>
             <Button
-              disabled={isLoading}
+              disabled={isPending}
               type="submit"
               className="w-full disabled:cursor-not-allowed"
             >
-              {isLoading && <Loader2 className="animate-spin" />}
+              {isPending && <Loader2 className="animate-spin" />}
               {t("SignIn")}
             </Button>
           </motion.div>

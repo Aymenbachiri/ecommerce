@@ -28,13 +28,15 @@ export async function login(formData: FormData) {
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":
-          return { error: "Invalid credentials!" };
+          return { error: "Invalid email or password." };
+        case "OAuthSignInError":
+          return { error: "Error with OAuth provider." };
         default:
-          return { error: "Something went wrong, Please try again later." };
+          return { error: "Invalid email or password." };
       }
+    } else {
+      return { error: "An unexpected error occurred. Please try again." };
     }
-
-    throw error;
   }
 }
 
@@ -68,10 +70,10 @@ export async function signup(formData: FormData) {
     await prisma.user.create({
       data: { email: validatedEmail, name: validatedName, hashedPassword },
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("failed to signup: ", error);
     return {
-      error: `Failed to create account. Please try again. eror: ${error}`,
+      error: `Failed to create account. Please try again. eror: ${(error as AuthError).message}`,
     };
   }
 

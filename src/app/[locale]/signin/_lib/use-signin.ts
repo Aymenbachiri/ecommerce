@@ -1,21 +1,25 @@
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createSignInSchema, type SignInFormValues } from "./validation";
 import { type Locale, useLocale, useTranslations } from "next-intl";
+import { login } from "@/lib/actions/auth";
+import { toast } from "sonner";
 
 type UseSignInReturn = {
   form: ReturnType<typeof useForm<SignInFormValues>>;
   isLoading: boolean;
-  onSubmit: (values: SignInFormValues) => void;
+  onSubmit: (values: SignInFormValues) => Promise<void>;
   showPassword: boolean;
   setShowPassword: React.Dispatch<React.SetStateAction<boolean>>;
   t: ReturnType<typeof useTranslations>;
   locale: Locale;
+  isPending: boolean;
 };
 
 export function useSignIn(): UseSignInReturn {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [isPending, startTransition] = useTransition();
   const validationMessages = useTranslations("Signin.Validation");
   const t = useTranslations("Signin");
   const locale = useLocale();
@@ -27,10 +31,24 @@ export function useSignIn(): UseSignInReturn {
   });
   const isLoading = form.formState.isSubmitting;
 
-  const onSubmit = (values: SignInFormValues) => {
-    // TODO: Replace with your sign-in logic (e.g., call API or NextAuth)
-    console.log("Signing in with:", values);
-  };
+  async function onSubmit(values: SignInFormValues) {
+    startTransition(async () => {
+      const formData = new FormData();
+      formData.append("email", values.email);
+      formData.append("password", values.password);
+
+      const result = await login(formData);
+
+      if (result?.error) {
+        toast.error(result.error);
+      } else {
+        toast.success("Signed in successfully!");
+        setTimeout(() => {
+          window.location.replace("/dashboard");
+        }, 1000);
+      }
+    });
+  }
 
   return {
     form,
@@ -40,5 +58,6 @@ export function useSignIn(): UseSignInReturn {
     setShowPassword,
     t,
     locale,
+    isPending,
   };
 }
