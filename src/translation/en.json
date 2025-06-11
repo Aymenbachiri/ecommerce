@@ -136,5 +136,20 @@
       "title": "ShopFlow Dashboard - Your Ecommerce Hub",
       "description": "Manage your ShopFlow ecommerce store with ease. View sales, orders, products, and customer data all in one place. Your ultimate dashboard for growing your online business."
     }
+  },
+  "Signin": {
+    "WelcomeBack": "Welcome Back!",
+    "PleaseSignIn": "Please sign in to your account",
+    "Email": "Email",
+    "EmailPlaceholder": "you@example.com",
+    "Password": "Password",
+    "PasswordPlaceholder": "••••••••",
+    "SignIn": "Sign In",
+    "NoAccount": "Don't have an account?",
+    "SignUpHere": "Sign up here",
+    "Validation": {
+      "emailInvalid": "Please enter a valid email address.",
+      "passwordMin": "Password must be at least 6 characters."
+    }
   }
 }

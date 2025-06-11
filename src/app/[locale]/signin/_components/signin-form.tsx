@@ -1,7 +1,4 @@
 "use client";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
@@ -12,53 +9,23 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils/utils";
 import { motion } from "motion/react";
 import { Link } from "@/i18n/navigation";
-
-const formVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
-
-// 1. Define the Zod schema for sign-in
-const signInSchema = z.object({
-  email: z.string().email({ message: "Please enter a valid email address." }),
-  password: z
-    .string()
-    .min(6, { message: "Password must be at least 6 characters." }),
-});
-
-// 2. Infer the form data type from the schema
-type SignInFormValues = z.infer<typeof signInSchema>;
+import { formVariants, itemVariants } from "../_lib/animation";
+import { useSignIn } from "../_lib/use-signin";
 
 export function SigninForm(): React.JSX.Element {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  // 3. Initialize React Hook Form with Zod resolver
-  const form = useForm<SignInFormValues>({
-    resolver: zodResolver(signInSchema),
-    defaultValues: { email: "", password: "" },
-  });
-  const isLoading = form.formState.isSubmitting;
-
-  // 4. Submission handler
-  const onSubmit = (values: SignInFormValues) => {
-    // TODO: Replace with your sign-in logic (e.g., call API or NextAuth)
-    console.log("Signing in with:", values);
-  };
+  const {
+    t,
+    locale,
+    form,
+    isLoading,
+    onSubmit,
+    showPassword,
+    setShowPassword,
+  } = useSignIn();
 
   return (
     <motion.div
@@ -68,8 +35,8 @@ export function SigninForm(): React.JSX.Element {
       variants={formVariants}
     >
       <motion.section variants={itemVariants} className="mb-6 text-center">
-        <h2 className="text-2xl font-bold">Welcome Back!</h2>
-        <p className="text-sm text-gray-500">Please sign in to your account</p>
+        <h2 className="text-2xl font-bold">{t("WelcomeBack")}</h2>
+        <p className="text-sm text-gray-500">{t("PleaseSignIn")}</p>
       </motion.section>
 
       <Form {...form}>
@@ -80,9 +47,9 @@ export function SigninForm(): React.JSX.Element {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>{t("Email")}</FormLabel>
                   <FormControl>
-                    <Input placeholder="you@example.com" {...field} />
+                    <Input placeholder={t("EmailPlaceholder")} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -96,12 +63,12 @@ export function SigninForm(): React.JSX.Element {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>{t("Password")}</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Input
                         type={showPassword ? "text" : "password"}
-                        placeholder="••••••••"
+                        placeholder={t("PasswordPlaceholder")}
                         className={cn(
                           "transition-colors",
                           "border",
@@ -114,7 +81,10 @@ export function SigninForm(): React.JSX.Element {
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute top-1/2 right-3 -translate-y-1/2 transform text-slate-400 transition-colors hover:text-slate-600 dark:hover:text-slate-300"
+                        className={cn(
+                          "absolute top-1/2 -translate-y-1/2 transform text-slate-400 transition-colors hover:text-slate-600 dark:hover:text-slate-300",
+                          locale === "ar" ? "left-3" : "right-3",
+                        )}
                       >
                         {showPassword ? (
                           <EyeOff className="h-4 w-4" />
@@ -137,25 +107,25 @@ export function SigninForm(): React.JSX.Element {
               className="w-full disabled:cursor-not-allowed"
             >
               {isLoading && <Loader2 className="animate-spin" />}
-              Sign In
+              {t("SignIn")}
             </Button>
           </motion.div>
         </form>
       </Form>
 
-      <motion.div variants={itemVariants} className="pt-4 text-center">
+      <motion.section variants={itemVariants} className="pt-4 text-center">
         <p className="text-sm text-slate-600 dark:text-slate-400">
-          Don&apos;t have an account?{" "}
+          {t("NoAccount")}{" "}
           <Link href="/signup">
             <motion.span
               whileHover={{ scale: 1.05 }}
               className="font-medium text-blue-600 transition-colors hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
             >
-              Sign up here
+              {t("SignUpHere")}
             </motion.span>
           </Link>
         </p>
-      </motion.div>
+      </motion.section>
     </motion.div>
   );
 }

@@ -136,5 +136,20 @@
       "title": "ShopFlow Dashboard - Votre centre de commerce électronique",
       "description": "Gérez votre boutique e-commerce ShopFlow en toute simplicité. Consultez les ventes, les commandes, les produits et les données clients en un seul endroit. Votre tableau de bord ultime pour développer votre activité en ligne."
     }
+  },
+  "Signin": {
+    "WelcomeBack": "Bienvenue !",
+    "PleaseSignIn": "Veuillez vous connecter à votre compte",
+    "Email": "E-mail",
+    "EmailPlaceholder": "vous@exemple.com",
+    "Password": "Mot de passe",
+    "PasswordPlaceholder": "••••••••",
+    "SignIn": "Se connecter",
+    "NoAccount": "Vous n'avez pas de compte ?",
+    "SignUpHere": "Inscrivez-vous ici",
+    "Validation": {
+      "emailInvalid": "Veuillez saisir une adresse e-mail valide.",
+      "passwordMin": "Le mot de passe doit comporter au moins 6 caractères."
+    }
   }
 }
