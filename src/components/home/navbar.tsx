@@ -60,7 +60,7 @@ export function Navbar(): React.JSX.Element {
             <LocaleSwitcher />
 
             <Button variant="outline" className="hidden sm:inline-flex">
-              {t("signIn")}
+              <Link href="/signin">{t("signIn")}</Link>
             </Button>
 
             <button
@@ -107,8 +107,12 @@ export function Navbar(): React.JSX.Element {
                 {t("pricing")}
               </Link>
               <div className="flex flex-col space-y-2 pt-4">
-                <Button variant="outline" className="w-full">
-                  {t("signIn")}
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Link href="/signin">{t("signIn")}</Link>
                 </Button>
               </div>
             </div>

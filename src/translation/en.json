@@ -151,5 +151,20 @@
       "emailInvalid": "Please enter a valid email address.",
       "passwordMin": "Password must be at least 6 characters."
     }
+  },
+  "Signup": {
+    "title": "Create an Account",
+    "subtitle": "Sign up to get started",
+    "nameLabel": "Full Name",
+    "namePlaceholder": "Enter your full name",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "Enter your email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "confirmPasswordLabel": "Confirm Password",
+    "confirmPasswordPlaceholder": "Confirm your password",
+    "submitButton": "Sign Up",
+    "haveAccountText": "Already have an account?",
+    "signInLink": "Sign in here"
   }
 }

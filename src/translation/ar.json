@@ -151,5 +151,20 @@
       "emailInvalid": "يرجى إدخال عنوان بريد إلكتروني صالح.",
       "passwordMin": "يجب أن تكون كلمة المرور على الأقل 6 أحرف."
     }
+  },
+  "Signup": {
+    "title": "إنشاء حساب",
+    "subtitle": "سجّل للبدء",
+    "nameLabel": "الاسم الكامل",
+    "namePlaceholder": "أدخل اسمك الكامل",
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "passwordLabel": "كلمة المرور",
+    "passwordPlaceholder": "أدخل كلمة المرور",
+    "confirmPasswordLabel": "تأكيد كلمة المرور",
+    "confirmPasswordPlaceholder": "أعد إدخال كلمة المرور",
+    "submitButton": "سجّل",
+    "haveAccountText": "هل لديك حساب بالفعل؟",
+    "signInLink": "تسجيل الدخول هنا"
   }
 }

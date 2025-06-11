@@ -53,7 +53,7 @@ export function LocaleSwitcherSelect({
         onValueChange={onValueChange}
         disabled={isPending}
       >
-        <SelectTrigger className="w-auto border-none bg-transparent text-gray-400 shadow-none focus:ring-0">
+        <SelectTrigger className="w-auto border bg-transparent text-gray-400 shadow focus:ring-0">
           <SelectValue aria-label={label} />
         </SelectTrigger>
         <SelectContent>
