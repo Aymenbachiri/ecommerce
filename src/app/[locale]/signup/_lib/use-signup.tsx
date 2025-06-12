@@ -45,7 +45,7 @@ export function useSignup(): UseSignupReturn {
       if (result?.error) {
         toast.error(result.error);
       } else {
-        toast.success("Account created successfully!");
+        toast.success(t("accountCreated"));
         setTimeout(() => {
           window.location.replace("/signin");
         }, 1000);

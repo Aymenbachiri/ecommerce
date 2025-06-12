@@ -147,6 +147,7 @@
     "SignIn": "تسجيل الدخول",
     "NoAccount": "ليس لديك حساب؟",
     "SignUpHere": "سجل هنا",
+    "signinSuccess": "تم تسجيل الدخول بنجاح!",
     "Validation": {
       "emailInvalid": "يرجى إدخال عنوان بريد إلكتروني صالح.",
       "passwordMin": "يجب أن تكون كلمة المرور على الأقل 6 أحرف."
@@ -166,6 +167,7 @@
     "submitButton": "سجّل",
     "haveAccountText": "هل لديك حساب بالفعل؟",
     "signInLink": "تسجيل الدخول هنا",
+    "accountCreated": "تم إنشاء حساب بنجاح!",
     "Validation": {
       "name": {
         "min": "يجب أن يكون الاسم مكونًا من حرفين على الأقل",

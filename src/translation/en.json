@@ -147,6 +147,7 @@
     "SignIn": "Sign In",
     "NoAccount": "Don't have an account?",
     "SignUpHere": "Sign up here",
+    "signinSuccess": "Signed in successfully!",
     "Validation": {
       "emailInvalid": "Please enter a valid email address.",
       "passwordMin": "Password must be at least 6 characters."
@@ -166,6 +167,7 @@
     "submitButton": "Sign Up",
     "haveAccountText": "Already have an account?",
     "signInLink": "Sign in here",
+    "accountCreated": "Account created successfully!",
     "Validation": {
       "name": {
         "min": "Name must be at least 2 characters",

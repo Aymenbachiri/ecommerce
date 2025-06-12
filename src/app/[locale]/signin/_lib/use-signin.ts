@@ -42,7 +42,7 @@ export function useSignIn(): UseSignInReturn {
       if (result?.error) {
         toast.error(result.error);
       } else {
-        toast.success("Signed in successfully!");
+        toast.success(t("signinSuccess"));
         setTimeout(() => {
           window.location.replace("/dashboard");
         }, 1000);
