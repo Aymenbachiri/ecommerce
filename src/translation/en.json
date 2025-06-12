@@ -187,5 +187,11 @@
         "match": "Passwords don't match"
       }
     }
+  },
+  "ProductsPage": {
+    "ProductsPageMetadata": {
+      "title": "ShopFlow - Products",
+      "description": "Browse our wide range of quality products."
+    }
   }
 }

@@ -187,5 +187,11 @@
         "match": "كلمات المرور غير متطابقة"
       }
     }
+  },
+  "ProductsPage": {
+    "ProductsPageMetadata": {
+      "title": "ShopFlow - المنتجات",
+      "description": "تصفح مجموعتنا الواسعة من المنتجات عالية الجودة."
+    }
   }
 }

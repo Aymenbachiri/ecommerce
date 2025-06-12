@@ -187,5 +187,11 @@
         "match": "Les mots de passe ne correspondent pas"
       }
     }
+  },
+  "ProductsPage": {
+    "ProductsPageMetadata": {
+      "title": "ShopFlow - Produits",
+      "description": "Parcourez notre large gamme de produits de qualité."
+    }
   }
 }
