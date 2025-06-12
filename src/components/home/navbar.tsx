@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingCart, Menu, X } from "lucide-react";
+import { ShoppingCart, Menu, X, User } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { ThemeToggle } from "./theme-toggle";
@@ -8,8 +8,14 @@ import { Button } from "../ui/button";
 import { useTranslations } from "next-intl";
 import { LocaleSwitcher } from "./locale-switcher";
 import { Link } from "@/i18n/navigation";
+import type { Session } from "next-auth";
+import { signOut } from "next-auth/react";
 
-export function Navbar(): React.JSX.Element {
+type Props = {
+  session: Session | null;
+};
+
+export function Navbar({ session }: Props): React.JSX.Element {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const t = useTranslations("HomePage.navbar");
 
@@ -59,9 +65,32 @@ export function Navbar(): React.JSX.Element {
             <ThemeToggle />
             <LocaleSwitcher />
 
-            <Button variant="outline" className="hidden sm:inline-flex">
-              <Link href="/signin">{t("signIn")}</Link>
-            </Button>
+            {session?.user ? (
+              <>
+                <section className="flex items-center gap-2">
+                  <User />
+                  <h2>{session?.user?.name}</h2>
+                </section>
+                <Button
+                  onClick={() => signOut()}
+                  variant="destructive"
+                  className="hidden sm:inline-flex"
+                >
+                  {t("Signout")}
+                </Button>
+                <Button
+                  asChild
+                  variant="link"
+                  className="hidden sm:inline-flex"
+                >
+                  <Link href="/dashboard">{t("dashboard")}</Link>
+                </Button>
+              </>
+            ) : (
+              <Button variant="outline" className="hidden sm:inline-flex">
+                <Link href="/signin">{t("signIn")}</Link>
+              </Button>
+            )}
 
             <button
               className="text-muted-foreground hover:text-foreground inline-flex items-center justify-center rounded-md p-2 focus:outline-none md:hidden"
@@ -106,14 +135,33 @@ export function Navbar(): React.JSX.Element {
               >
                 {t("pricing")}
               </Link>
-              <div className="flex flex-col space-y-2 pt-4">
-                <Button
-                  variant="outline"
-                  className="w-full"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <Link href="/signin">{t("signIn")}</Link>
-                </Button>
+              <div className="flex flex-col space-y-2">
+                {session?.user ? (
+                  <>
+                    <section className="text-muted-foreground hover:text-foreground flex items-center gap-2 transition-colors">
+                      <User />
+                      <h2>{session?.user?.name}</h2>
+                    </section>
+                    <Button
+                      asChild
+                      variant="link"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Link href="/dashboard">{t("dashboard")}</Link>
+                    </Button>
+                    <Button variant="destructive" onClick={() => signOut()}>
+                      {t("Signout")}
+                    </Button>
+                  </>
+                ) : (
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Link href="/signin">{t("signIn")}</Link>
+                  </Button>
+                )}
               </div>
             </div>
           </motion.div>

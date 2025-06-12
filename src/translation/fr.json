@@ -12,7 +12,9 @@
       "features": "Fonctionnalités",
       "demo": "Démo",
       "pricing": "Tarification",
-      "signIn": "Se connecter"
+      "signIn": "Se connecter",
+      "Signout": "Se déconnecter",
+      "dashboard": "Tableau de bord"
     }
   },
   "Hero": {

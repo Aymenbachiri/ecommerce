@@ -12,7 +12,9 @@
       "features": "Features",
       "demo": "Demo",
       "pricing": "Pricing",
-      "signIn": "Sign In"
+      "signIn": "Sign In",
+      "Signout": "Sign Out",
+      "dashboard": "Dashboard"
     }
   },
   "Hero": {

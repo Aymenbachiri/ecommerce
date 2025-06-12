@@ -4,6 +4,7 @@ import { routing } from "@/i18n/routing";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Metadata } from "next";
 import { Navbar } from "@/components/home/navbar";
+import { auth } from "@/auth";
 
 type Props = {
   children: React.ReactNode;
@@ -31,7 +32,7 @@ export async function generateMetadata(
 }
 
 export default async function LocaleLayout({ children, params }: Props) {
-  // Ensure that the incoming `locale` is valid
+  const session = await auth();
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
 
@@ -40,7 +41,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <div lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <NextIntlClientProvider>
-        <Navbar />
+        <Navbar session={session} />
         {children}
       </NextIntlClientProvider>
     </div>
