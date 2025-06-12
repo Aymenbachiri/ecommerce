@@ -165,6 +165,23 @@
     "confirmPasswordPlaceholder": "Confirmez votre mot de passe",
     "submitButton": "S’inscrire",
     "haveAccountText": "Vous avez déjà un compte ?",
-    "signInLink": "Connectez-vous ici"
+    "signInLink": "Connectez-vous ici",
+    "Validation": {
+      "name": {
+        "min": "Le nom doit contenir au moins 2 caractères",
+        "max": "Le nom doit contenir moins de 50 caractères"
+      },
+      "email": {
+        "required": "L'adresse e-mail est requise",
+        "invalid": "Veuillez entrer une adresse e-mail valide"
+      },
+      "password": {
+        "min": "Le mot de passe doit contenir au moins 8 caractères"
+      },
+      "confirmPassword": {
+        "required": "Veuillez confirmer votre mot de passe",
+        "match": "Les mots de passe ne correspondent pas"
+      }
+    }
   }
 }

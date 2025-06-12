@@ -12,25 +12,22 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { useForm } from "react-hook-form";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
-import { useState } from "react";
 import { cn } from "@/lib/utils/utils";
-import { useLocale, useTranslations } from "next-intl";
+import { useSignup } from "../_lib/use-signup";
 
 export function SignupForm(): React.JSX.Element {
-  const t = useTranslations("Signup");
-  const locale = useLocale();
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPassword, setShowConfirmPassword] =
-    useState<boolean>(false);
-
-  const form = useForm();
-  const isPending = form.formState.isSubmitting;
-
-  const onSubmit = () => {
-    console.log("submitted");
-  };
+  const {
+    t,
+    locale,
+    form,
+    isPending,
+    onSubmit,
+    showPassword,
+    setShowPassword,
+    showConfirmPassword,
+    setShowConfirmPassword,
+  } = useSignup();
 
   return (
     <motion.div
