@@ -1,8 +1,7 @@
-import { requireAuthentication } from "@/lib/helpers/helpers";
 import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
-import { ProductsPage } from "./_components/products-page";
-import type { Metadata } from "next";
+import { CartPage } from "./_component/cart-page";
 import type { Locale } from "next-intl";
+import type { Metadata } from "next";
 
 type Props = { params: Promise<{ locale: Locale }> };
 
@@ -11,7 +10,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const t = await getTranslations({
     locale,
-    namespace: "ProductsPage.ProductsPageMetadata",
+    namespace: "CartPage.CartPageMetadata",
   });
 
   return {
@@ -22,8 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function page(): Promise<React.JSX.Element> {
   const locale = await getLocale();
-  await requireAuthentication(locale);
   setRequestLocale(locale);
 
-  return <ProductsPage />;
+  return <CartPage />;
 }

@@ -238,5 +238,24 @@
       "title": "لم يتم العثور على المنتج",
       "description": "المنتج الذي تبحث عنه غير موجود."
     }
+  },
+  "CartPage": {
+    "CartPageMetadata": {
+      "title": "عربة التسوق الخاصة بك - ShopFlow",
+      "description": "راجع العناصر التي أضفتها إلى عربة التسوق الخاصة بك وانتقل إلى عملية الدفع."
+    },
+    "itemRemovedToast": "تمت إزالة المنتج من سلة التسوق.",
+    "emptyCartTitle": "عربة التسوق فارغة",
+    "emptyCartMessage": "يبدو أنك لم تقم بإضافة أي عناصر إلى عربة التسوق بعد.",
+    "startShoppingButton": "ابدأ التسوق",
+    "shoppingCartTitle": "عربة التسوق",
+    "orderSummaryTitle": "ملخص الطلب",
+    "subtotal": "المجموع الفرعي",
+    "shipping": "الشحن",
+    "free": "مجاني",
+    "tax": "الضريبة",
+    "total": "الإجمالي",
+    "proceedToCheckoutButton": "المتابعة إلى الدفع",
+    "continueShoppingButton": "متابعة التسوق"
   }
 }

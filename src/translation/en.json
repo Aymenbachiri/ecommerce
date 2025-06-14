@@ -238,5 +238,24 @@
       "title": "Product Not Found",
       "description": "The product you're looking for doesn't exist."
     }
+  },
+  "CartPage": {
+    "CartPageMetadata": {
+      "title": "Your Shopping Cart - ShopFlow",
+      "description": "Review the items you have added to your shopping cart and proceed to checkout."
+    },
+    "itemRemovedToast": "Item has been removed from your cart.",
+    "emptyCartTitle": "Your cart is empty",
+    "emptyCartMessage": "Looks like you haven't added any items to your cart yet.",
+    "startShoppingButton": "Start Shopping",
+    "shoppingCartTitle": "Shopping Cart",
+    "orderSummaryTitle": "Order Summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "free": "Free",
+    "tax": "Tax",
+    "total": "Total",
+    "proceedToCheckoutButton": "Proceed to Checkout",
+    "continueShoppingButton": "Continue Shopping"
   }
 }

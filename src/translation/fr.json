@@ -238,5 +238,24 @@
       "title": "Produit non trouvé",
       "description": "Le produit que vous recherchez n'existe pas."
     }
+  },
+  "CartPage": {
+    "CartPageMetadata": {
+      "title": "Votre Panier - ShopFlow",
+      "description": "Revoyez les articles que vous avez ajoutés à votre panier et passez à la caisse."
+    },
+    "itemRemovedToast": "L'article a été retiré de votre panier.",
+    "emptyCartTitle": "Votre panier est vide",
+    "emptyCartMessage": "Il semble que vous n'ayez pas encore ajouté d'articles à votre panier.",
+    "startShoppingButton": "Commencer vos achats",
+    "shoppingCartTitle": "Panier",
+    "orderSummaryTitle": "Résumé de la commande",
+    "subtotal": "Sous-total",
+    "shipping": "Livraison",
+    "free": "Gratuit",
+    "tax": "Taxe",
+    "total": "Total",
+    "proceedToCheckoutButton": "Passer à la caisse",
+    "continueShoppingButton": "Continuer vos achats"
   }
 }
