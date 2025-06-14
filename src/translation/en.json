@@ -218,5 +218,24 @@
       "outOfStock": "Out of Stock",
       "addToCart": "Add to Cart"
     }
+  },
+  "ProductPage": {
+    "featured": "Featured",
+    "offer": "{discount}% OFF",
+    "reviews": "reviews",
+    "stock": "{count} in stock",
+    "outOfStock": "Out of stock",
+    "quantity": "Quantity",
+    "addToCart": "Add to Cart",
+    "productInformation": "Product Information",
+    "category": "Category:",
+    "sku": "SKU:",
+    "availability": "Availability:",
+    "inStock": "In Stock",
+    "wishlist": "Add to wishlist",
+    "NotFound": {
+      "title": "Product Not Found",
+      "description": "The product you're looking for doesn't exist."
+    }
   }
 }

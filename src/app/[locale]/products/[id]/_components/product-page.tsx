@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { ProductSkeleton } from "./product-skeleton";
+import { useTranslations } from "next-intl";
 
 export function ProductPage(): React.JSX.Element {
   const params = useParams();
@@ -22,6 +23,7 @@ export function ProductPage(): React.JSX.Element {
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
   const [cart, setCart] = useAtom(cartAtom);
+  const t = useTranslations("ProductPage");
 
   useEffect(() => {
     setTimeout(() => {
@@ -57,10 +59,8 @@ export function ProductPage(): React.JSX.Element {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="text-center">
-          <h1 className="mb-4 text-2xl font-bold">Product Not Found</h1>
-          <p className="text-muted-foreground">
-            The product you&apos;re looking for doesn&apos;t exist.
-          </p>
+          <h1 className="mb-4 text-2xl font-bold">{t("NotFound.title")}</h1>
+          <p className="text-muted-foreground">{t("NotFound.description")}</p>
         </div>
       </div>
     );
@@ -127,10 +127,13 @@ export function ProductPage(): React.JSX.Element {
           <div>
             <div className="mb-2 flex items-center gap-2">
               {product.featured && (
-                <Badge className="bg-yellow-500">Featured</Badge>
+                <Badge className="bg-yellow-500">{t("featured")}</Badge>
               )}
               {discount > 0 && (
-                <Badge className="bg-red-500">-{discount}% OFF</Badge>
+                <Badge className="bg-red-500">
+                  -{discount}
+                  {t("offer", { discount })}
+                </Badge>
               )}
             </div>
 
@@ -151,7 +154,7 @@ export function ProductPage(): React.JSX.Element {
               </div>
               <span className="text-muted-foreground text-sm">
                 {product.averageRating as number} ({product.reviews.length}{" "}
-                reviews)
+                {t("reviews")})
               </span>
             </div>
 
@@ -171,7 +174,9 @@ export function ProductPage(): React.JSX.Element {
             </div>
 
             <p className="text-muted-foreground mb-4 text-sm">
-              {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
+              {product.stock > 0
+                ? t("stock", { count: product.stock })
+                : t("outOfStock")}
             </p>
           </div>
 
@@ -179,7 +184,9 @@ export function ProductPage(): React.JSX.Element {
 
           <div className="space-y-4">
             <div>
-              <label className="mb-2 block text-sm font-medium">Quantity</label>
+              <label className="mb-2 block text-sm font-medium">
+                {t("quantity")}
+              </label>
               <div className="flex items-center gap-2">
                 <Button
                   variant="outline"
@@ -210,7 +217,7 @@ export function ProductPage(): React.JSX.Element {
                 disabled={product.stock === 0}
               >
                 <ShoppingCart className="mr-2 h-4 w-4" />
-                Add to Cart
+                {t("addToCart")}
               </Button>
               <Button variant="outline" size="icon">
                 <Heart className="h-4 w-4" />
@@ -220,20 +227,20 @@ export function ProductPage(): React.JSX.Element {
 
           <Card>
             <CardContent className="p-4">
-              <h3 className="mb-2 font-semibold">Product Information</h3>
+              <h3 className="mb-2 font-semibold">{t("productInformation")}</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span>Category:</span>
+                  <span>{t("category")}</span>
                   <span className="capitalize">
                     {product.categories[0].category.name}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span>SKU:</span>
+                  <span>{t("sku")}</span>
                   <span>{product.id}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Availability:</span>
+                  <span>{t("availability")}</span>
                   <span>{product.stock > 0 ? "In Stock" : "Out of Stock"}</span>
                 </div>
               </div>

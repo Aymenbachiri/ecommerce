@@ -218,5 +218,24 @@
       "outOfStock": "نفدت الكمية",
       "addToCart": "أضف إلى السلة"
     }
+  },
+  "ProductPage": {
+    "featured": "متميز",
+    "offer": "خصم {discount}%",
+    "reviews": "تقييمات",
+    "stock": "{count} متوفر في المخزون",
+    "outOfStock": "نفذ من المخزون",
+    "quantity": "الكمية",
+    "addToCart": "أضف إلى السلة",
+    "productInformation": "معلومات المنتج",
+    "category": "الفئة:",
+    "sku": "رمز المنتج:",
+    "availability": "التوفر:",
+    "inStock": "متوفر",
+    "wishlist": "أضف إلى قائمة الرغبات",
+    "NotFound": {
+      "title": "لم يتم العثور على المنتج",
+      "description": "المنتج الذي تبحث عنه غير موجود."
+    }
   }
 }

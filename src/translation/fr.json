@@ -218,5 +218,24 @@
       "outOfStock": "En rupture de stock",
       "addToCart": "Ajouter au panier"
     }
+  },
+  "ProductPage": {
+    "featured": "En vedette",
+    "offer": "-{discount}% de réduction",
+    "reviews": "avis",
+    "stock": "{count} en stock",
+    "outOfStock": "En rupture de stock",
+    "quantity": "Quantité",
+    "addToCart": "Ajouter au panier",
+    "productInformation": "Informations sur le produit",
+    "category": "Catégorie :",
+    "sku": "SKU :",
+    "availability": "Disponibilité :",
+    "inStock": "En stock",
+    "wishlist": "Ajouter à la liste de souhaits",
+    "NotFound": {
+      "title": "Produit non trouvé",
+      "description": "Le produit que vous recherchez n'existe pas."
+    }
   }
 }
