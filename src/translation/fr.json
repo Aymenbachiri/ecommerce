@@ -192,6 +192,25 @@
     "ProductsPageMetadata": {
       "title": "ShopFlow - Produits",
       "description": "Parcourez notre large gamme de produits de qualité."
+    },
+    "title": "Produits",
+    "showingProducts": "Affichage de {count} produits",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "Filters": {
+      "title": "Filtres",
+      "searchLabel": "Recherche",
+      "searchPlaceholder": "Rechercher des produits…",
+      "categoryLabel": "Catégorie",
+      "categoryPlaceholder": "Sélectionner une catégorie",
+      "sortLabel": "Trier par",
+      "sortPlaceholder": "Trier par",
+      "sort": {
+        "name": "Nom",
+        "priceLow": "Prix : du plus bas au plus élevé",
+        "priceHigh": "Prix : du plus élevé au plus bas",
+        "rating": "Note"
+      }
     }
   }
 }

@@ -192,6 +192,25 @@
     "ProductsPageMetadata": {
       "title": "ShopFlow - المنتجات",
       "description": "تصفح مجموعتنا الواسعة من المنتجات عالية الجودة."
+    },
+    "title": "المنتجات",
+    "showingProducts": "عرض {count} منتجًا",
+    "previous": "السابق",
+    "next": "التالي",
+    "Filters": {
+      "title": "الفلاتر",
+      "searchLabel": "بحث",
+      "searchPlaceholder": "ابحث في المنتجات...",
+      "categoryLabel": "الفئة",
+      "categoryPlaceholder": "اختر الفئة",
+      "sortLabel": "ترتيب حسب",
+      "sortPlaceholder": "ترتيب حسب",
+      "sort": {
+        "name": "الاسم",
+        "priceLow": "السعر: من الأقل إلى الأعلى",
+        "priceHigh": "السعر: من الأعلى إلى الأقل",
+        "rating": "التقييم"
+      }
     }
   }
 }

@@ -14,8 +14,9 @@ import {
   selectedCategoryAtom,
   sortByAtom,
 } from "@/lib/store/store";
+import { useTranslations } from "next-intl";
 
-const PRODUCTS_PER_PAGE = 8;
+const PRODUCTS_PER_PAGE = 3;
 
 export function ProductsPage(): React.JSX.Element {
   const [products, setProducts] = useState<ProductWithRelations[]>([]);
@@ -24,6 +25,7 @@ export function ProductsPage(): React.JSX.Element {
   const [searchQuery] = useAtom(searchQueryAtom);
   const [selectedCategory] = useAtom(selectedCategoryAtom);
   const [sortBy] = useAtom(sortByAtom);
+  const t = useTranslations("ProductsPage");
 
   useEffect(() => {
     setTimeout(() => {
@@ -93,7 +95,7 @@ export function ProductsPage(): React.JSX.Element {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h1 className="mb-8 text-3xl font-bold">Products</h1>
+        <h1 className="mb-8 text-3xl font-bold">{t("title")}</h1>
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
           <div className="lg:col-span-1">
@@ -103,7 +105,9 @@ export function ProductsPage(): React.JSX.Element {
           <div className="lg:col-span-3">
             <div className="mb-6">
               <p className="text-muted-foreground">
-                Showing {filteredAndSortedProducts.length} products
+                {t("showingProducts", {
+                  count: filteredAndSortedProducts.length,
+                })}
               </p>
             </div>
 
@@ -137,7 +141,7 @@ export function ProductsPage(): React.JSX.Element {
                       }
                       disabled={currentPage === 1}
                     >
-                      Previous
+                      {t("previous")}
                     </Button>
 
                     {[...Array(totalPages)].map((_, i) => (
@@ -157,7 +161,7 @@ export function ProductsPage(): React.JSX.Element {
                       }
                       disabled={currentPage === totalPages}
                     >
-                      Next
+                      {t("next")}
                     </Button>
                   </div>
                 )}
