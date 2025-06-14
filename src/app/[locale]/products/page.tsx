@@ -2,6 +2,7 @@ import { requireAuthentication } from "@/lib/helpers/helpers";
 import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import type { Locale } from "next-intl";
+import { ProductsPage } from "./_components/products-page";
 
 type Props = { params: Promise<{ locale: Locale }> };
 
@@ -24,5 +25,5 @@ export default async function page(): Promise<React.JSX.Element> {
   await requireAuthentication(locale);
   setRequestLocale(locale);
 
-  return <div>page</div>;
+  return <ProductsPage />;
 }
