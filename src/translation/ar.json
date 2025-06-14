@@ -220,6 +220,7 @@
     }
   },
   "ProductPage": {
+    "notification": "{quantity, plural, one {تمت إضافة قطعة واحدة من {productName} إلى سلتك.} two {تمت إضافة قطعتين من {productName} إلى سلتك.} few {تمت إضافة # قطع من {productName} إلى سلتك.} other {تمت إضافة # قطعة من {productName} إلى سلتك.}}",
     "featured": "متميز",
     "offer": "خصم {discount}%",
     "reviews": "تقييمات",

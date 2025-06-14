@@ -220,6 +220,7 @@
     }
   },
   "ProductPage": {
+    "notification": "{quantity, plural, one {Un {productName} a été ajouté à votre panier.} other {# {productName}s ont été ajoutés à votre panier.}}",
     "featured": "En vedette",
     "offer": "-{discount}% de réduction",
     "reviews": "avis",

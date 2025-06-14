@@ -220,6 +220,7 @@
     }
   },
   "ProductPage": {
+    "notification": "{quantity, plural, one {One {productName} was added to your cart.} other {# {productName}s were added to your cart.}}",
     "featured": "Featured",
     "offer": "{discount}% OFF",
     "reviews": "reviews",

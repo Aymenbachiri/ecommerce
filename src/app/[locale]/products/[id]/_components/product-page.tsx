@@ -50,7 +50,12 @@ export function ProductPage(): React.JSX.Element {
       setCart([...cart, { product, quantity }] as CartItemWithRelations[]);
     }
 
-    toast.success(`${quantity} ${product.name}(s) added to your cart.`);
+    toast.success(
+      t("notification", {
+        quantity: quantity,
+        productName: product.name,
+      }),
+    );
   };
 
   if (loading) return <ProductSkeleton />;
