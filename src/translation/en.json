@@ -302,5 +302,48 @@
         "outOfStock": "Out of Stock"
       }
     }
+  },
+  "CheckoutPage": {
+    "CheckoutPageMetadata": {
+      "title": "Checkout - ShopFlow",
+      "description": "Complete your purchase securely and easily with ShopFlow. Review your items, choose a payment method, and place your order."
+    },
+    "orderPlacedSuccess": "Your order #{orderId} has been placed.",
+    "checkoutTitle": "Checkout",
+    "customerInformation": "Customer Information",
+    "fullName": "Full Name",
+    "enterFullName": "Enter your full name",
+    "email": "Email",
+    "enterEmail": "Enter your email",
+    "phoneNumber": "Phone Number",
+    "enterPhoneNumber": "Enter your phone number",
+    "shippingAddress": "Shipping Address",
+    "streetAddress": "Street Address",
+    "enterStreetAddress": "Enter your street address",
+    "city": "City",
+    "enterCity": "Enter your city",
+    "state": "State",
+    "enterState": "Enter your state",
+    "zipCode": "ZIP Code",
+    "enterZipCode": "Enter your zip code",
+    "country": "Country",
+    "enterCountry": "Enter your country",
+    "paymentInformation": "Payment Information",
+    "cardholderName": "Cardholder Name",
+    "enterCardholderName": "Enter your cardholder name",
+    "cardNumber": "Card Number",
+    "expiryDate": "Expiry Date",
+    "cvv": "CVV",
+    "orderSummary": "Order Summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "free": "Free",
+    "tax": "Tax",
+    "total": "Total",
+    "placeOrder": "Place Order",
+    "processing": "Processing...",
+    "cartEmptyTitle": "Your cart is empty",
+    "cartEmptyMessage": "Add some items to your cart before checking out.",
+    "startShopping": "Start Shopping"
   }
 }

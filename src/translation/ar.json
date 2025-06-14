@@ -302,5 +302,48 @@
         "outOfStock": "غير متوفر في المخزون"
       }
     }
+  },
+  "CheckoutPage": {
+    "CheckoutPageMetadata": {
+      "title": "إتمام الشراء - ShopFlow",
+      "description": "أكمل عملية الشراء بأمان وسهولة مع ShopFlow. راجع المنتجات، واختر وسيلة الدفع، وقم بتأكيد الطلب."
+    },
+    "orderPlacedSuccess": "لقد تم تقديم طلبك رقم #{orderId}.",
+    "checkoutTitle": "إتمام الشراء",
+    "customerInformation": "معلومات العميل",
+    "fullName": "الاسم الكامل",
+    "enterFullName": "أدخل اسمك الكامل",
+    "email": "البريد الإلكتروني",
+    "enterEmail": "أدخل بريدك الإلكتروني",
+    "phoneNumber": "رقم الهاتف",
+    "enterPhoneNumber": "أدخل رقم هاتفك",
+    "shippingAddress": "عنوان الشحن",
+    "streetAddress": "عنوان الشارع",
+    "enterStreetAddress": "أدخل عنوان الشارع الخاص بك",
+    "city": "المدينة",
+    "enterCity": "أدخل مدينتك",
+    "state": "الولاية",
+    "enterState": "أدخل ولايتك",
+    "zipCode": "الرمز البريدي",
+    "enterZipCode": "أدخل الرمز البريدي الخاص بك",
+    "country": "الدولة",
+    "enterCountry": "أدخل دولتك",
+    "paymentInformation": "معلومات الدفع",
+    "cardholderName": "اسم حامل البطاقة",
+    "enterCardholderName": "أدخل اسم حامل البطاقة",
+    "cardNumber": "رقم البطاقة",
+    "expiryDate": "تاريخ انتهاء الصلاحية",
+    "cvv": "رمز CVV",
+    "orderSummary": "ملخص الطلب",
+    "subtotal": "المجموع الفرعي",
+    "shipping": "الشحن",
+    "free": "مجاني",
+    "tax": "الضريبة",
+    "total": "الإجمالي",
+    "placeOrder": "تأكيد الطلب",
+    "processing": "جاري المعالجة...",
+    "cartEmptyTitle": "سلة التسوق فارغة",
+    "cartEmptyMessage": "أضف بعض المنتجات إلى سلة التسوق قبل إتمام الشراء.",
+    "startShopping": "ابدأ التسوق"
   }
 }

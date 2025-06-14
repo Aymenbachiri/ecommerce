@@ -302,5 +302,48 @@
         "outOfStock": "Rupture de stock"
       }
     }
+  },
+  "CheckoutPage": {
+    "CheckoutPageMetadata": {
+      "title": "Paiement - ShopFlow",
+      "description": "Finalisez votre achat en toute sécurité et simplicité avec ShopFlow. Vérifiez vos articles, choisissez un mode de paiement et validez votre commande."
+    },
+    "orderPlacedSuccess": "Votre commande n°{orderId} a été passée.",
+    "checkoutTitle": "Paiement",
+    "customerInformation": "Informations client",
+    "fullName": "Nom complet",
+    "enterFullName": "Entrez votre nom complet",
+    "email": "Email",
+    "enterEmail": "Entrez votre email",
+    "phoneNumber": "Numéro de téléphone",
+    "enterPhoneNumber": "Entrez votre numéro de téléphone",
+    "shippingAddress": "Adresse de livraison",
+    "streetAddress": "Adresse",
+    "enterStreetAddress": "Entrez votre adresse",
+    "city": "Ville",
+    "enterCity": "Entrez votre ville",
+    "state": "État/Province",
+    "enterState": "Entrez votre état/province",
+    "zipCode": "Code postal",
+    "enterZipCode": "Entrez votre code postal",
+    "country": "Pays",
+    "enterCountry": "Entrez votre pays",
+    "paymentInformation": "Informations de paiement",
+    "cardholderName": "Nom du titulaire de la carte",
+    "enterCardholderName": "Entrez le nom du titulaire de la carte",
+    "cardNumber": "Numéro de carte",
+    "expiryDate": "Date d'expiration",
+    "cvv": "CVV",
+    "orderSummary": "Récapitulatif de la commande",
+    "subtotal": "Sous-total",
+    "shipping": "Livraison",
+    "free": "Gratuit",
+    "tax": "Taxe",
+    "total": "Total",
+    "placeOrder": "Passer la commande",
+    "processing": "Traitement...",
+    "cartEmptyTitle": "Votre panier est vide",
+    "cartEmptyMessage": "Ajoutez des articles à votre panier avant de passer à la caisse.",
+    "startShopping": "Commencer vos achats"
   }
 }
