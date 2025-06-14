@@ -345,5 +345,52 @@
     "cartEmptyTitle": "Your cart is empty",
     "cartEmptyMessage": "Add some items to your cart before checking out.",
     "startShopping": "Start Shopping"
+  },
+  "OrdersPage": {
+    "OrdersPageMetadata": {
+      "title": "Orders - ShopFlow",
+      "description": "View your orders and track your shipments."
+    },
+    "noOrdersTitle": "No orders yet",
+    "noOrdersDescription": "You haven't placed any orders yet. Start shopping to see your orders here.",
+    "startShoppingButton": "Start Shopping",
+    "yourOrdersTitle": "Your Orders",
+    "orderNumber": "Order #{orderId}",
+    "placedOn": "Placed on {date}",
+    "total": "Total",
+    "viewDetailsButton": "View Details",
+    "status": {
+      "DELIVERED": "Delivered",
+      "SHIPPED": "Shipped",
+      "PROCESSING": "Processing",
+      "PENDING": "Pending",
+      "CANCELLED": "Cancelled"
+    }
+  },
+  "OrderDetailsPage": {
+    "orderNotFound": "Order Not Found",
+    "orderNotFoundMessage": "The order you're looking for doesn't exist.",
+    "backToOrders": "Back to Orders",
+    "orderNumber": "Order #{orderId}",
+    "placedOn": "Placed on {date}",
+    "orderStatus": "Order Status",
+    "lastUpdated": "Last updated: {date}",
+    "orderItems": "Order Items",
+    "quantity": "Quantity: {quantity}",
+    "shippingAddress": "Shipping Address",
+    "name": "Name: {name}",
+    "street": "Street: {street}",
+    "address": "Address: {city}, {state} {zipCode}",
+    "country": "Country: {country}",
+    "phone": "Phone: {phone}",
+    "email": "Email: {email}",
+    "orderSummary": "Order Summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "free": "Free",
+    "tax": "Tax",
+    "total": "Total",
+    "trackPackage": "Track Package",
+    "downloadInvoice": "Download Invoice"
   }
 }

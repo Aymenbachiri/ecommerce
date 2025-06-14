@@ -345,5 +345,52 @@
     "cartEmptyTitle": "Votre panier est vide",
     "cartEmptyMessage": "Ajoutez des articles à votre panier avant de passer à la caisse.",
     "startShopping": "Commencer vos achats"
+  },
+  "OrdersPage": {
+    "OrdersPageMetadata": {
+      "title": "Commandes - ShopFlow",
+      "description": "Consultez vos commandes et suivez vos livraisons."
+    },
+    "noOrdersTitle": "Aucune commande pour le moment",
+    "noOrdersDescription": "Vous n'avez pas encore passé de commandes. Commencez vos achats pour voir vos commandes ici.",
+    "startShoppingButton": "Commencer mes achats",
+    "yourOrdersTitle": "Vos commandes",
+    "orderNumber": "Commande n°{orderId}",
+    "placedOn": "Passée le {date}",
+    "total": "Total",
+    "viewDetailsButton": "Voir les détails",
+    "status": {
+      "DELIVERED": "Livrée",
+      "SHIPPED": "Expédiée",
+      "PROCESSING": "En traitement",
+      "PENDING": "En attente",
+      "CANCELLED": "Annulée"
+    }
+  },
+  "OrderDetailsPage": {
+    "orderNotFound": "Commande Introuvable",
+    "orderNotFoundMessage": "La commande que vous recherchez n'existe pas.",
+    "backToOrders": "Retour aux commandes",
+    "orderNumber": "Commande n°{orderId}",
+    "placedOn": "Passée le {date}",
+    "orderStatus": "Statut de la commande",
+    "lastUpdated": "Dernière mise à jour : {date}",
+    "orderItems": "Articles de la commande",
+    "quantity": "Quantité : {quantity}",
+    "shippingAddress": "Adresse de livraison",
+    "name": "Nom : {name}",
+    "street": "Rue : {street}",
+    "address": "Adresse : {city}, {state} {zipCode}",
+    "country": "Pays : {country}",
+    "phone": "Téléphone : {phone}",
+    "email": "E-mail : {email}",
+    "orderSummary": "Récapitulatif de la commande",
+    "subtotal": "Sous-total",
+    "shipping": "Livraison",
+    "free": "Gratuit",
+    "tax": "Taxe",
+    "total": "Total",
+    "trackPackage": "Suivre le colis",
+    "downloadInvoice": "Télécharger la facture"
   }
 }

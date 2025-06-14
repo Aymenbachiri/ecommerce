@@ -345,5 +345,52 @@
     "cartEmptyTitle": "سلة التسوق فارغة",
     "cartEmptyMessage": "أضف بعض المنتجات إلى سلة التسوق قبل إتمام الشراء.",
     "startShopping": "ابدأ التسوق"
+  },
+  "OrdersPage": {
+    "OrdersPageMetadata": {
+      "title": "الطلبات - ShopFlow",
+      "description": "اعرض طلباتك وتتبع شحناتك."
+    },
+    "noOrdersTitle": "لا توجد طلبات بعد",
+    "noOrdersDescription": "لم تقم بتقديم أي طلبات بعد. ابدأ التسوق لرؤية طلباتك هنا.",
+    "startShoppingButton": "ابدأ التسوق",
+    "yourOrdersTitle": "طلباتك",
+    "orderNumber": "الطلب رقم {orderId}",
+    "placedOn": "تاريخ الطلب {date}",
+    "total": "الإجمالي",
+    "viewDetailsButton": "عرض التفاصيل",
+    "status": {
+      "DELIVERED": "تم التوصيل",
+      "SHIPPED": "تم الشحن",
+      "PROCESSING": "قيد المعالجة",
+      "PENDING": "معلق",
+      "CANCELLED": "ملغاة"
+    }
+  },
+  "OrderDetailsPage": {
+    "orderNotFound": "الطلب غير موجود",
+    "orderNotFoundMessage": "الطلب الذي تبحث عنه غير موجود.",
+    "backToOrders": "العودة إلى الطلبات",
+    "orderNumber": "الطلب رقم: {orderId}",
+    "placedOn": "تم الطلب في: {date}",
+    "orderStatus": "حالة الطلب",
+    "lastUpdated": "آخر تحديث: {date}",
+    "orderItems": "عناصر الطلب",
+    "quantity": "الكمية: {quantity}",
+    "shippingAddress": "عنوان الشحن",
+    "name": "الاسم: {name}",
+    "street": "الشارع: {street}",
+    "address": "العنوان: {city}, {state} {zipCode}",
+    "country": "البلد: {country}",
+    "phone": "الهاتف: {phone}",
+    "email": "البريد الإلكتروني: {email}",
+    "orderSummary": "ملخص الطلب",
+    "subtotal": "المجموع الفرعي",
+    "shipping": "الشحن",
+    "free": "مجاني",
+    "tax": "الضريبة",
+    "total": "الإجمالي",
+    "trackPackage": "تتبع الشحنة",
+    "downloadInvoice": "تحميل الفاتورة"
   }
 }
