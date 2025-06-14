@@ -1,6 +1,10 @@
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
-import type { CartItemWithRelations, Order, Product } from "../types/types";
+import type {
+  CartItemWithRelations,
+  Order,
+  ProductWithRelations,
+} from "../types/types";
 
 export const cartAtom = atomWithStorage<CartItemWithRelations[]>("cart", []);
 
@@ -24,5 +28,7 @@ export const sortByAtom = atom<"name" | "price-low" | "price-high" | "rating">(
 );
 
 export const ordersAtom = atomWithStorage<Order[]>("orders", []);
-
-export const productsAtom = atomWithStorage<Product[]>("products", []);
+export const productsAtom = atomWithStorage<ProductWithRelations[]>(
+  "products",
+  [],
+);

@@ -19,6 +19,8 @@ import {
 } from "@/lib/store/store";
 import { mockCategories } from "@/lib/data/data";
 
+type Value = "name" | "price-low" | "price-high" | "rating";
+
 export function Filters(): React.JSX.Element {
   const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
   const [selectedCategory, setSelectedCategory] = useAtom(selectedCategoryAtom);
@@ -56,12 +58,8 @@ export function Filters(): React.JSX.Element {
             </SelectTrigger>
             <SelectContent>
               {mockCategories.map((category) => (
-                <SelectItem
-                  defaultValue="All"
-                  key={category.id}
-                  value={category.id}
-                >
-                  {category.slug}
+                <SelectItem key={category.id} value={category.slug}>
+                  {category.name}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -74,8 +72,7 @@ export function Filters(): React.JSX.Element {
           </Label>
           <Select
             value={sortBy}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            onValueChange={(value: any) => setSortBy(value)}
+            onValueChange={(value: Value) => setSortBy(value)}
           >
             <SelectTrigger>
               <SelectValue placeholder="Sort by" />

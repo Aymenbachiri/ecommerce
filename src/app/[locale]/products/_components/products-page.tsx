@@ -21,7 +21,6 @@ export function ProductsPage(): React.JSX.Element {
   const [products, setProducts] = useState<ProductWithRelations[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
-
   const [searchQuery] = useAtom(searchQueryAtom);
   const [selectedCategory] = useAtom(selectedCategoryAtom);
   const [sortBy] = useAtom(sortByAtom);
@@ -47,30 +46,32 @@ export function ProductsPage(): React.JSX.Element {
     if (selectedCategory && selectedCategory !== "all") {
       filtered = filtered.filter((product) =>
         product.categories.some(
-          (catOnProd) => catOnProd.category.name === selectedCategory,
+          (catOnProd) => catOnProd.category.slug === selectedCategory,
         ),
       );
     }
 
+    const sortedProducts = [...filtered];
+
     switch (sortBy) {
       case "price-low":
-        filtered.sort((a, b) => a.price - b.price);
+        sortedProducts.sort((a, b) => a.price - b.price);
         break;
       case "price-high":
-        filtered.sort((a, b) => b.price - a.price);
+        sortedProducts.sort((a, b) => b.price - a.price);
         break;
       case "rating":
-        filtered.sort(
+        sortedProducts.sort(
           (a, b) => (b.averageRating || 0) - (a.averageRating || 0),
         );
         break;
       case "name":
       default:
-        filtered.sort((a, b) => a.name.localeCompare(b.name));
+        sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
         break;
     }
 
-    return filtered;
+    return sortedProducts;
   }, [products, searchQuery, selectedCategory, sortBy]);
 
   const paginatedProducts = useMemo(() => {

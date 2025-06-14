@@ -127,7 +127,7 @@ export const mockProducts: ProductWithRelations[] = [
         productId: "prod-1",
         categoryId: "cat-clq9z8t6r0000_mock_elec",
         assignedAt: new Date(),
-        category: mockCategories[0],
+        category: mockCategories[1],
       },
     ],
     reviews: [
@@ -177,7 +177,7 @@ export const mockProducts: ProductWithRelations[] = [
         productId: "prod-2",
         categoryId: "cat-clq9z8t6r0000_mock_elec",
         assignedAt: new Date(),
-        category: mockCategories[0],
+        category: mockCategories[1],
       },
     ],
     reviews: [],
@@ -214,7 +214,7 @@ export const mockProducts: ProductWithRelations[] = [
         productId: "prod-3",
         categoryId: "cat-clq9z8t6r0001_mock_cloth",
         assignedAt: new Date(),
-        category: mockCategories[1],
+        category: mockCategories[2],
       },
     ],
     reviews: [
@@ -263,7 +263,7 @@ export const mockProducts: ProductWithRelations[] = [
         productId: "prod-5",
         categoryId: "cat-clq9z8t6r0002_mock_furn",
         assignedAt: new Date(),
-        category: mockCategories[2],
+        category: mockCategories[3],
       },
     ],
     reviews: [],
@@ -299,7 +299,7 @@ export const mockProducts: ProductWithRelations[] = [
         productId: "prod-6",
         categoryId: "cat-clq9z8t6r0003_mock_beauty",
         assignedAt: new Date(),
-        category: mockCategories[3],
+        category: mockCategories[4],
       },
     ],
     reviews: [],
@@ -323,7 +323,7 @@ export const mockAnalytics: DashboardAnalytics = {
   ],
   topProducts: [
     { product: mockProducts[0], totalSold: 50 },
-    { product: mockProducts[4], totalSold: 45 },
+    { product: mockProducts[3], totalSold: 45 },
     { product: mockProducts[1], totalSold: 40 },
   ],
   ordersByStatus: [
