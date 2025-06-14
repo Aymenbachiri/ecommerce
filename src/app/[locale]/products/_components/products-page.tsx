@@ -4,7 +4,6 @@ import { useState, useEffect, useMemo } from "react";
 import { useAtom } from "jotai";
 import { motion } from "motion/react";
 import { ProductCard } from "./product-card";
-import { ProductSkeleton } from "./product-skeleton";
 import { Filters } from "./filters";
 import { Button } from "@/components/ui/button";
 import { mockProducts } from "@/lib/data/data";
@@ -15,6 +14,7 @@ import {
   sortByAtom,
 } from "@/lib/store/store";
 import { useTranslations } from "next-intl";
+import { ProductsSkeleton } from "./products-skeleton";
 
 const PRODUCTS_PER_PAGE = 3;
 
@@ -89,7 +89,7 @@ export function ProductsPage(): React.JSX.Element {
   );
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="mx-auto max-w-5xl px-4 py-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -114,7 +114,7 @@ export function ProductsPage(): React.JSX.Element {
             {loading ? (
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
                 {[...Array(6)].map((_, i) => (
-                  <ProductSkeleton key={i} />
+                  <ProductsSkeleton key={i} />
                 ))}
               </div>
             ) : (

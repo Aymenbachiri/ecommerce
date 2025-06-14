@@ -211,6 +211,12 @@
         "priceHigh": "السعر: من الأعلى إلى الأقل",
         "rating": "التقييم"
       }
+    },
+    "ProductCard": {
+      "featured": "مميز",
+      "reviews": "({count})",
+      "outOfStock": "نفدت الكمية",
+      "addToCart": "أضف إلى السلة"
     }
   }
 }

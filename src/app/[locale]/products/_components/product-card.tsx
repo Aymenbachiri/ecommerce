@@ -14,6 +14,7 @@ import type {
   CartItemWithRelations,
   ProductWithRelations,
 } from "@/lib/types/types";
+import { useTranslations } from "next-intl";
 
 type ProductCardProps = {
   product: ProductWithRelations;
@@ -21,6 +22,7 @@ type ProductCardProps = {
 
 export function ProductCard({ product }: ProductCardProps): React.JSX.Element {
   const [cart, setCart] = useAtom(cartAtom);
+  const t = useTranslations("ProductsPage.ProductCard");
 
   const addToCart = () => {
     const existingItem = cart.find((item) => item.product.id === product.id);
@@ -66,7 +68,7 @@ export function ProductCard({ product }: ProductCardProps): React.JSX.Element {
           )}
           {product.featured && (
             <Badge className="absolute top-2 right-2 bg-yellow-500">
-              Featured
+              {t("featured")}
             </Badge>
           )}
           <Button
@@ -100,7 +102,7 @@ export function ProductCard({ product }: ProductCardProps): React.JSX.Element {
               />
             ))}
             <span className="text-muted-foreground ml-1 text-sm">
-              ({product.reviews.length})
+              {t("reviews", { count: product.reviews.length })}
             </span>
           </div>
 
@@ -121,7 +123,7 @@ export function ProductCard({ product }: ProductCardProps): React.JSX.Element {
             disabled={product.stock === 0}
           >
             <ShoppingCart className="mr-2 h-4 w-4" />
-            {product.stock === 0 ? "Out of Stock" : "Add to Cart"}
+            {product.stock === 0 ? t("outOfStock") : t("addToCart")}
           </Button>
         </CardFooter>
       </Card>

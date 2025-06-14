@@ -211,6 +211,12 @@
         "priceHigh": "Price: High to Low",
         "rating": "Rating"
       }
+    },
+    "ProductCard": {
+      "featured": "Featured",
+      "reviews": "({count})",
+      "outOfStock": "Out of Stock",
+      "addToCart": "Add to Cart"
     }
   }
 }

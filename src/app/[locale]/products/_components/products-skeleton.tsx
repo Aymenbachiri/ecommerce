@@ -1,7 +1,7 @@
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export function ProductSkeleton(): React.JSX.Element {
+export function ProductsSkeleton(): React.JSX.Element {
   return (
     <Card className="overflow-hidden">
       <Skeleton className="h-64 w-full" />

@@ -27,7 +27,7 @@ export function Navbar({ session }: Props): React.JSX.Element {
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="container mx-auto flex items-center justify-between px-4 py-4">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
           <motion.div
             className="flex items-center space-x-2"
             whileHover={{ scale: 1.05 }}

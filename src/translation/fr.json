@@ -211,6 +211,12 @@
         "priceHigh": "Prix : du plus élevé au plus bas",
         "rating": "Note"
       }
+    },
+    "ProductCard": {
+      "featured": "En vedette",
+      "reviews": "({count})",
+      "outOfStock": "En rupture de stock",
+      "addToCart": "Ajouter au panier"
     }
   }
 }
