@@ -97,7 +97,7 @@ export function CartPage(): React.JSX.Element {
                         </p>
 
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
+                          <section className="flex items-center gap-2">
                             <Button
                               variant="outline"
                               size="icon"
@@ -126,9 +126,9 @@ export function CartPage(): React.JSX.Element {
                             >
                               <Plus className="h-4 w-4" />
                             </Button>
-                          </div>
+                          </section>
 
-                          <div className="flex items-center gap-4">
+                          <section className="flex items-center gap-4">
                             <span className="text-lg font-semibold">
                               ${(item.product.price * item.quantity).toFixed(2)}
                             </span>
@@ -140,7 +140,7 @@ export function CartPage(): React.JSX.Element {
                             >
                               <Trash2 className="h-4 w-4" />
                             </Button>
-                          </div>
+                          </section>
                         </div>
                       </div>
                     </div>
@@ -156,7 +156,7 @@ export function CartPage(): React.JSX.Element {
                 <CardTitle>{t("orderSummaryTitle")}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="space-y-2">
+                <section className="space-y-2">
                   {cart.map((item) => (
                     <div
                       key={item.product.id}
@@ -170,31 +170,31 @@ export function CartPage(): React.JSX.Element {
                       </span>
                     </div>
                   ))}
-                </div>
+                </section>
 
                 <Separator />
 
                 <div className="space-y-2">
-                  <div className="flex justify-between">
+                  <section className="flex justify-between">
                     <span>{t("subtotal")}</span>
                     <span>${total.toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between">
+                  </section>
+                  <section className="flex justify-between">
                     <span>{t("shipping")}</span>
                     <span>{t("free")}</span>
-                  </div>
-                  <div className="flex justify-between">
+                  </section>
+                  <section className="flex justify-between">
                     <span>{t("tax")}</span>
                     <span>${(total * 0.1).toFixed(2)}</span>
-                  </div>
+                  </section>
                 </div>
 
                 <Separator />
 
-                <div className="flex justify-between text-lg font-semibold">
+                <section className="flex justify-between text-lg font-semibold">
                   <span>{t("total")}</span>
                   <span>${(total * 1.1).toFixed(2)}</span>
-                </div>
+                </section>
 
                 <Button className="w-full" size="lg" asChild>
                   <Link href="/checkout">{t("proceedToCheckoutButton")}</Link>

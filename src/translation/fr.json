@@ -216,7 +216,8 @@
       "featured": "En vedette",
       "reviews": "({count})",
       "outOfStock": "En rupture de stock",
-      "addToCart": "Ajouter au panier"
+      "addToCart": "Ajouter au panier",
+      "notification": "{productName} a été ajouté à votre panier."
     }
   },
   "ProductPage": {
@@ -257,5 +258,49 @@
     "total": "Total",
     "proceedToCheckoutButton": "Passer à la caisse",
     "continueShoppingButton": "Continuer vos achats"
+  },
+  "AdminPage": {
+    "AdminPageMetadata": {
+      "title": "Tableau de bord administrateur - ShopFlow",
+      "description": "Gérez les paramètres de votre boutique, vos produits et vos commandes depuis le tableau de bord administrateur."
+    },
+    "ToastMessages": {
+      "productUpdated": "Le produit a été mis à jour avec succès.",
+      "productCreated": "Un nouveau produit a été créé avec succès.",
+      "productDeleted": "Le produit a été supprimé avec succès."
+    },
+    "Dashboard": {
+      "title": "Tableau de bord administrateur",
+      "totalSales": "Ventes totales",
+      "totalOrders": "Commandes totales",
+      "products": "Produits",
+      "avgOrderValue": "Valeur moyenne des commandes"
+    },
+    "ProductManagement": {
+      "title": "Gestion des produits",
+      "addProduct": "Ajouter un produit",
+      "editProduct": "Modifier le produit",
+      "addNewProduct": "Ajouter un nouveau produit",
+      "form": {
+        "productName": "Nom du produit",
+        "description": "Description",
+        "price": "Prix",
+        "stock": "Stock",
+        "category": "Catégorie",
+        "selectCategory": "Sélectionner une catégorie",
+        "updateProduct": "Mettre à jour le produit",
+        "createProduct": "Créer le produit"
+      },
+      "table": {
+        "name": "Nom",
+        "category": "Catégorie",
+        "price": "Prix",
+        "stock": "Stock",
+        "status": "Statut",
+        "actions": "Actions",
+        "inStock": "En stock",
+        "outOfStock": "Rupture de stock"
+      }
+    }
   }
 }

@@ -216,7 +216,8 @@
       "featured": "Featured",
       "reviews": "({count})",
       "outOfStock": "Out of Stock",
-      "addToCart": "Add to Cart"
+      "addToCart": "Add to Cart",
+      "notification": "{productName} has been added to your cart."
     }
   },
   "ProductPage": {
@@ -257,5 +258,49 @@
     "total": "Total",
     "proceedToCheckoutButton": "Proceed to Checkout",
     "continueShoppingButton": "Continue Shopping"
+  },
+  "AdminPage": {
+    "AdminPageMetadata": {
+      "title": "Admin Dashboard - ShopFlow",
+      "description": "Manage your store settings, products, and orders from the Admin Dashboard."
+    },
+    "ToastMessages": {
+      "productUpdated": "Product has been updated successfully.",
+      "productCreated": "New product has been created successfully.",
+      "productDeleted": "Product has been deleted successfully."
+    },
+    "Dashboard": {
+      "title": "Admin Dashboard",
+      "totalSales": "Total Sales",
+      "totalOrders": "Total Orders",
+      "products": "Products",
+      "avgOrderValue": "Avg Order Value"
+    },
+    "ProductManagement": {
+      "title": "Products Management",
+      "addProduct": "Add Product",
+      "editProduct": "Edit Product",
+      "addNewProduct": "Add New Product",
+      "form": {
+        "productName": "Product Name",
+        "description": "Description",
+        "price": "Price",
+        "stock": "Stock",
+        "category": "Category",
+        "selectCategory": "Select category",
+        "updateProduct": "Update Product",
+        "createProduct": "Create Product"
+      },
+      "table": {
+        "name": "Name",
+        "category": "Category",
+        "price": "Price",
+        "stock": "Stock",
+        "status": "Status",
+        "actions": "Actions",
+        "inStock": "In Stock",
+        "outOfStock": "Out of Stock"
+      }
+    }
   }
 }

@@ -10,11 +10,11 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { cartAtom } from "@/lib/store/store";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 import type {
   CartItemWithRelations,
   ProductWithRelations,
 } from "@/lib/types/types";
-import { useTranslations } from "next-intl";
 
 type ProductCardProps = {
   product: ProductWithRelations;
@@ -39,7 +39,7 @@ export function ProductCard({ product }: ProductCardProps): React.JSX.Element {
       setCart([...cart, { product, quantity: 1 } as CartItemWithRelations]);
     }
 
-    toast.success(`${product.name} has been added to your cart.`);
+    toast.success(t("notification", { productName: product.name }));
   };
 
   const discount = product.originalPrice

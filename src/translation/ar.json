@@ -216,7 +216,8 @@
       "featured": "مميز",
       "reviews": "({count})",
       "outOfStock": "نفدت الكمية",
-      "addToCart": "أضف إلى السلة"
+      "addToCart": "أضف إلى السلة",
+      "notification": "تم إضافة {productName} إلى سلة التسوق الخاصة بك."
     }
   },
   "ProductPage": {
@@ -257,5 +258,49 @@
     "total": "الإجمالي",
     "proceedToCheckoutButton": "المتابعة إلى الدفع",
     "continueShoppingButton": "متابعة التسوق"
+  },
+  "AdminPage": {
+    "AdminPageMetadata": {
+      "title": "لوحة التحكم الإدارية - ShopFlow",
+      "description": "إدارة إعدادات متجرك، المنتجات، والطلبات من لوحة التحكم الإدارية."
+    },
+    "ToastMessages": {
+      "productUpdated": "تم تحديث المنتج بنجاح.",
+      "productCreated": "تم إنشاء منتج جديد بنجاح.",
+      "productDeleted": "تم حذف المنتج بنجاح."
+    },
+    "Dashboard": {
+      "title": "لوحة تحكم المسؤول",
+      "totalSales": "إجمالي المبيعات",
+      "totalOrders": "إجمالي الطلبات",
+      "products": "المنتجات",
+      "avgOrderValue": "متوسط قيمة الطلب"
+    },
+    "ProductManagement": {
+      "title": "إدارة المنتجات",
+      "addProduct": "إضافة منتج",
+      "editProduct": "تعديل المنتج",
+      "addNewProduct": "إضافة منتج جديد",
+      "form": {
+        "productName": "اسم المنتج",
+        "description": "الوصف",
+        "price": "السعر",
+        "stock": "المخزون",
+        "category": "الفئة",
+        "selectCategory": "اختر الفئة",
+        "updateProduct": "تحديث المنتج",
+        "createProduct": "إنشاء منتج"
+      },
+      "table": {
+        "name": "الاسم",
+        "category": "الفئة",
+        "price": "السعر",
+        "stock": "المخزون",
+        "status": "الحالة",
+        "actions": "الإجراءات",
+        "inStock": "متوفر في المخزون",
+        "outOfStock": "غير متوفر في المخزون"
+      }
+    }
   }
 }
