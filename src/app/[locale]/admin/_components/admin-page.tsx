@@ -29,7 +29,7 @@ import {
 } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
 import { mockAnalytics, mockCategories } from "@/lib/data/data";
-import { ordersAtom, productsAtom } from "@/lib/store/store";
+import { productsAtom } from "@/lib/store/store";
 import type { ProductWithRelations } from "@/lib/types/types";
 import { useAtom } from "jotai";
 import {
@@ -49,7 +49,6 @@ import { useTranslations } from "next-intl";
 export function AdminPage(): React.JSX.Element {
   const t = useTranslations("AdminPage");
   const [products, setProducts] = useAtom(productsAtom);
-  const [orders] = useAtom(ordersAtom);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingProduct, setEditingProduct] =
     useState<ProductWithRelations | null>(null);
@@ -78,27 +77,34 @@ export function AdminPage(): React.JSX.Element {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const productData = {
+    const newProduct: ProductWithRelations = {
       id: editingProduct?.id || Date.now().toString(),
       name: formData.name,
       description: formData.description,
-      price: Number.parseFloat(formData.price),
       category: formData.category,
-      stock: Number.parseInt(formData.stock),
-      image: formData.image,
-      rating: editingProduct?.averageRating || 4.5,
-      reviews: editingProduct?.reviews || 0,
+      price: parseFloat(formData.price),
+      originalPrice: null,
+      stock: parseInt(formData.stock, 10),
+      sku: null,
+      featured: false,
+      published: true,
       createdAt: editingProduct?.createdAt || new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-    };
+      image: formData.image,
+      images: [],
+      categories: [],
+      reviews: [],
+      _count: { reviews: 0 },
+      averageRating: editingProduct?.averageRating ?? 0,
+    } as unknown as ProductWithRelations;
 
     if (editingProduct) {
       setProducts(
-        products.map((p) => (p.id === editingProduct.id ? productData : p)),
+        products.map((p) => (p.id === editingProduct.id ? newProduct : p)),
       );
       toast.success(t("ToastMessages.productUpdated"));
     } else {
-      setProducts([...products, productData]);
+      setProducts([...products, newProduct]);
       toast.success(t("ToastMessages.productCreated"));
     }
 
@@ -112,9 +118,9 @@ export function AdminPage(): React.JSX.Element {
       name: product.name,
       description: product.description,
       price: product.price.toString(),
-      category: product.categories[0].category.name,
+      category: product.category || "",
       stock: product.stock.toString(),
-      image: product.images[0].url,
+      image: product.images[0]?.url || "/placeholder.svg?height=400&width=400",
     });
     setIsDialogOpen(true);
   };
@@ -208,9 +214,13 @@ export function AdminPage(): React.JSX.Element {
                         : t("ProductManagement.addNewProduct")}
                     </DialogTitle>
                   </DialogHeader>
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                      <Label htmlFor="name">
+                  <form
+                    dir="auto"
+                    onSubmit={handleSubmit}
+                    className="space-y-4"
+                  >
+                    <div className="">
+                      <Label htmlFor="name" className="mb-2">
                         {t("ProductManagement.form.productName")}
                       </Label>
                       <Input
@@ -224,13 +234,14 @@ export function AdminPage(): React.JSX.Element {
                     </div>
 
                     <div>
-                      <Label htmlFor="description">
+                      <Label htmlFor="description" className="mb-2">
                         {t("ProductManagement.form.description")}
                       </Label>
                       <Textarea
                         id="description"
                         required
                         value={formData.description}
+                        className="resize-none"
                         onChange={(e) =>
                           setFormData({
                             ...formData,
@@ -242,7 +253,7 @@ export function AdminPage(): React.JSX.Element {
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="price">
+                        <Label htmlFor="price" className="mb-2">
                           {t("ProductManagement.form.price")}
                         </Label>
                         <Input
@@ -258,7 +269,7 @@ export function AdminPage(): React.JSX.Element {
                       </div>
 
                       <div>
-                        <Label htmlFor="stock">
+                        <Label htmlFor="stock" className="mb-2">
                           {t("ProductManagement.form.stock")}
                         </Label>
                         <Input
@@ -274,7 +285,7 @@ export function AdminPage(): React.JSX.Element {
                     </div>
 
                     <div>
-                      <Label htmlFor="category">
+                      <Label htmlFor="category" className="mb-2">
                         {t("ProductManagement.form.category")}
                       </Label>
                       <Select
@@ -284,7 +295,11 @@ export function AdminPage(): React.JSX.Element {
                         }
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder="Select category" />
+                          <SelectValue
+                            placeholder={t(
+                              "ProductManagement.form.selectCategory",
+                            )}
+                          />
                         </SelectTrigger>
                         <SelectContent>
                           {mockCategories
@@ -312,7 +327,7 @@ export function AdminPage(): React.JSX.Element {
             </div>
           </CardHeader>
           <CardContent>
-            <Table>
+            <Table dir="rtl">
               <TableHeader>
                 <TableRow>
                   <TableHead>{t("ProductManagement.table.name")}</TableHead>
@@ -323,14 +338,14 @@ export function AdminPage(): React.JSX.Element {
                   <TableHead>{t("ProductManagement.table.actions")}</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody>
+              <TableBody dir="ltr">
                 {products.map((product) => (
                   <TableRow key={product.id}>
                     <TableCell className="font-medium">
                       {product.name}
                     </TableCell>
                     <TableCell className="capitalize">
-                      {product.categories[0].category.name}
+                      {product.category ?? "-"}
                     </TableCell>
                     <TableCell>${product.price}</TableCell>
                     <TableCell>{product.stock}</TableCell>
