@@ -50,11 +50,11 @@ export function ProductCard({ product }: ProductCardProps): React.JSX.Element {
 
   return (
     <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }}>
-      <Card className="group overflow-hidden">
+      <Card className="group flex h-full flex-col overflow-hidden">
         <div className="relative">
           <Link href={`/products/${product.id}`}>
             <Image
-              src={product.images[0].url || "/placeholder.svg"}
+              src={product.images?.[0]?.url || "/placeholder.svg"}
               alt={product.name}
               width={400}
               height={400}
@@ -62,51 +62,51 @@ export function ProductCard({ product }: ProductCardProps): React.JSX.Element {
             />
           </Link>
           {discount > 0 && (
-            <Badge className="absolute top-2 left-2 bg-red-500">
+            <Badge className="absolute top-2 left-2 bg-red-500 text-white">
               -{discount}%
             </Badge>
           )}
           {product.featured && (
-            <Badge className="absolute top-2 right-2 bg-yellow-500">
+            <Badge className="absolute top-2 right-2 bg-yellow-500 text-black">
               {t("featured")}
             </Badge>
           )}
           <Button
             variant="ghost"
             size="icon"
-            className="absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100"
+            className="absolute top-2 right-2 bg-white/70 opacity-0 transition-opacity group-hover:opacity-100 hover:bg-white"
           >
             <Heart className="h-4 w-4" />
           </Button>
         </div>
 
-        <CardContent className="p-4">
-          <Link href={`/products/${product.id}`}>
-            <h3 className="hover:text-primary mb-2 line-clamp-2 text-lg font-semibold transition-colors">
+        <CardContent className="flex flex-1 flex-col p-4">
+          <Link href={`/products/${product.id}`} className="flex-grow">
+            <h3 className="hover:text-primary mb-2 truncate text-lg font-semibold transition-colors">
               {product.name}
             </h3>
+            <p className="text-muted-foreground mb-4 line-clamp-2 h-10 text-sm">
+              {product.description}
+            </p>
           </Link>
-          <p className="text-muted-foreground mb-2 line-clamp-2 text-sm">
-            {product.description}
-          </p>
 
           <div className="mb-2 flex items-center gap-1">
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
                 className={`h-4 w-4 ${
-                  i < Math.floor(product.averageRating as number)
+                  i < (product.averageRating || 0)
                     ? "fill-yellow-400 text-yellow-400"
                     : "text-gray-300"
                 }`}
               />
             ))}
             <span className="text-muted-foreground ml-1 text-sm">
-              {t("reviews", { count: product.reviews.length })}
+              {t("reviews", { count: product.reviews?.length || 0 })}
             </span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-baseline gap-2">
             <span className="text-xl font-bold">${product.price}</span>
             {product.originalPrice && (
               <span className="text-muted-foreground text-sm line-through">
@@ -116,7 +116,7 @@ export function ProductCard({ product }: ProductCardProps): React.JSX.Element {
           </div>
         </CardContent>
 
-        <CardFooter className="p-4 pt-0">
+        <CardFooter className="mt-auto p-4 pt-0">
           <Button
             onClick={addToCart}
             className="w-full"
