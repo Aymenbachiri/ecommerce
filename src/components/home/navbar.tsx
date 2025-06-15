@@ -40,7 +40,7 @@ export function Navbar({ session }: Props): React.JSX.Element {
             </Link>
           </motion.div>
 
-          <div className="hidden items-center space-x-8 md:flex">
+          <section className="hidden items-center space-x-8 md:flex">
             <Link
               href="/#features"
               className="text-muted-foreground hover:text-foreground transition-colors"
@@ -65,7 +65,7 @@ export function Navbar({ session }: Props): React.JSX.Element {
             >
               {t("products")}
             </Link>
-          </div>
+          </section>
 
           <div className="flex items-center space-x-4">
             <ThemeToggle />
