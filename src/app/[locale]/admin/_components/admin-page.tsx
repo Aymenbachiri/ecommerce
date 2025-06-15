@@ -44,10 +44,11 @@ import {
 import { useState } from "react";
 import { toast } from "sonner";
 import { motion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export function AdminPage(): React.JSX.Element {
   const t = useTranslations("AdminPage");
+  const locale = useLocale();
   const [products, setProducts] = useAtom(productsAtom);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingProduct, setEditingProduct] =
@@ -327,7 +328,7 @@ export function AdminPage(): React.JSX.Element {
             </div>
           </CardHeader>
           <CardContent>
-            <Table dir="rtl">
+            <Table dir={locale === "ar" ? "rtl" : "ltr"}>
               <TableHeader>
                 <TableRow>
                   <TableHead>{t("ProductManagement.table.name")}</TableHead>

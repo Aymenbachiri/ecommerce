@@ -23,7 +23,7 @@ export function OrderDetails(): React.JSX.Element {
   if (!order) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <div className="py-16 text-center">
+        <section className="py-16 text-center">
           <h1 className="mb-4 text-3xl font-bold">{t("orderNotFound")}</h1>
           <p className="text-muted-foreground mb-8">
             {t("orderNotFoundMessage")}
@@ -31,7 +31,7 @@ export function OrderDetails(): React.JSX.Element {
           <Button asChild>
             <Link href="/orders">{t("backToOrders")}</Link>
           </Button>
-        </div>
+        </section>
       </div>
     );
   }

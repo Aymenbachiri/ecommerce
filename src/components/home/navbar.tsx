@@ -8,8 +8,8 @@ import { Button } from "../ui/button";
 import { useTranslations } from "next-intl";
 import { LocaleSwitcher } from "./locale-switcher";
 import { Link } from "@/i18n/navigation";
-import type { Session } from "next-auth";
 import { signOut } from "next-auth/react";
+import type { Session } from "next-auth";
 
 type Props = {
   session: Session | null;
@@ -59,6 +59,12 @@ export function Navbar({ session }: Props): React.JSX.Element {
             >
               {t("pricing")}
             </Link>
+            <Link
+              href="/products"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {t("products")}
+            </Link>
           </div>
 
           <div className="flex items-center space-x-4">
@@ -83,7 +89,7 @@ export function Navbar({ session }: Props): React.JSX.Element {
                   variant="link"
                   className="hidden sm:inline-flex"
                 >
-                  <Link href="/dashboard">{t("dashboard")}</Link>
+                  <Link href="/admin">{t("dashboard")}</Link>
                 </Button>
               </>
             ) : (
@@ -135,6 +141,13 @@ export function Navbar({ session }: Props): React.JSX.Element {
               >
                 {t("pricing")}
               </Link>
+              <Link
+                href="/products"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t("products")}
+              </Link>
               <div className="flex flex-col space-y-2">
                 {session?.user ? (
                   <>
@@ -147,7 +160,7 @@ export function Navbar({ session }: Props): React.JSX.Element {
                       variant="link"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      <Link href="/dashboard">{t("dashboard")}</Link>
+                      <Link href="/admin">{t("dashboard")}</Link>
                     </Button>
                     <Button variant="destructive" onClick={() => signOut()}>
                       {t("Signout")}
