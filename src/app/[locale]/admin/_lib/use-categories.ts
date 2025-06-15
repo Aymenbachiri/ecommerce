@@ -14,7 +14,7 @@ export function useCategories(): UseCategoriesReturn {
     try {
       const mockCategories: Category[] = [
         {
-          id: "507f1f77bcf86cd799439011",
+          id: "684ed955d04a123e49ea3add",
           name: "Electronics",
           slug: "electronics",
           parentId: null,
@@ -24,7 +24,7 @@ export function useCategories(): UseCategoriesReturn {
           image: "",
         },
         {
-          id: "507f1f77bcf86cd799439012",
+          id: "684edb90d04a123e49ea3ae0",
           name: "Clothing",
           slug: "clothing",
           parentId: null,
@@ -34,7 +34,7 @@ export function useCategories(): UseCategoriesReturn {
           image: "",
         },
         {
-          id: "507f1f77bcf86cd799439013",
+          id: "684edc47d04a123e49ea3ae3",
           name: "Books",
           slug: "books",
           parentId: null,
@@ -44,7 +44,7 @@ export function useCategories(): UseCategoriesReturn {
           image: "",
         },
         {
-          id: "507f1f77bcf86cd799439014",
+          id: "684edcadd04a123e49ea3ae5",
           name: "Home & Garden",
           slug: "home-garden",
           parentId: null,
