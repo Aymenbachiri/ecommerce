@@ -7,7 +7,9 @@ import {
   DiscountType,
 } from "@prisma/client";
 
-export const idSchema = z.string().cuid();
+export const idSchema = z
+  .string()
+  .regex(/^[0-9a-fA-F]{24}$/, "Invalid ObjectId format");
 export const emailSchema = z.string().email();
 export const phoneSchema = z.string().min(10).max(15);
 export const priceSchema = z.number().positive().max(999999.99);
