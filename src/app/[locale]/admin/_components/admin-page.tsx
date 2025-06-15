@@ -10,15 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import {
   Table,
   TableBody,
@@ -27,8 +19,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Textarea } from "@/components/ui/textarea";
-import { mockAnalytics, mockCategories } from "@/lib/data/data";
+import { mockAnalytics } from "@/lib/data/data";
 import { productsAtom } from "@/lib/store/store";
 import type { ProductWithRelations } from "@/lib/types/types";
 import { useAtom } from "jotai";
@@ -45,90 +36,98 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { motion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
+import { type CreateProductInput } from "@/lib/validation/api-validation";
+import { ProductForm } from "./product-form";
 
 export function AdminPage(): React.JSX.Element {
   const t = useTranslations("AdminPage");
   const locale = useLocale();
   const [products, setProducts] = useAtom(productsAtom);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [editingProduct, setEditingProduct] =
     useState<ProductWithRelations | null>(null);
 
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    price: "",
-    category: "",
-    stock: "",
-    image: "/placeholder.svg?height=400&width=400",
-  });
+  const createProduct = async (data: CreateProductInput) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch("/api/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-  const resetForm = () => {
-    setFormData({
-      name: "",
-      description: "",
-      price: "",
-      category: "",
-      stock: "",
-      image: "/placeholder.svg?height=400&width=400",
-    });
-    setEditingProduct(null);
-  };
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to create product");
+      }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+      const newProduct = await response.json();
 
-    const newProduct: ProductWithRelations = {
-      id: editingProduct?.id || Date.now().toString(),
-      name: formData.name,
-      description: formData.description,
-      category: formData.category,
-      price: parseFloat(formData.price),
-      originalPrice: null,
-      stock: parseInt(formData.stock, 10),
-      sku: null,
-      featured: false,
-      published: true,
-      createdAt: editingProduct?.createdAt || new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      image: formData.image,
-      images: [],
-      categories: [],
-      reviews: [],
-      _count: { reviews: 0 },
-      averageRating: editingProduct?.averageRating ?? 0,
-    } as unknown as ProductWithRelations;
-
-    if (editingProduct) {
-      setProducts(
-        products.map((p) => (p.id === editingProduct.id ? newProduct : p)),
-      );
-      toast.success(t("ToastMessages.productUpdated"));
-    } else {
       setProducts([...products, newProduct]);
-      toast.success(t("ToastMessages.productCreated"));
-    }
 
-    setIsDialogOpen(false);
-    resetForm();
+      toast.success(t("ToastMessages.productCreated"));
+      setIsDialogOpen(false);
+    } catch (error) {
+      console.error("Error creating product:", error);
+      toast.error(
+        error instanceof Error ? error.message : "Failed to create product",
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleEdit = (product: ProductWithRelations) => {
     setEditingProduct(product);
-    setFormData({
-      name: product.name,
-      description: product.description,
-      price: product.price.toString(),
-      category: product.category || "",
-      stock: product.stock.toString(),
-      image: product.images[0]?.url || "/placeholder.svg?height=400&width=400",
-    });
     setIsDialogOpen(true);
   };
 
-  const handleDelete = (productId: string) => {
-    setProducts(products.filter((p) => p.id !== productId));
-    toast.success(t("ToastMessages.productDeleted"));
+  const handleDelete = async (productId: string) => {
+    if (!confirm("Are you sure you want to delete this product?")) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/products/${productId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete product");
+      }
+
+      setProducts(products.filter((p) => p.id !== productId));
+      toast.success(t("ToastMessages.productDeleted"));
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      toast.error("Failed to delete product");
+    }
+  };
+
+  const getDefaultValues = (
+    product: ProductWithRelations | null,
+  ): Partial<CreateProductInput> => {
+    if (!product) return {};
+
+    return {
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      originalPrice: product.originalPrice || undefined,
+      stock: product.stock,
+      sku: product.sku || "",
+      featured: product.featured,
+      published: product.published,
+      categoryIds: product.categories.map((c) => c.category.id),
+      images: product.images.map((img) => ({
+        url: img.url,
+        alt: img.alt || "",
+        order: img.order,
+      })),
+    };
   };
 
   return (
@@ -200,14 +199,22 @@ export function AdminPage(): React.JSX.Element {
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle>{t("ProductManagement.title")}</CardTitle>
-              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <Dialog
+                open={isDialogOpen}
+                onOpenChange={(open) => {
+                  setIsDialogOpen(open);
+                  if (!open) {
+                    setEditingProduct(null);
+                  }
+                }}
+              >
                 <DialogTrigger asChild>
-                  <Button onClick={resetForm}>
+                  <Button>
                     <Plus className="mr-2 h-4 w-4" />
                     {t("ProductManagement.addProduct")}
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="max-w-md">
+                <DialogContent className="max-h-[90vh] max-w-4xl overflow-y-auto">
                   <DialogHeader>
                     <DialogTitle>
                       {editingProduct
@@ -215,114 +222,11 @@ export function AdminPage(): React.JSX.Element {
                         : t("ProductManagement.addNewProduct")}
                     </DialogTitle>
                   </DialogHeader>
-                  <form
-                    dir="auto"
-                    onSubmit={handleSubmit}
-                    className="space-y-4"
-                  >
-                    <div className="">
-                      <Label htmlFor="name" className="mb-2">
-                        {t("ProductManagement.form.productName")}
-                      </Label>
-                      <Input
-                        id="name"
-                        required
-                        value={formData.name}
-                        onChange={(e) =>
-                          setFormData({ ...formData, name: e.target.value })
-                        }
-                      />
-                    </div>
-
-                    <div>
-                      <Label htmlFor="description" className="mb-2">
-                        {t("ProductManagement.form.description")}
-                      </Label>
-                      <Textarea
-                        id="description"
-                        required
-                        value={formData.description}
-                        className="resize-none"
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            description: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="price" className="mb-2">
-                          {t("ProductManagement.form.price")}
-                        </Label>
-                        <Input
-                          id="price"
-                          type="number"
-                          step="0.01"
-                          required
-                          value={formData.price}
-                          onChange={(e) =>
-                            setFormData({ ...formData, price: e.target.value })
-                          }
-                        />
-                      </div>
-
-                      <div>
-                        <Label htmlFor="stock" className="mb-2">
-                          {t("ProductManagement.form.stock")}
-                        </Label>
-                        <Input
-                          id="stock"
-                          type="number"
-                          required
-                          value={formData.stock}
-                          onChange={(e) =>
-                            setFormData({ ...formData, stock: e.target.value })
-                          }
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="category" className="mb-2">
-                        {t("ProductManagement.form.category")}
-                      </Label>
-                      <Select
-                        value={formData.category}
-                        onValueChange={(value) =>
-                          setFormData({ ...formData, category: value })
-                        }
-                      >
-                        <SelectTrigger>
-                          <SelectValue
-                            placeholder={t(
-                              "ProductManagement.form.selectCategory",
-                            )}
-                          />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {mockCategories
-                            .filter((c) => c.id !== "all")
-                            .map((category) => (
-                              <SelectItem
-                                key={category.id}
-                                value={category.slug}
-                              >
-                                {category.name}
-                              </SelectItem>
-                            ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <Button type="submit" className="w-full">
-                      {editingProduct
-                        ? t("ProductManagement.form.updateProduct")
-                        : t("ProductManagement.form.createProduct")}
-                    </Button>
-                  </form>
+                  <ProductForm
+                    createProduct={createProduct}
+                    defaultValues={getDefaultValues(editingProduct)}
+                    isLoading={isLoading}
+                  />
                 </DialogContent>
               </Dialog>
             </div>

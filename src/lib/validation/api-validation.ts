@@ -33,21 +33,19 @@ export const createProductSchema = z.object({
   name: z.string().min(1).max(200),
   description: z.string().min(1).max(2000),
   price: priceSchema,
-  originalPrice: priceSchema.optional(),
+  originalPrice: priceSchema,
   stock: z.number().int().min(0).max(999999),
-  sku: z.string().min(1).max(100).optional(),
-  featured: z.boolean().optional().default(false),
-  published: z.boolean().optional().default(true),
+  sku: z.string().min(1).max(100),
+  featured: z.boolean(),
+  published: z.boolean(),
   categoryIds: z.array(idSchema).min(1),
-  images: z
-    .array(
-      z.object({
-        url: z.string().url(),
-        alt: z.string().max(200).optional(),
-        order: z.number().int().min(0).optional().default(0),
-      }),
-    )
-    .optional(),
+  images: z.array(
+    z.object({
+      url: z.string().url(),
+      alt: z.string().max(200),
+      order: z.number().int().min(0).default(0),
+    }),
+  ),
 });
 
 export const updateProductSchema = createProductSchema.partial().extend({
