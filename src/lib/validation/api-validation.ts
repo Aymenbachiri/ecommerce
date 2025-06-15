@@ -43,7 +43,7 @@ export const createProductSchema = z.object({
     z.object({
       url: z.string().url(),
       alt: z.string().max(200),
-      order: z.number().int().min(0).default(0),
+      order: z.number(),
     }),
   ),
 });
