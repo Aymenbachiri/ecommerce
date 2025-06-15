@@ -77,7 +77,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("GET /api/search", error);
     return NextResponse.json(
-      { error: "Failed to get products", message: (error as Error).message },
+      { error: "Failed to search products", message: (error as Error).message },
       { status: 500 },
     );
   }
