@@ -1,13 +1,11 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useAtom } from "jotai";
 import { motion } from "motion/react";
 import { ProductCard } from "./product-card";
 import { Filters } from "./filters";
 import { Button } from "@/components/ui/button";
-import { mockProducts } from "@/lib/data/data";
-import type { ProductWithRelations } from "@/lib/types/types";
 import {
   searchQueryAtom,
   selectedCategoryAtom,
@@ -15,78 +13,101 @@ import {
 } from "@/lib/store/store";
 import { useTranslations } from "next-intl";
 import { ProductsSkeleton } from "./products-skeleton";
+import type { ProductWithRelations } from "@/lib/types/types";
 
 const PRODUCTS_PER_PAGE = 3;
+
+type ApiResponse = {
+  data: ProductWithRelations[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+    hasMore: boolean;
+  };
+};
 
 export function ProductsPage(): React.JSX.Element {
   const [products, setProducts] = useState<ProductWithRelations[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(0);
   const [searchQuery] = useAtom(searchQueryAtom);
   const [selectedCategory] = useAtom(selectedCategoryAtom);
   const [sortBy] = useAtom(sortByAtom);
   const t = useTranslations("ProductsPage");
 
-  useEffect(() => {
-    setTimeout(() => {
-      setProducts(mockProducts);
+  const fetchProducts = async () => {
+    setLoading(true);
+    try {
+      const params = new URLSearchParams();
+
+      params.append("page", currentPage.toString());
+      params.append("limit", PRODUCTS_PER_PAGE.toString());
+
+      if (searchQuery?.trim()) {
+        params.append("search", searchQuery.trim());
+      }
+
+      if (selectedCategory && selectedCategory !== "all") {
+        params.append("categoryId", selectedCategory);
+      }
+
+      if (sortBy) {
+        switch (sortBy) {
+          case "price-low":
+            params.append("sortBy", "price");
+            params.append("sortOrder", "asc");
+            break;
+          case "price-high":
+            params.append("sortBy", "price");
+            params.append("sortOrder", "desc");
+            break;
+          case "rating":
+            params.append("sortBy", "rating");
+            params.append("sortOrder", "desc");
+            break;
+          case "name":
+            params.append("sortBy", "name");
+            params.append("sortOrder", "asc");
+            break;
+          default:
+            params.append("sortBy", "createdAt");
+            params.append("sortOrder", "desc");
+        }
+      }
+
+      const response = await fetch(`/api/products?${params.toString()}`);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data: ApiResponse = await response.json();
+
+      setProducts(data.data);
+      setTotalPages(data.pagination.totalPages);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      setProducts([]);
+      setTotalPages(0);
+    } finally {
       setLoading(false);
-    }, 1000);
-  }, []);
-
-  const filteredAndSortedProducts = useMemo(() => {
-    let filtered = products;
-
-    if (searchQuery) {
-      filtered = filtered.filter(
-        (product) =>
-          product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          product.description.toLowerCase().includes(searchQuery.toLowerCase()),
-      );
     }
+  };
 
-    if (selectedCategory && selectedCategory !== "all") {
-      filtered = filtered.filter((product) =>
-        product.categories.some(
-          (catOnProd) => catOnProd.category.slug === selectedCategory,
-        ),
-      );
+  useEffect(() => {
+    fetchProducts();
+  }, [currentPage, searchQuery, selectedCategory, sortBy]);
+
+  useEffect(() => {
+    if (currentPage !== 1) {
+      setCurrentPage(1);
     }
+  }, [searchQuery, selectedCategory, sortBy]);
 
-    const sortedProducts = [...filtered];
-
-    switch (sortBy) {
-      case "price-low":
-        sortedProducts.sort((a, b) => a.price - b.price);
-        break;
-      case "price-high":
-        sortedProducts.sort((a, b) => b.price - a.price);
-        break;
-      case "rating":
-        sortedProducts.sort(
-          (a, b) => (b.averageRating || 0) - (a.averageRating || 0),
-        );
-        break;
-      case "name":
-      default:
-        sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-    }
-
-    return sortedProducts;
-  }, [products, searchQuery, selectedCategory, sortBy]);
-
-  const paginatedProducts = useMemo(() => {
-    const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
-    return filteredAndSortedProducts.slice(
-      startIndex,
-      startIndex + PRODUCTS_PER_PAGE,
-    );
-  }, [filteredAndSortedProducts, currentPage]);
-
-  const totalPages = Math.ceil(
-    filteredAndSortedProducts.length / PRODUCTS_PER_PAGE,
-  );
+  const paginatedProducts = products;
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
@@ -106,7 +127,7 @@ export function ProductsPage(): React.JSX.Element {
             <div className="mb-6">
               <p className="text-muted-foreground">
                 {t("showingProducts", {
-                  count: filteredAndSortedProducts.length,
+                  count: paginatedProducts.length,
                 })}
               </p>
             </div>
