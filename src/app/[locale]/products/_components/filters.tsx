@@ -17,10 +17,10 @@ import {
   selectedCategoryAtom,
   sortByAtom,
 } from "@/lib/store/store";
-import { mockCategories } from "@/lib/data/data";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useDebounce } from "@/lib/hooks/use-debounce";
+import { productCategories } from "@/lib/utils/utils";
 
 type Value = "name" | "price-low" | "price-high" | "rating";
 
@@ -71,8 +71,9 @@ export function Filters(): React.JSX.Element {
               <SelectValue placeholder={t("categoryPlaceholder")} />
             </SelectTrigger>
             <SelectContent>
-              {mockCategories.map((category) => (
-                <SelectItem key={category.id} value={category.slug}>
+              <SelectItem value="all">All</SelectItem>
+              {productCategories.map((category) => (
+                <SelectItem key={category.id} value={category.id}>
                   {category.name}
                 </SelectItem>
               ))}
