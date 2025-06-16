@@ -38,6 +38,7 @@ import { motion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
 import { type CreateProductInput } from "@/lib/validation/api-validation";
 import { ProductForm } from "./product-form";
+import { API_URL } from "@/lib/env/env";
 
 export function AdminPage(): React.JSX.Element {
   const t = useTranslations("AdminPage");
@@ -51,7 +52,7 @@ export function AdminPage(): React.JSX.Element {
   const createProduct = async (data: CreateProductInput) => {
     setIsLoading(true);
     try {
-      const response = await fetch("/api/products", {
+      const response = await fetch(`${API_URL}/api/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,7 +92,7 @@ export function AdminPage(): React.JSX.Element {
     }
 
     try {
-      const response = await fetch(`/api/products/${productId}`, {
+      const response = await fetch(`${API_URL}/api/products/${productId}`, {
         method: "DELETE",
       });
 
@@ -250,7 +251,9 @@ export function AdminPage(): React.JSX.Element {
                       {product.name}
                     </TableCell>
                     <TableCell className="capitalize">
-                      {product.category ?? "-"}
+                      {product?.categories
+                        ? product?.categories[0]?.category?.name
+                        : null}
                     </TableCell>
                     <TableCell>${product.price}</TableCell>
                     <TableCell>{product.stock}</TableCell>
