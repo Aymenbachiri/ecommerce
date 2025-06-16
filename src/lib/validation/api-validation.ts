@@ -36,7 +36,7 @@ export const createProductSchema = z.object({
   description: z.string().min(1).max(2000),
   price: priceSchema,
   originalPrice: priceSchema,
-  stock: z.number().int().min(0).max(999999),
+  stock: z.number().min(0).max(999999),
   sku: z.string().min(1).max(100),
   featured: z.boolean(),
   published: z.boolean(),

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useAtom } from "jotai";
 import { motion } from "motion/react";
@@ -53,11 +52,10 @@ export function ProductCard({ product }: ProductCardProps): React.JSX.Element {
       <Card className="group flex h-full flex-col overflow-hidden">
         <div className="relative">
           <Link href={`/products/${product.id}`}>
-            <Image
+            {/* eslint-disable @next/next/no-img-element */}
+            <img
               src={product.images?.[0]?.url || "/placeholder.svg"}
               alt={product.name}
-              width={400}
-              height={400}
               className="h-64 w-full object-cover transition-transform group-hover:scale-105"
             />
           </Link>

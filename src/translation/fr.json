@@ -302,6 +302,35 @@
         "inStock": "En stock",
         "outOfStock": "Rupture de stock"
       }
+    },
+    "ProductForm": {
+      "nameLabel": "Nom du Produit",
+      "namePlaceholder": "Entrez le nom du produit",
+      "skuLabel": "SKU",
+      "skuPlaceholder": "Entrez le SKU",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Entrez la description du produit",
+      "priceLabel": "Prix",
+      "pricePlaceholder": "0.00",
+      "originalPriceLabel": "Prix Original",
+      "originalPricePlaceholder": "0.00",
+      "stockLabel": "Stock",
+      "stockPlaceholder": "0",
+      "categoriesLabel": "Catégories",
+      "categoriesDescription": "Sélectionnez au moins une catégorie pour ce produit",
+      "loadingCategories": "Chargement des catégories...",
+      "imagesLabel": "Images du Produit",
+      "addImageButton": "Ajouter une Image",
+      "imageUrlLabel": "URL de l'image",
+      "imageUrlPlaceholder": "https://...",
+      "altTextLabel": "Texte Alternatif",
+      "altTextPlaceholder": "Description de l'image",
+      "featuredLabel": "Produit Vedette",
+      "featuredDescription": "Ce produit sera mis en avant sur la page d'accueil",
+      "publishedLabel": "Publié",
+      "publishedDescription": "Ce produit sera visible par les clients",
+      "submitButton": "Créer le Produit",
+      "submitButtonLoading": "Création du produit en cours..."
     }
   },
   "CheckoutPage": {

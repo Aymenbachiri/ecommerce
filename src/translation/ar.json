@@ -302,6 +302,35 @@
         "inStock": "متوفر في المخزون",
         "outOfStock": "غير متوفر في المخزون"
       }
+    },
+    "ProductForm": {
+      "nameLabel": "اسم المنتج",
+      "namePlaceholder": "أدخل اسم المنتج",
+      "skuLabel": "رمز SKU",
+      "skuPlaceholder": "أدخل رمز SKU",
+      "descriptionLabel": "الوصف",
+      "descriptionPlaceholder": "أدخل وصف المنتج",
+      "priceLabel": "السعر",
+      "pricePlaceholder": "0.00",
+      "originalPriceLabel": "السعر الأصلي",
+      "originalPricePlaceholder": "0.00",
+      "stockLabel": "المخزون",
+      "stockPlaceholder": "0",
+      "categoriesLabel": "الفئات",
+      "categoriesDescription": "اختر فئة واحدة على الأقل لهذا المنتج",
+      "loadingCategories": "جاري تحميل الفئات...",
+      "imagesLabel": "صور المنتج",
+      "addImageButton": "أضف صورة",
+      "imageUrlLabel": "رابط الصورة",
+      "imageUrlPlaceholder": "https://...",
+      "altTextLabel": "النص البديل",
+      "altTextPlaceholder": "وصف الصورة",
+      "featuredLabel": "منتج مميز",
+      "featuredDescription": "سيتم عرض هذا المنتج في الصفحة الرئيسية",
+      "publishedLabel": "منشور",
+      "publishedDescription": "سيكون هذا المنتج مرئيًا للعملاء",
+      "submitButton": "إنشاء منتج",
+      "submitButtonLoading": "جاري إنشاء المنتج..."
     }
   },
   "CheckoutPage": {

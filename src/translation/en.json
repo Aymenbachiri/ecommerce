@@ -302,6 +302,35 @@
         "inStock": "In Stock",
         "outOfStock": "Out of Stock"
       }
+    },
+    "ProductForm": {
+      "nameLabel": "Product Name",
+      "namePlaceholder": "Enter product name",
+      "skuLabel": "SKU",
+      "skuPlaceholder": "Enter SKU",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Enter product description",
+      "priceLabel": "Price",
+      "pricePlaceholder": "0.00",
+      "originalPriceLabel": "Original Price",
+      "originalPricePlaceholder": "0.00",
+      "stockLabel": "Stock",
+      "stockPlaceholder": "0",
+      "categoriesLabel": "Categories",
+      "categoriesDescription": "Select at least one category for this product",
+      "loadingCategories": "Loading categories...",
+      "imagesLabel": "Product Images",
+      "addImageButton": "Add Image",
+      "imageUrlLabel": "Image URL",
+      "imageUrlPlaceholder": "https://...",
+      "altTextLabel": "Alt Text",
+      "altTextPlaceholder": "Image description",
+      "featuredLabel": "Featured Product",
+      "featuredDescription": "This product will be featured on the homepage",
+      "publishedLabel": "Published",
+      "publishedDescription": "This product will be visible to customers",
+      "submitButton": "Create Product",
+      "submitButtonLoading": "Creating Product..."
     }
   },
   "CheckoutPage": {

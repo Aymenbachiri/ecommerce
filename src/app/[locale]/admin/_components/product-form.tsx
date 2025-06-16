@@ -20,6 +20,8 @@ import {
   type CreateProductInput,
   createProductSchema,
 } from "@/lib/validation/api-validation";
+import { cn } from "@/lib/utils/utils";
+import { useTranslations } from "next-intl";
 
 type ProductFormProps = {
   createProduct: (data: CreateProductInput) => Promise<void>;
@@ -33,6 +35,7 @@ export function ProductForm({
   isLoading,
 }: ProductFormProps): React.JSX.Element {
   const { categories, loading: categoriesLoading } = useCategories();
+  const t = useTranslations("AdminPage.ProductForm");
 
   const form = useForm<CreateProductInput>({
     resolver: zodResolver(createProductSchema),
@@ -92,9 +95,9 @@ export function ProductForm({
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Product Name</FormLabel>
+                <FormLabel>{t("nameLabel")}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter product name" {...field} />
+                  <Input placeholder={t("namePlaceholder")} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -106,9 +109,9 @@ export function ProductForm({
             name="sku"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>SKU</FormLabel>
+                <FormLabel>{t("skuLabel")}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter SKU" {...field} />
+                  <Input placeholder={t("skuPlaceholder")} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -121,10 +124,10 @@ export function ProductForm({
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>{t("descriptionLabel")}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Enter product description"
+                  placeholder={t("descriptionPlaceholder")}
                   className="min-h-[100px] resize-none"
                   {...field}
                 />
@@ -140,7 +143,7 @@ export function ProductForm({
             name="price"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Price</FormLabel>
+                <FormLabel>{t("priceLabel")}</FormLabel>
                 <FormControl>
                   <Input
                     type="number"
@@ -159,7 +162,7 @@ export function ProductForm({
             name="originalPrice"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Original Price (Optional)</FormLabel>
+                <FormLabel>{t("originalPriceLabel")}</FormLabel>
                 <FormControl>
                   <Input
                     type="number"
@@ -182,7 +185,7 @@ export function ProductForm({
             name="stock"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Stock</FormLabel>
+                <FormLabel>{t("stockLabel")}</FormLabel>
                 <FormControl>
                   <Input
                     type="number"
@@ -203,13 +206,11 @@ export function ProductForm({
           name="categoryIds"
           render={() => (
             <FormItem>
-              <FormLabel>Categories</FormLabel>
-              <FormDescription>
-                Select at least one category for this product
-              </FormDescription>
-              <div className="mt-2 flex flex-wrap gap-2">
+              <FormLabel>{t("categoriesLabel")}</FormLabel>
+              <FormDescription>{t("categoriesDescription")}</FormDescription>
+              <div className={cn("mt-2 flex flex-wrap gap-2")}>
                 {categoriesLoading ? (
-                  <div>Loading categories...</div>
+                  <div>{t("loadingCategories")}</div>
                 ) : (
                   categories.map((category) => {
                     const isSelected = selectedCategoryIds?.includes(
@@ -219,7 +220,10 @@ export function ProductForm({
                       <Badge
                         key={category.id}
                         variant={isSelected ? "default" : "secondary"}
-                        className="cursor-pointer"
+                        className={cn(
+                          "cursor-pointer",
+                          form.formState.errors.categoryIds && "text-red-500",
+                        )}
                         onClick={() => toggleCategory(category.id)}
                       >
                         {category.name}
@@ -236,7 +240,7 @@ export function ProductForm({
 
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <FormLabel>Product Images</FormLabel>
+            <FormLabel>{t("imagesLabel")}</FormLabel>
             <Button
               type="button"
               variant="outline"
@@ -244,7 +248,7 @@ export function ProductForm({
               onClick={addImage}
             >
               <Plus className="mr-2 h-4 w-4" />
-              Add Image
+              {t("addImageButton")}
             </Button>
           </div>
 
@@ -258,9 +262,12 @@ export function ProductForm({
                 name={`images.${index}.url`}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Image URL</FormLabel>
+                    <FormLabel>{t("imageUrlLabel")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="https://..." {...field} />
+                      <Input
+                        placeholder={t("imageUrlPlaceholder")}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -272,9 +279,9 @@ export function ProductForm({
                 name={`images.${index}.alt`}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Alt Text</FormLabel>
+                    <FormLabel>{t("altTextLabel")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Image description" {...field} />
+                      <Input placeholder={t("altTextPlaceholder")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -308,10 +315,8 @@ export function ProductForm({
                   />
                 </FormControl>
                 <div className="space-y-1 leading-none">
-                  <FormLabel>Featured Product</FormLabel>
-                  <FormDescription>
-                    This product will be featured on the homepage
-                  </FormDescription>
+                  <FormLabel>{t("featuredLabel")}</FormLabel>
+                  <FormDescription>{t("featuredDescription")}</FormDescription>
                 </div>
               </FormItem>
             )}
@@ -329,10 +334,8 @@ export function ProductForm({
                   />
                 </FormControl>
                 <div className="space-y-1 leading-none">
-                  <FormLabel>Published</FormLabel>
-                  <FormDescription>
-                    This product will be visible to customers
-                  </FormDescription>
+                  <FormLabel>{t("publishedLabel")}</FormLabel>
+                  <FormDescription>{t("publishedDescription")}</FormDescription>
                 </div>
               </FormItem>
             )}
@@ -340,7 +343,7 @@ export function ProductForm({
         </div>
 
         <Button type="submit" className="w-full" disabled={isLoading}>
-          {isLoading ? "Creating Product..." : "Create Product"}
+          {isLoading ? t("submitButtonLoading") : t("submitButton")}
         </Button>
       </form>
     </Form>
