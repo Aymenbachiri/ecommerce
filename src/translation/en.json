@@ -195,6 +195,7 @@
       "description": "Browse our wide range of quality products."
     },
     "title": "Products",
+    "cartLink": "Cart",
     "showingProducts": "Showing {count} products",
     "previous": "Previous",
     "next": "Next",

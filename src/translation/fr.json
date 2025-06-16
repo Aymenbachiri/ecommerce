@@ -195,6 +195,7 @@
       "description": "Parcourez notre large gamme de produits de qualité."
     },
     "title": "Produits",
+    "cartLink": "Panier",
     "showingProducts": "Affichage de {count} produits",
     "previous": "Précédent",
     "next": "Suivant",

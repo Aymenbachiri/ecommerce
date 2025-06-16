@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ProductsSkeleton } from "./products-skeleton";
 import { PackageX } from "lucide-react";
 import { useProducts } from "../_lib/use-products";
+import { Link } from "@/i18n/navigation";
 
 export function ProductsPage(): React.JSX.Element {
   const {
@@ -25,7 +26,12 @@ export function ProductsPage(): React.JSX.Element {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h1 className="mb-8 text-3xl font-bold">{t("title")}</h1>
+        <section className="flex justify-between">
+          <h1 className="mb-8 text-3xl font-bold">{t("title")}</h1>
+          <Link href="/cart">
+            <h1 className="mb-8 text-3xl font-bold">{t("cartLink")}</h1>
+          </Link>
+        </section>
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
           <div className="lg:col-span-1">
