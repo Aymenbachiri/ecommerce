@@ -14,6 +14,7 @@ import {
 import { useTranslations } from "next-intl";
 import { ProductsSkeleton } from "./products-skeleton";
 import type { ProductWithRelations } from "@/lib/types/types";
+import { API_URL } from "@/lib/env/env";
 
 const PRODUCTS_PER_PAGE = 3;
 
@@ -78,7 +79,9 @@ export function ProductsPage(): React.JSX.Element {
         }
       }
 
-      const response = await fetch(`/api/products?${params.toString()}`);
+      const response = await fetch(
+        ` ${API_URL}/api/products?${params.toString()}`,
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -154,7 +157,7 @@ export function ProductsPage(): React.JSX.Element {
                 </div>
 
                 {totalPages > 1 && (
-                  <div className="mt-8 flex justify-center gap-2">
+                  <section className="mt-8 flex justify-center gap-2">
                     <Button
                       variant="outline"
                       onClick={() =>
@@ -184,7 +187,7 @@ export function ProductsPage(): React.JSX.Element {
                     >
                       {t("next")}
                     </Button>
-                  </div>
+                  </section>
                 )}
               </>
             )}
