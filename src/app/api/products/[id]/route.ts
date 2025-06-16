@@ -59,12 +59,21 @@ export async function PUT(request: NextRequest, { params }: Params) {
   const { id: productId, categoryIds, images, ...data } = parseResult.data;
 
   try {
+    const existingProduct = await prisma.product.findUnique({
+      where: { id: productId },
+      select: { id: true },
+    });
+
+    if (!existingProduct) {
+      return NextResponse.json({ error: "Product not found" }, { status: 404 });
+    }
+
     const categoryUpdates = categoryIds
       ? {
           categories: {
             deleteMany: {},
             create: categoryIds.map((cid) => ({
-              category: { connect: { id: cid } },
+              categoryId: cid,
             })),
           },
         }
@@ -115,6 +124,18 @@ export async function DELETE(request: NextRequest, { params }: Params) {
   }
 
   try {
+    const product = await prisma.product.findUnique({
+      where: { id },
+      include: { categories: { include: { category: true } } },
+    });
+
+    if (!product) {
+      return NextResponse.json(
+        { error: "Product not found", message: "Id not belong to any product" },
+        { status: 404 },
+      );
+    }
+
     await prisma.product.delete({ where: { id } });
     return NextResponse.json({ success: true }, { status: 204 });
   } catch (error) {

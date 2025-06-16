@@ -23,6 +23,7 @@ type UseAdminReturn = {
   ) => Partial<CreateProductInput>;
   setIsDialogOpen: (open: boolean) => void;
   setEditingProduct: (product: ProductWithRelations | null) => void;
+  onDelete: (productId: string) => void;
 };
 
 export function useAdmin(): UseAdminReturn {
@@ -128,6 +129,10 @@ export function useAdmin(): UseAdminReturn {
     }
   };
 
+  const onDelete = (productId: string) => {
+    setProducts(products.filter((p) => p.id !== productId));
+  };
+
   const getDefaultValues = (
     product: ProductWithRelations | null,
   ): Partial<CreateProductInput> => {
@@ -165,5 +170,6 @@ export function useAdmin(): UseAdminReturn {
     getDefaultValues,
     setIsDialogOpen,
     setEditingProduct,
+    onDelete,
   };
 }
