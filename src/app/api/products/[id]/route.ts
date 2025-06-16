@@ -124,12 +124,12 @@ export async function DELETE(request: NextRequest, { params }: Params) {
   }
 
   try {
-    const product = await prisma.product.findUnique({
+    const existingProduct = await prisma.product.findUnique({
       where: { id },
-      include: { categories: { include: { category: true } } },
+      select: { id: true },
     });
 
-    if (!product) {
+    if (!existingProduct) {
       return NextResponse.json(
         { error: "Product not found", message: "Id not belong to any product" },
         { status: 404 },
@@ -137,7 +137,11 @@ export async function DELETE(request: NextRequest, { params }: Params) {
     }
 
     await prisma.product.delete({ where: { id } });
-    return NextResponse.json({ success: true }, { status: 204 });
+
+    return NextResponse.json(
+      { success: true, message: "Product deleted successfully" },
+      { status: 200 },
+    );
   } catch (error) {
     console.error("DELETE /api/products/[id]", error);
     return NextResponse.json(
