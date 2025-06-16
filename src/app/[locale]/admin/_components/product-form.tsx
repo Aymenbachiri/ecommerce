@@ -12,18 +12,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Plus, X } from "lucide-react";
-import { useFieldArray, useForm } from "react-hook-form";
-import { useCategories } from "../_lib/use-categories";
-import {
-  type CreateProductInput,
-  createProductSchema,
-} from "@/lib/validation/api-validation";
 import { cn } from "@/lib/utils/utils";
-import { useTranslations } from "next-intl";
+import { useProductForm } from "../_lib/use-product-form";
+import type { CreateProductInput } from "@/lib/validation/api-validation";
 import type { ProductWithRelations } from "@/lib/types/types";
-import { useEffect } from "react";
+import type { Locale } from "next-intl";
 
 type ProductFormProps = {
   createProduct: (data: CreateProductInput) => Promise<void>;
@@ -31,6 +25,7 @@ type ProductFormProps = {
   editingProduct: ProductWithRelations | null;
   defaultValues?: Partial<CreateProductInput> | undefined;
   isLoading: boolean;
+  locale: Locale;
 };
 
 export function ProductForm({
@@ -39,88 +34,34 @@ export function ProductForm({
   editingProduct,
   defaultValues,
   isLoading,
+  locale,
 }: ProductFormProps): React.JSX.Element {
-  const { categories, loading: categoriesLoading } = useCategories();
-  const t = useTranslations("AdminPage.ProductForm");
-  const isEditing = !!editingProduct;
-
-  const form = useForm<CreateProductInput>({
-    resolver: zodResolver(createProductSchema),
-    defaultValues: {
-      name: "",
-      description: "",
-      price: 0,
-      originalPrice: undefined,
-      stock: 0,
-      sku: "",
-      featured: true,
-      published: false,
-      categoryIds: [],
-      images: [],
-      ...defaultValues,
-    },
-  });
-
-  useEffect(() => {
-    if (defaultValues) {
-      form.reset({
-        name: "",
-        description: "",
-        price: 0,
-        originalPrice: undefined,
-        stock: 0,
-        sku: "",
-        featured: true,
-        published: false,
-        categoryIds: [],
-        images: [],
-        ...defaultValues,
-      });
-    }
-  }, [defaultValues, form]);
-
   const {
-    fields: imageFields,
-    append: appendImage,
-    remove: removeImage,
-  } = useFieldArray({
-    control: form.control,
-    name: "images",
-  });
-
-  const selectedCategoryIds = form.watch("categoryIds");
-
-  const onSubmit = async (data: CreateProductInput) => {
-    try {
-      if (isEditing && editingProduct) {
-        await updateProduct(editingProduct.id, data);
-      } else {
-        await createProduct(data);
-      }
-
-      if (!isEditing) {
-        form.reset();
-      }
-    } catch (error) {
-      console.error("Form submission error:", error);
-    }
-  };
-
-  const addImage = () => {
-    appendImage({ url: "", alt: "", order: imageFields.length });
-  };
-
-  const toggleCategory = (categoryId: string) => {
-    const current = selectedCategoryIds || [];
-    const updated = current.includes(categoryId)
-      ? current.filter((id) => id !== categoryId)
-      : [...current, categoryId];
-    form.setValue("categoryIds", updated);
-  };
+    t,
+    categories,
+    categoriesLoading,
+    isEditing,
+    form,
+    imageFields,
+    removeImage,
+    selectedCategoryIds,
+    onSubmit,
+    addImage,
+    toggleCategory,
+  } = useProductForm(
+    editingProduct,
+    defaultValues,
+    updateProduct,
+    createProduct,
+  );
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form
+        dir={locale === "ar" ? "rtl" : "ltr"}
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-6"
+      >
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <FormField
             control={form.control}

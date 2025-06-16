@@ -148,6 +148,7 @@ export function AdminPage(): React.JSX.Element {
                     editingProduct={editingProduct}
                     defaultValues={getDefaultValues(editingProduct)}
                     isLoading={isLoading}
+                    locale={locale}
                   />
                 </DialogContent>
               </Dialog>
