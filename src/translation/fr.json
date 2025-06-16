@@ -267,8 +267,11 @@
     },
     "ToastMessages": {
       "productUpdated": "Le produit a été mis à jour avec succès.",
+      "failedToUpdateProduct": "Échec de la mise à jour du produit",
       "productCreated": "Un nouveau produit a été créé avec succès.",
-      "productDeleted": "Le produit a été supprimé avec succès."
+      "productDeleted": "Le produit a été supprimé avec succès.",
+      "failedToDeleteProduct": "Échec de la suppression du produit",
+      "confirmationModalDescription": "Êtes-vous sûr de vouloir supprimer ce produit?"
     },
     "Dashboard": {
       "title": "Tableau de bord administrateur",
@@ -330,6 +333,7 @@
       "publishedLabel": "Publié",
       "publishedDescription": "Ce produit sera visible par les clients",
       "submitButton": "Créer le Produit",
+      "updateButton": "Mettre à jour le produit",
       "submitButtonLoading": "Création du produit en cours..."
     }
   },

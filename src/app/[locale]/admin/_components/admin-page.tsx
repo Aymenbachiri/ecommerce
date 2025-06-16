@@ -81,13 +81,48 @@ export function AdminPage(): React.JSX.Element {
     }
   };
 
+  const updateProduct = async (id: string, data: CreateProductInput) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`${API_URL}/api/products/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to update product");
+      }
+
+      const updatedProduct = await response.json();
+
+      setProducts(products.map((p) => (p.id === id ? updatedProduct : p)));
+
+      toast.success(t("ToastMessages.productUpdated"));
+      setIsDialogOpen(false);
+      setEditingProduct(null);
+    } catch (error) {
+      console.error("Error updating product:", error);
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : t("ToastMessages.failedToUpdateProduct"),
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleEdit = (product: ProductWithRelations) => {
     setEditingProduct(product);
     setIsDialogOpen(true);
   };
 
   const handleDelete = async (productId: string) => {
-    if (!confirm("Are you sure you want to delete this product?")) {
+    if (!confirm(t("ToastMessages.confirmationModalDescription"))) {
       return;
     }
 
@@ -104,7 +139,7 @@ export function AdminPage(): React.JSX.Element {
       toast.success(t("ToastMessages.productDeleted"));
     } catch (error) {
       console.error("Error deleting product:", error);
-      toast.error("Failed to delete product");
+      toast.error(t("ToastMessages.failedToDeleteProduct"));
     }
   };
 
@@ -225,6 +260,8 @@ export function AdminPage(): React.JSX.Element {
                   </DialogHeader>
                   <ProductForm
                     createProduct={createProduct}
+                    updateProduct={updateProduct}
+                    editingProduct={editingProduct}
                     defaultValues={getDefaultValues(editingProduct)}
                     isLoading={isLoading}
                   />

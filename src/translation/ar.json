@@ -267,8 +267,11 @@
     },
     "ToastMessages": {
       "productUpdated": "تم تحديث المنتج بنجاح.",
+      "failedToUpdateProduct": "فشل تحديث المنتج",
       "productCreated": "تم إنشاء منتج جديد بنجاح.",
-      "productDeleted": "تم حذف المنتج بنجاح."
+      "productDeleted": "تم حذف المنتج بنجاح.",
+      "failedToDeleteProduct": "فشل حذف المنتج",
+      "confirmationModalDescription": "هل أنت متأكد من أنك تريد حذف هذا المنتج؟"
     },
     "Dashboard": {
       "title": "لوحة تحكم المسؤول",
@@ -330,6 +333,7 @@
       "publishedLabel": "منشور",
       "publishedDescription": "سيكون هذا المنتج مرئيًا للعملاء",
       "submitButton": "إنشاء منتج",
+      "updateButton": "تحديث المنتج",
       "submitButtonLoading": "جاري إنشاء المنتج..."
     }
   },

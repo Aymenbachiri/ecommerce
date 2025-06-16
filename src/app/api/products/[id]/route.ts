@@ -4,20 +4,20 @@ import { updateProductSchema } from "@/lib/validation/api-validation";
 import { Prisma } from "@prisma/client";
 import { NextResponse, type NextRequest } from "next/server";
 
-export async function GET(request: NextRequest) {
-  const { pathname } = new URL(request.url);
-  const id = pathname.split("/").pop();
+type Params = {
+  params: Promise<{ id: string }>;
+};
 
-  if (!id) {
-    return NextResponse.json(
-      { error: "Missing product ID in URL" },
-      { status: 400 },
-    );
+export async function GET(request: NextRequest, { params }: Params) {
+  const productId = (await params).id;
+
+  if (!productId) {
+    return NextResponse.json({ error: "Missing product ID" }, { status: 400 });
   }
 
   try {
     const product = await prisma.product.findUnique({
-      where: { id },
+      where: { id: productId },
       include: {
         images: { orderBy: { order: "asc" } },
         categories: { include: { category: true } },
@@ -38,16 +38,12 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function PUT(request: NextRequest) {
+export async function PUT(request: NextRequest, { params }: Params) {
   await requireAuth();
+  const id = (await params).id;
 
-  const { pathname } = new URL(request.url);
-  const id = pathname.split("/").pop();
   if (!id) {
-    return NextResponse.json(
-      { error: "Missing product ID in URL" },
-      { status: 400 },
-    );
+    return NextResponse.json({ error: "Missing product ID" }, { status: 400 });
   }
 
   const body = await request.json();
@@ -110,16 +106,12 @@ export async function PUT(request: NextRequest) {
   }
 }
 
-export async function DELETE(request: NextRequest) {
+export async function DELETE(request: NextRequest, { params }: Params) {
   await requireAuth();
+  const id = (await params).id;
 
-  const { pathname } = new URL(request.url);
-  const id = pathname.split("/").pop();
   if (!id) {
-    return NextResponse.json(
-      { error: "Missing product ID in URL" },
-      { status: 400 },
-    );
+    return NextResponse.json({ error: "Missing product ID" }, { status: 400 });
   }
 
   try {

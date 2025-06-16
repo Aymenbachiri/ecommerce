@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Plus, X } from "lucide-react";
+import { Loader2, Plus, X } from "lucide-react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useCategories } from "../_lib/use-categories";
 import {
@@ -22,20 +22,27 @@ import {
 } from "@/lib/validation/api-validation";
 import { cn } from "@/lib/utils/utils";
 import { useTranslations } from "next-intl";
+import type { ProductWithRelations } from "@/lib/types/types";
+import { useEffect } from "react";
 
 type ProductFormProps = {
   createProduct: (data: CreateProductInput) => Promise<void>;
+  updateProduct: (id: string, data: CreateProductInput) => Promise<void>;
+  editingProduct: ProductWithRelations | null;
   defaultValues?: Partial<CreateProductInput> | undefined;
   isLoading: boolean;
 };
 
 export function ProductForm({
   createProduct,
+  updateProduct,
+  editingProduct,
   defaultValues,
   isLoading,
 }: ProductFormProps): React.JSX.Element {
   const { categories, loading: categoriesLoading } = useCategories();
   const t = useTranslations("AdminPage.ProductForm");
+  const isEditing = !!editingProduct;
 
   const form = useForm<CreateProductInput>({
     resolver: zodResolver(createProductSchema),
@@ -54,6 +61,24 @@ export function ProductForm({
     },
   });
 
+  useEffect(() => {
+    if (defaultValues) {
+      form.reset({
+        name: "",
+        description: "",
+        price: 0,
+        originalPrice: undefined,
+        stock: 0,
+        sku: "",
+        featured: true,
+        published: false,
+        categoryIds: [],
+        images: [],
+        ...defaultValues,
+      });
+    }
+  }, [defaultValues, form]);
+
   const {
     fields: imageFields,
     append: appendImage,
@@ -67,8 +92,15 @@ export function ProductForm({
 
   const onSubmit = async (data: CreateProductInput) => {
     try {
-      await createProduct(data);
-      form.reset();
+      if (isEditing && editingProduct) {
+        await updateProduct(editingProduct.id, data);
+      } else {
+        await createProduct(data);
+      }
+
+      if (!isEditing) {
+        form.reset();
+      }
     } catch (error) {
       console.error("Form submission error:", error);
     }
@@ -343,7 +375,13 @@ export function ProductForm({
         </div>
 
         <Button type="submit" className="w-full" disabled={isLoading}>
-          {isLoading ? t("submitButtonLoading") : t("submitButton")}
+          {isLoading ? (
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          ) : isEditing ? (
+            t("updateButton")
+          ) : (
+            t("submitButton")
+          )}
         </Button>
       </form>
     </Form>
