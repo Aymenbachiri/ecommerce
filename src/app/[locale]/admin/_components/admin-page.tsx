@@ -267,7 +267,7 @@ export function AdminPage(): React.JSX.Element {
                       </Badge>
                     </TableCell>
                     <TableCell>
-                      <div className="flex gap-2">
+                      <section className="flex gap-2">
                         <Button
                           variant="ghost"
                           size="icon"
@@ -283,7 +283,7 @@ export function AdminPage(): React.JSX.Element {
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
-                      </div>
+                      </section>
                     </TableCell>
                   </TableRow>
                 ))}

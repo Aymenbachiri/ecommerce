@@ -288,7 +288,7 @@ export function ProductForm({
                 )}
               />
 
-              <div className="flex items-end">
+              <section className="flex items-end">
                 <Button
                   type="button"
                   variant="destructive"
@@ -297,7 +297,7 @@ export function ProductForm({
                 >
                   <X className="h-4 w-4" />
                 </Button>
-              </div>
+              </section>
             </div>
           ))}
         </div>
