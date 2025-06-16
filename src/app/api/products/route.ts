@@ -15,8 +15,8 @@ export async function GET(request: NextRequest) {
     ...params,
     minPrice: params.minPrice ? Number(params.minPrice) : undefined,
     maxPrice: params.maxPrice ? Number(params.maxPrice) : undefined,
-    inStock: params.inStock === "true",
-    featured: params.featured === "true",
+    inStock: params.inStock,
+    featured: params.featured,
     page: params.page ? Number(params.page) : undefined,
     limit: params.limit ? Number(params.limit) : undefined,
   });
@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
     sortOrder,
   } = parseResult.data;
 
-  const where: Prisma.ProductWhereInput = { published: true };
+  const where: Prisma.ProductWhereInput = {};
 
   if (search) {
     where.OR = [
@@ -91,6 +91,7 @@ export async function GET(request: NextRequest) {
   try {
     const [products, total] = await Promise.all([
       prisma.product.findMany({
+        where,
         orderBy,
         skip,
         take: limit,

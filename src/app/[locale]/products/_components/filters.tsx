@@ -19,6 +19,8 @@ import {
 } from "@/lib/store/store";
 import { mockCategories } from "@/lib/data/data";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+import { useDebounce } from "@/lib/hooks/use-debounce";
 
 type Value = "name" | "price-low" | "price-high" | "rating";
 
@@ -26,7 +28,17 @@ export function Filters(): React.JSX.Element {
   const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
   const [selectedCategory, setSelectedCategory] = useAtom(selectedCategoryAtom);
   const [sortBy, setSortBy] = useAtom(sortByAtom);
+  const [localSearchQuery, setLocalSearchQuery] = useState(searchQuery);
   const t = useTranslations("ProductsPage.Filters");
+  const debouncedSearchQuery = useDebounce(localSearchQuery, 300);
+
+  useEffect(() => {
+    setSearchQuery(debouncedSearchQuery);
+  }, [debouncedSearchQuery, setSearchQuery]);
+
+  useEffect(() => {
+    setLocalSearchQuery(searchQuery);
+  }, [searchQuery]);
 
   return (
     <Card>
@@ -44,7 +56,7 @@ export function Filters(): React.JSX.Element {
               id="search"
               placeholder={t("searchPlaceholder")}
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => setLocalSearchQuery(e.target.value)}
               className="pl-10"
             />
           </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useAtom } from "jotai";
 import { motion } from "motion/react";
 import { ProductCard } from "./product-card";
@@ -40,7 +40,7 @@ export function ProductsPage(): React.JSX.Element {
   const [sortBy] = useAtom(sortByAtom);
   const t = useTranslations("ProductsPage");
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     setLoading(true);
     try {
       const params = new URLSearchParams();
@@ -81,7 +81,7 @@ export function ProductsPage(): React.JSX.Element {
       }
 
       const response = await fetch(
-        ` ${API_URL}/api/products?${params.toString()}`,
+        `${API_URL}/api/products?${params.toString()}`,
       );
 
       if (!response.ok) {
@@ -99,17 +99,15 @@ export function ProductsPage(): React.JSX.Element {
     } finally {
       setLoading(false);
     }
-  };
-
-  useEffect(() => {
-    fetchProducts();
   }, [currentPage, searchQuery, selectedCategory, sortBy]);
 
   useEffect(() => {
-    if (currentPage !== 1) {
-      setCurrentPage(1);
-    }
+    setCurrentPage(1);
   }, [searchQuery, selectedCategory, sortBy]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
   const paginatedProducts = products;
 
