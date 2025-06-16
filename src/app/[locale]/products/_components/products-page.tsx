@@ -15,6 +15,7 @@ import { useTranslations } from "next-intl";
 import { ProductsSkeleton } from "./products-skeleton";
 import type { ProductWithRelations } from "@/lib/types/types";
 import { API_URL } from "@/lib/env/env";
+import { PackageX } from "lucide-react";
 
 const PRODUCTS_PER_PAGE = 3;
 
@@ -144,16 +145,23 @@ export function ProductsPage(): React.JSX.Element {
             ) : (
               <>
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-                  {paginatedProducts.map((product, index) => (
-                    <motion.div
-                      key={product.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1, duration: 0.6 }}
-                    >
-                      <ProductCard product={product} />
-                    </motion.div>
-                  ))}
+                  {paginatedProducts.length === 0 ? (
+                    <section className="text-muted-foreground flex flex-col items-center justify-center space-y-4 py-10 text-center">
+                      <PackageX className="h-12 w-12 text-gray-400" />
+                      <p>{t("noProducts")}</p>
+                    </section>
+                  ) : (
+                    paginatedProducts.map((product, index) => (
+                      <motion.div
+                        key={product.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1, duration: 0.6 }}
+                      >
+                        <ProductCard product={product} />
+                      </motion.div>
+                    ))
+                  )}
                 </div>
 
                 {totalPages > 1 && (

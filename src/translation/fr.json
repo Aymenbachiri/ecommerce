@@ -198,6 +198,7 @@
     "showingProducts": "Affichage de {count} produits",
     "previous": "Précédent",
     "next": "Suivant",
+    "noProducts": "Aucun produit disponible.",
     "Filters": {
       "title": "Filtres",
       "searchLabel": "Recherche",
@@ -285,6 +286,7 @@
       "addProduct": "Ajouter un produit",
       "editProduct": "Modifier le produit",
       "addNewProduct": "Ajouter un nouveau produit",
+      "noProducts": "Il n'y a aucun produit, veuillez en ajouter un.",
       "form": {
         "productName": "Nom du produit",
         "description": "Description",

@@ -25,6 +25,7 @@ import {
   DollarSign,
   Edit,
   Package,
+  PackageX,
   Plus,
   Trash2,
   Users,
@@ -155,62 +156,75 @@ export function AdminPage(): React.JSX.Element {
             </div>
           </CardHeader>
           <CardContent>
-            <Table dir={locale === "ar" ? "rtl" : "ltr"}>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>{t("ProductManagement.table.name")}</TableHead>
-                  <TableHead>{t("ProductManagement.table.category")}</TableHead>
-                  <TableHead>{t("ProductManagement.table.price")}</TableHead>
-                  <TableHead>{t("ProductManagement.table.stock")}</TableHead>
-                  <TableHead>{t("ProductManagement.table.status")}</TableHead>
-                  <TableHead>{t("ProductManagement.table.actions")}</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody dir="ltr">
-                {products.map((product) => (
-                  <TableRow key={product.id}>
-                    <TableCell className="font-medium">
-                      {product.name}
-                    </TableCell>
-                    <TableCell className="capitalize">
-                      {product?.categories
-                        ? product?.categories[0]?.category?.name
-                        : null}
-                    </TableCell>
-                    <TableCell>${product.price}</TableCell>
-                    <TableCell>{product.stock}</TableCell>
-                    <TableCell>
-                      <Badge
-                        variant={product.stock > 0 ? "default" : "destructive"}
-                      >
-                        {product.stock > 0
-                          ? t("ProductManagement.table.inStock")
-                          : t("ProductManagement.table.outOfStock")}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <section className="flex gap-2">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => handleEdit(product)}
-                        >
-                          <Edit className="h-4 w-4" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => handleDelete(product.id)}
-                          className="text-red-500 hover:text-red-700"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </section>
-                    </TableCell>
+            {products.length === 0 ? (
+              <section className="text-muted-foreground flex flex-col items-center justify-center space-y-4 py-10 text-center">
+                <PackageX className="h-12 w-12 text-gray-400" />
+                <p>{t("ProductManagement.noProducts")}</p>
+              </section>
+            ) : (
+              <Table dir={locale === "ar" ? "rtl" : "ltr"}>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>{t("ProductManagement.table.name")}</TableHead>
+                    <TableHead>
+                      {t("ProductManagement.table.category")}
+                    </TableHead>
+                    <TableHead>{t("ProductManagement.table.price")}</TableHead>
+                    <TableHead>{t("ProductManagement.table.stock")}</TableHead>
+                    <TableHead>{t("ProductManagement.table.status")}</TableHead>
+                    <TableHead>
+                      {t("ProductManagement.table.actions")}
+                    </TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody dir="ltr">
+                  {products.map((product) => (
+                    <TableRow key={product.id}>
+                      <TableCell className="font-medium">
+                        {product.name}
+                      </TableCell>
+                      <TableCell className="capitalize">
+                        {product?.categories
+                          ? product?.categories[0]?.category?.name
+                          : null}
+                      </TableCell>
+                      <TableCell>${product.price}</TableCell>
+                      <TableCell>{product.stock}</TableCell>
+                      <TableCell>
+                        <Badge
+                          variant={
+                            product.stock > 0 ? "default" : "destructive"
+                          }
+                        >
+                          {product.stock > 0
+                            ? t("ProductManagement.table.inStock")
+                            : t("ProductManagement.table.outOfStock")}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>
+                        <section className="flex gap-2">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => handleEdit(product)}
+                          >
+                            <Edit className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => handleDelete(product.id)}
+                            className="text-red-500 hover:text-red-700"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </section>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            )}
           </CardContent>
         </Card>
       </motion.div>

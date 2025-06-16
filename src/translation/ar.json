@@ -198,6 +198,7 @@
     "showingProducts": "عرض {count} منتجًا",
     "previous": "السابق",
     "next": "التالي",
+    "noProducts": "لا توجد منتجات متاحة.",
     "Filters": {
       "title": "الفلاتر",
       "searchLabel": "بحث",
@@ -285,6 +286,7 @@
       "addProduct": "إضافة منتج",
       "editProduct": "تعديل المنتج",
       "addNewProduct": "إضافة منتج جديد",
+      "noProducts": "لا يوجد منتجات، يرجى إضافة واحدة.",
       "form": {
         "productName": "اسم المنتج",
         "description": "الوصف",
