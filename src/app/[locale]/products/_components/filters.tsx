@@ -1,6 +1,5 @@
 "use client";
 
-import { useAtom } from "jotai";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,33 +11,22 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  searchQueryAtom,
-  selectedCategoryAtom,
-  sortByAtom,
-} from "@/lib/store/store";
-import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
-import { useDebounce } from "@/lib/hooks/use-debounce";
+
 import { productCategories } from "@/lib/utils/utils";
+import { useFilter } from "../_lib/use-filter";
 
 type Value = "name" | "price-low" | "price-high" | "rating";
 
 export function Filters(): React.JSX.Element {
-  const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
-  const [selectedCategory, setSelectedCategory] = useAtom(selectedCategoryAtom);
-  const [sortBy, setSortBy] = useAtom(sortByAtom);
-  const [localSearchQuery, setLocalSearchQuery] = useState(searchQuery);
-  const t = useTranslations("ProductsPage.Filters");
-  const debouncedSearchQuery = useDebounce(localSearchQuery, 300);
-
-  useEffect(() => {
-    setSearchQuery(debouncedSearchQuery);
-  }, [debouncedSearchQuery, setSearchQuery]);
-
-  useEffect(() => {
-    setLocalSearchQuery(searchQuery);
-  }, [searchQuery]);
+  const {
+    t,
+    searchQuery,
+    selectedCategory,
+    sortBy,
+    setLocalSearchQuery,
+    setSelectedCategory,
+    setSortBy,
+  } = useFilter();
 
   return (
     <Card>
