@@ -1,7 +1,6 @@
 "use client";
 
 import { cartAtom } from "@/lib/store/store";
-import { CartItemWithRelations, ProductWithRelations } from "@/lib/types/types";
 import { useAtom } from "jotai";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -15,6 +14,10 @@ import { Separator } from "@/components/ui/separator";
 import { ProductSkeleton } from "./product-skeleton";
 import { useTranslations } from "next-intl";
 import { API_URL } from "@/lib/env/env";
+import type {
+  CartItemWithRelations,
+  ProductWithRelations,
+} from "@/lib/types/types";
 
 export function ProductPage(): React.JSX.Element {
   const params = useParams();

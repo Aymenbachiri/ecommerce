@@ -2,22 +2,19 @@
 
 import { ShoppingCart, Menu, X, User } from "lucide-react";
 import { motion } from "motion/react";
-import { useState } from "react";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "../ui/button";
-import { useTranslations } from "next-intl";
 import { LocaleSwitcher } from "./locale-switcher";
 import { Link } from "@/i18n/navigation";
 import { signOut } from "next-auth/react";
+import { useNavbar } from "@/lib/hooks/use-navbar";
 import type { Session } from "next-auth";
+import { cn } from "@/lib/utils/utils";
 
-type Props = {
-  session: Session | null;
-};
+type Props = { session: Session | null };
 
 export function Navbar({ session }: Props): React.JSX.Element {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-  const t = useTranslations("HomePage.navbar");
+  const { mobileMenuOpen, setMobileMenuOpen, t, cart, locale } = useNavbar();
 
   return (
     <>
@@ -54,10 +51,18 @@ export function Navbar({ session }: Props): React.JSX.Element {
               {t("demo")}
             </Link>
             <Link
-              href="/#pricing"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              href="/cart"
+              className="text-muted-foreground hover:text-foreground relative transition-colors"
             >
-              {t("pricing")}
+              {t("cart")}
+              {cart.length > 0 && (
+                <span
+                  className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-black text-xs font-semibold text-white dark:bg-red-600"
+                  aria-label={`${cart.length} items in cart`}
+                >
+                  {cart.length}
+                </span>
+              )}
             </Link>
             <Link
               href="/products"
@@ -135,11 +140,22 @@ export function Navbar({ session }: Props): React.JSX.Element {
                 {t("demo")}
               </Link>
               <Link
-                href="/#pricing"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                href="/cart"
+                className="text-muted-foreground hover:text-foreground relative transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                {t("pricing")}
+                {t("cart")}
+                {cart.length > 0 && (
+                  <span
+                    className={cn(
+                      "absolute -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-black text-xs font-semibold text-white dark:bg-red-600",
+                      locale === "ar" ? "right-8" : "left-8",
+                    )}
+                    aria-label={`${cart.length} items in cart`}
+                  >
+                    {cart.length}
+                  </span>
+                )}
               </Link>
               <Link
                 href="/products"

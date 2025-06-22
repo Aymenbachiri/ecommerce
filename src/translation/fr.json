@@ -15,7 +15,8 @@
       "products": "Produits",
       "signIn": "Se connecter",
       "Signout": "Se déconnecter",
-      "dashboard": "Tableau de bord"
+      "dashboard": "Tableau de bord",
+      "cart": "Panier"
     }
   },
   "Hero": {

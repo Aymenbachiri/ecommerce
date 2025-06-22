@@ -15,7 +15,8 @@
       "signIn": "Sign In",
       "Signout": "Sign Out",
       "dashboard": "Dashboard",
-      "products": "Products"
+      "products": "Products",
+      "cart": "Cart"
     }
   },
   "Hero": {
