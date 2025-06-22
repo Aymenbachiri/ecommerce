@@ -8,8 +8,8 @@ import { LocaleSwitcher } from "./locale-switcher";
 import { Link } from "@/i18n/navigation";
 import { signOut } from "next-auth/react";
 import { useNavbar } from "@/lib/hooks/use-navbar";
-import type { Session } from "next-auth";
 import { cn } from "@/lib/utils/utils";
+import type { Session } from "next-auth";
 
 type Props = { session: Session | null };
 

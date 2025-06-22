@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cartAtom, cartTotalAtom, ordersAtom } from "@/lib/store/store";
-import { CustomerInfo, Order } from "@/lib/types/types";
 import { useAtom } from "jotai";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -15,6 +14,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
+import type {
+  CustomerInfo,
+  Order,
+  OrderStatus,
+  OrderWithRelations,
+  PaymentStatus,
+} from "@/lib/types/types";
 
 export function CheckoutPage(): React.JSX.Element {
   const [cart, setCart] = useAtom(cartAtom);
@@ -49,17 +55,35 @@ export function CheckoutPage(): React.JSX.Element {
     setLoading(true);
 
     setTimeout(() => {
+      const subtotal = total;
+      const tax = subtotal * 0.08;
+      const shipping = 10;
+      const finalTotal = subtotal + tax + shipping;
+
       const newOrder: Order = {
         id: Date.now().toString(),
-        items: [...cart],
-        total: total * 1.1,
-        status: "PENDING",
-        customerInfo,
+        userId: "temp-user-id",
+        status: "PENDING" as OrderStatus,
+        total: finalTotal,
+        subtotal: subtotal,
+        tax: tax,
+        shipping: shipping,
+        shippingAddressId: null,
+        billingAddressId: null,
+        paymentIntentId: null,
+        paymentStatus: "PENDING" as PaymentStatus,
+        notes: null,
         createdAt: new Date(),
         updatedAt: new Date(),
       };
 
-      setOrders([...orders, newOrder]);
+      const orderWithItems = {
+        ...newOrder,
+        items: [...cart],
+        customerInfo,
+      };
+
+      setOrders([...orders, orderWithItems] as OrderWithRelations[]);
       setCart([]);
 
       toast.success(t("orderPlacedSuccess", { orderId: newOrder.id }));

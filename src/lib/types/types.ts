@@ -60,6 +60,8 @@ export interface CategoryWithRelations extends Category {
 }
 
 export interface OrderWithRelations extends Order {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  customerInfo: any;
   user: Pick<User, "id" | "name" | "email">;
   items: (OrderItem & {
     product: ProductWithRelations;

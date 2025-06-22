@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { ordersAtom } from "@/lib/store/store";
-import { useAtom } from "jotai";
+import { useAtomValue } from "jotai";
 import { ArrowLeft, CheckCircle, Clock, Package, Truck } from "lucide-react";
 import { useParams } from "next/navigation";
 import { motion } from "motion/react";
@@ -15,7 +15,7 @@ import { useTranslations } from "next-intl";
 
 export function OrderDetails(): React.JSX.Element {
   const params = useParams();
-  const [orders] = useAtom(ordersAtom);
+  const orders = useAtomValue(ordersAtom);
   const t = useTranslations("OrderDetailsPage");
 
   const order = orders.find((o) => o.id === params.id);
@@ -129,7 +129,7 @@ export function OrderDetails(): React.JSX.Element {
                       className="flex gap-4 rounded-lg border p-4"
                     >
                       <Image
-                        src={item.product.image || "/placeholder.svg"}
+                        src={item.product.images[0].url || "/placeholder.svg"}
                         alt={item.product.name}
                         width={80}
                         height={80}
