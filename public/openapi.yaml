@@ -3,119 +3,471 @@ info:
   title: ShopBase API
   version: 1.0.0
   description: >
-    REST endpoints for product browsing, ordering, etc.
+    REST endpoints for product browsing, ordering, and management.
+
+    ## Authentication
+    Some endpoints require authentication. Include the session token in your requests.
+
+    ## Rate Limiting
+    API requests are rate-limited to prevent abuse.
 servers:
-  - url: { { process.env.NEXT_PUBLIC_API_URL } }
+  - url: { { NEXT_PUBLIC_API_URL } }
+    description: Production server
+  - url: http://localhost:3000
+    description: Development server
+
 paths:
   /api/products:
     get:
       summary: List products
+      description: Retrieve a paginated list of products with optional filtering and sorting
+      tags:
+        - Products
       parameters:
         - in: query
           name: page
+          description: Page number for pagination
           schema:
             type: integer
             default: 1
+            minimum: 1
         - in: query
           name: limit
+          description: Number of products per page
           schema:
             type: integer
             default: 10
+            minimum: 1
+            maximum: 100
         - in: query
           name: search
+          description: Search term to filter products by name or description
           schema:
             type: string
+            example: "smartphone"
         - in: query
           name: minPrice
+          description: Minimum price filter
           schema:
             type: number
+            minimum: 0
+            example: 10.99
         - in: query
           name: maxPrice
+          description: Maximum price filter
           schema:
             type: number
+            minimum: 0
+            example: 999.99
         - in: query
           name: inStock
+          description: Filter by stock availability
           schema:
             type: boolean
+            example: true
         - in: query
           name: featured
+          description: Filter by featured products only
           schema:
             type: boolean
+            example: true
         - in: query
           name: sortBy
+          description: Field to sort by
           schema:
             type: string
             enum: [name, price, rating, createdAt]
+            default: createdAt
         - in: query
           name: sortOrder
+          description: Sort order
           schema:
             type: string
             enum: [asc, desc]
+            default: desc
       responses:
         "200":
-          description: OK
+          description: Successfully retrieved products
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ProductList"
+              example:
+                data:
+                  - id: "60f7b3b3b3b3b3b3b3b3b3b3"
+                    name: "Smartphone Pro"
+                    description: "Latest smartphone with advanced features"
+                    price: 699.99
+                    images:
+                      - url: "https://example.com/image1.jpg"
+                        alt: "Smartphone front view"
+                    categories:
+                      - id: "60f7b3b3b3b3b3b3b3b3b3b4"
+                        name: "Electronics"
+                    averageRating: 4.5
+                    reviewCount: 128
+                pagination:
+                  page: 1
+                  limit: 10
+                  total: 50
+                  totalPages: 5
+                  hasMore: true
         "400":
           description: Invalid query parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: "Invalid query parameters"
+                details: "minPrice must be a positive number"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+    post:
+      summary: Create a new product
+      description: Create a new product (Admin only)
+      tags:
+        - Products
+      security:
+        - sessionAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateProductRequest"
+            example:
+              name: "New Smartphone"
+              description: "Latest model with cutting-edge technology"
+              price: 799.99
+              originalPrice: 899.99
+              stock: 50
+              sku: "PHONE-001"
+              featured: true
+              published: true
+              categoryIds: ["60f7b3b3b3b3b3b3b3b3b3b4"]
+              images:
+                - url: "https://example.com/phone1.jpg"
+                  alt: "Phone front view"
+                  order: 1
+      responses:
+        "201":
+          description: Product created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "400":
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Failed to create product
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
 components:
+  securitySchemes:
+    sessionAuth:
+      type: apiKey
+      in: cookie
+      name: next-auth.session-token
+      description: NextAuth session cookie
+
   schemas:
     ProductImage:
       type: object
+      required:
+        - url
+        - alt
       properties:
         url:
           type: string
+          format: uri
+          description: Image URL
+          example: "https://example.com/image.jpg"
         alt:
           type: string
+          description: Alternative text for the image
+          example: "Product front view"
+        order:
+          type: integer
+          description: Display order of the image
+          example: 1
+
     Category:
       type: object
+      required:
+        - id
+        - name
       properties:
         id:
           type: string
+          description: Unique category identifier
+          example: "60f7b3b3b3b3b3b3b3b3b3b4"
         name:
           type: string
+          description: Category name
+          example: "Electronics"
+
     Product:
       type: object
+      required:
+        - id
+        - name
+        - description
+        - price
       properties:
         id:
           type: string
+          description: Unique product identifier
+          example: "60f7b3b3b3b3b3b3b3b3b3b3"
         name:
           type: string
+          description: Product name
+          example: "Smartphone Pro"
         description:
           type: string
+          description: Product description
+          example: "Latest smartphone with advanced features"
         price:
           type: number
+          format: float
+          minimum: 0
+          description: Current product price
+          example: 699.99
+        originalPrice:
+          type: number
+          format: float
+          minimum: 0
+          description: Original price before discount
+          example: 799.99
+        stock:
+          type: integer
+          minimum: 0
+          description: Available stock quantity
+          example: 25
+        sku:
+          type: string
+          description: Stock Keeping Unit
+          example: "PHONE-PRO-001"
+        featured:
+          type: boolean
+          description: Whether the product is featured
+          example: true
+        published:
+          type: boolean
+          description: Whether the product is published
+          example: true
         images:
           type: array
           items:
             $ref: "#/components/schemas/ProductImage"
+          description: Product images
         categories:
           type: array
           items:
             $ref: "#/components/schemas/Category"
+          description: Product categories
         averageRating:
           type: number
+          format: float
+          minimum: 0
+          maximum: 5
+          description: Average customer rating
+          example: 4.5
         reviewCount:
           type: integer
+          minimum: 0
+          description: Number of customer reviews
+          example: 128
+        createdAt:
+          type: string
+          format: date-time
+          description: Product creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: Product last update timestamp
+
+    CreateProductRequest:
+      type: object
+      required:
+        - name
+        - description
+        - price
+        - stock
+        - sku
+        - featured
+        - published
+        - categoryIds
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 200
+          description: Product name
+          example: "New Smartphone"
+        description:
+          type: string
+          minLength: 1
+          maxLength: 2000
+          description: Product description
+          example: "Latest model with cutting-edge technology"
+        price:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 999999.99
+          description: Product price
+          example: 799.99
+        originalPrice:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 999999.99
+          description: Original price before discount
+          example: 899.99
+        stock:
+          type: integer
+          minimum: 0
+          maximum: 999999
+          description: Stock quantity
+          example: 50
+        sku:
+          type: string
+          minLength: 1
+          maxLength: 100
+          description: Stock Keeping Unit
+          example: "PHONE-001"
+        featured:
+          type: boolean
+          description: Whether the product should be featured
+          example: true
+        published:
+          type: boolean
+          description: Whether the product should be published
+          example: true
+        categoryIds:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: Array of category IDs
+          example: ["60f7b3b3b3b3b3b3b3b3b3b4"]
+        images:
+          type: array
+          items:
+            type: object
+            required:
+              - url
+              - alt
+              - order
+            properties:
+              url:
+                type: string
+                format: uri
+                description: Image URL
+              alt:
+                type: string
+                maxLength: 200
+                description: Alternative text for the image
+              order:
+                type: integer
+                description: Display order of the image
+          description: Product images
+
     ProductList:
       type: object
+      required:
+        - data
+        - pagination
       properties:
         data:
           type: array
           items:
             $ref: "#/components/schemas/Product"
+          description: Array of products
         pagination:
           type: object
+          required:
+            - page
+            - limit
+            - total
+            - totalPages
+            - hasMore
           properties:
             page:
               type: integer
+              minimum: 1
+              description: Current page number
+              example: 1
             limit:
               type: integer
+              minimum: 1
+              description: Number of items per page
+              example: 10
             total:
               type: integer
+              minimum: 0
+              description: Total number of products
+              example: 50
             totalPages:
               type: integer
+              minimum: 0
+              description: Total number of pages
+              example: 5
             hasMore:
               type: boolean
+              description: Whether there are more pages available
+              example: true
+
+    Error:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: string
+          description: Error message
+          example: "Something went wrong"
+        message:
+          type: string
+          description: Detailed error message
+          example: "Failed to process request"
+
+    ValidationError:
+      type: object
+      required:
+        - error
+        - details
+      properties:
+        error:
+          type: string
+          description: Error message
+          example: "Invalid request body"
+        details:
+          type: object
+          description: Validation error details
+          example:
+            name: ["String must contain at least 1 character(s)"]
+            price: ["Number must be greater than 0"]
+
+tags:
+  - name: Products
+    description: Product management endpoints
