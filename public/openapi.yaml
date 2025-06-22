@@ -234,6 +234,93 @@ paths:
               example:
                 error: "Failed to get categories"
                 message: "Database connection error"
+  /api/products/{id}:
+    get:
+      summary: Get product by ID
+      description: Retrieve a single product by its unique identifier with images and categories
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: Unique product identifier
+          schema:
+            type: string
+            example: "60f7b3b3b3b3b3b3b3b3b3b3"
+      responses:
+        "200":
+          description: Successfully retrieved product
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductWithDetails"
+              example:
+                id: "60f7b3b3b3b3b3b3b3b3b3b3"
+                name: "Smartphone Pro"
+                description: "Latest smartphone with advanced features"
+                price: 699.99
+                originalPrice: 799.99
+                stock: 25
+                sku: "PHONE-PRO-001"
+                featured: true
+                published: true
+                createdAt: "2023-07-20T10:30:00.000Z"
+                updatedAt: "2023-07-20T10:30:00.000Z"
+                images:
+                  - id: "60f7b3b3b3b3b3b3b3b3b3b6"
+                    url: "https://example.com/phone1.jpg"
+                    alt: "Smartphone front view"
+                    order: 1
+                    productId: "60f7b3b3b3b3b3b3b3b3b3b3"
+                    createdAt: "2023-07-20T10:30:00.000Z"
+                    updatedAt: "2023-07-20T10:30:00.000Z"
+                  - id: "60f7b3b3b3b3b3b3b3b3b3b7"
+                    url: "https://example.com/phone2.jpg"
+                    alt: "Smartphone back view"
+                    order: 2
+                    productId: "60f7b3b3b3b3b3b3b3b3b3b3"
+                    createdAt: "2023-07-20T10:30:00.000Z"
+                    updatedAt: "2023-07-20T10:30:00.000Z"
+                categories:
+                  - id: "60f7b3b3b3b3b3b3b3b3b3b8"
+                    productId: "60f7b3b3b3b3b3b3b3b3b3b3"
+                    categoryId: "60f7b3b3b3b3b3b3b3b3b3b4"
+                    assignedAt: "2023-07-20T10:30:00.000Z"
+                    category:
+                      id: "60f7b3b3b3b3b3b3b3b3b3b4"
+                      name: "Electronics"
+                      slug: "electronics"
+                      description: "Electronic devices and gadgets"
+                      image: "https://example.com/electronics.jpg"
+                      parentId: null
+                      createdAt: "2023-07-20T10:30:00.000Z"
+                      updatedAt: "2023-07-20T10:30:00.000Z"
+        "400":
+          description: Missing or invalid product ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: "Missing product ID"
+        "404":
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: "Product not found"
+        "500":
+          description: Failed to fetch product
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: "Failed to fetch product"
+                message: "Database connection error"
 
 components:
   securitySchemes:
@@ -522,59 +609,257 @@ components:
             name: ["String must contain at least 1 character(s)"]
             price: ["Number must be greater than 0"]
 
-  CategoryWithSubcategories:
-    type: object
-    required:
-      - id
-      - name
-      - slug
-      - createdAt
-      - updatedAt
-      - subcategories
-    properties:
-      id:
-        type: string
-        description: Unique category identifier
-        example: "60f7b3b3b3b3b3b3b3b3b3b4"
-      name:
-        type: string
-        description: Category name
-        example: "Electronics"
-      slug:
-        type: string
-        description: URL-friendly category name
-        example: "electronics"
-      description:
-        type: string
-        nullable: true
-        description: Category description
-        example: "Electronic devices and gadgets"
-      image:
-        type: string
-        nullable: true
-        description: Category image URL
-        example: "https://example.com/electronics.jpg"
-      parentId:
-        type: string
-        nullable: true
-        description: Parent category ID (null for root categories)
-        example: null
-      createdAt:
-        type: string
-        format: date-time
-        description: Category creation timestamp
-        example: "2023-07-20T10:30:00.000Z"
-      updatedAt:
-        type: string
-        format: date-time
-        description: Category last update timestamp
-        example: "2023-07-20T10:30:00.000Z"
-      subcategories:
-        type: array
-        items:
-          $ref: "#/components/schemas/CategoryWithSubcategories"
-        description: Array of subcategories
-        example: []
+    CategoryWithSubcategories:
+      type: object
+      required:
+        - id
+        - name
+        - slug
+        - createdAt
+        - updatedAt
+        - subcategories
+      properties:
+        id:
+          type: string
+          description: Unique category identifier
+          example: "60f7b3b3b3b3b3b3b3b3b3b4"
+        name:
+          type: string
+          description: Category name
+          example: "Electronics"
+        slug:
+          type: string
+          description: URL-friendly category name
+          example: "electronics"
+        description:
+          type: string
+          nullable: true
+          description: Category description
+          example: "Electronic devices and gadgets"
+        image:
+          type: string
+          nullable: true
+          description: Category image URL
+          example: "https://example.com/electronics.jpg"
+        parentId:
+          type: string
+          nullable: true
+          description: Parent category ID (null for root categories)
+          example: null
+        createdAt:
+          type: string
+          format: date-time
+          description: Category creation timestamp
+          example: "2023-07-20T10:30:00.000Z"
+        updatedAt:
+          type: string
+          format: date-time
+          description: Category last update timestamp
+          example: "2023-07-20T10:30:00.000Z"
+        subcategories:
+          type: array
+          items:
+            $ref: "#/components/schemas/CategoryWithSubcategories"
+          description: Array of subcategories
+          example: []
+
+    ProductImageWithDetails:
+      type: object
+      required:
+        - id
+        - url
+        - order
+        - productId
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          type: string
+          description: Unique image identifier
+          example: "60f7b3b3b3b3b3b3b3b3b3b6"
+        url:
+          type: string
+          format: uri
+          description: Image URL
+          example: "https://example.com/image.jpg"
+        alt:
+          type: string
+          nullable: true
+          description: Alternative text for the image
+          example: "Product front view"
+        order:
+          type: integer
+          description: Display order of the image
+          example: 1
+        productId:
+          type: string
+          description: Associated product identifier
+          example: "60f7b3b3b3b3b3b3b3b3b3b3"
+        createdAt:
+          type: string
+          format: date-time
+          description: Image creation timestamp
+          example: "2023-07-20T10:30:00.000Z"
+        updatedAt:
+          type: string
+          format: date-time
+          description: Image last update timestamp
+          example: "2023-07-20T10:30:00.000Z"
+
+    CategoryOnProduct:
+      type: object
+      required:
+        - id
+        - productId
+        - categoryId
+        - assignedAt
+        - category
+      properties:
+        id:
+          type: string
+          description: Unique assignment identifier
+          example: "60f7b3b3b3b3b3b3b3b3b3b8"
+        productId:
+          type: string
+          description: Product identifier
+          example: "60f7b3b3b3b3b3b3b3b3b3b3"
+        categoryId:
+          type: string
+          description: Category identifier
+          example: "60f7b3b3b3b3b3b3b3b3b3b4"
+        assignedAt:
+          type: string
+          format: date-time
+          description: Assignment timestamp
+          example: "2023-07-20T10:30:00.000Z"
+        category:
+          $ref: "#/components/schemas/CategoryDetail"
+
+    CategoryDetail:
+      type: object
+      required:
+        - id
+        - name
+        - slug
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          type: string
+          description: Unique category identifier
+          example: "60f7b3b3b3b3b3b3b3b3b3b4"
+        name:
+          type: string
+          description: Category name
+          example: "Electronics"
+        slug:
+          type: string
+          description: URL-friendly category name
+          example: "electronics"
+        description:
+          type: string
+          nullable: true
+          description: Category description
+          example: "Electronic devices and gadgets"
+        image:
+          type: string
+          nullable: true
+          description: Category image URL
+          example: "https://example.com/electronics.jpg"
+        parentId:
+          type: string
+          nullable: true
+          description: Parent category ID
+          example: null
+        createdAt:
+          type: string
+          format: date-time
+          description: Category creation timestamp
+          example: "2023-07-20T10:30:00.000Z"
+        updatedAt:
+          type: string
+          format: date-time
+          description: Category last update timestamp
+          example: "2023-07-20T10:30:00.000Z"
+
+    ProductWithDetails:
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - price
+        - stock
+        - featured
+        - published
+        - createdAt
+        - updatedAt
+        - images
+        - categories
+      properties:
+        id:
+          type: string
+          description: Unique product identifier
+          example: "60f7b3b3b3b3b3b3b3b3b3b3"
+        name:
+          type: string
+          description: Product name
+          example: "Smartphone Pro"
+        description:
+          type: string
+          description: Product description
+          example: "Latest smartphone with advanced features"
+        price:
+          type: number
+          format: float
+          minimum: 0
+          description: Current product price
+          example: 699.99
+        originalPrice:
+          type: number
+          format: float
+          minimum: 0
+          nullable: true
+          description: Original price before discount
+          example: 799.99
+        stock:
+          type: integer
+          minimum: 0
+          description: Available stock quantity
+          example: 25
+        sku:
+          type: string
+          nullable: true
+          description: Stock Keeping Unit
+          example: "PHONE-PRO-001"
+        featured:
+          type: boolean
+          description: Whether the product is featured
+          example: true
+        published:
+          type: boolean
+          description: Whether the product is published
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Product creation timestamp
+          example: "2023-07-20T10:30:00.000Z"
+        updatedAt:
+          type: string
+          format: date-time
+          description: Product last update timestamp
+          example: "2023-07-20T10:30:00.000Z"
+        images:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductImageWithDetails"
+          description: Product images ordered by display order
+        categories:
+          type: array
+          items:
+            $ref: "#/components/schemas/CategoryOnProduct"
+          description: Product categories with detailed category information
 
 tags:
   - name: Products
