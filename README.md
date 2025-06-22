@@ -66,10 +66,10 @@ Then fill in your environment variables in the `.env` file:
 
 ```env
 # Database
-DATABASE_URL="mongodb://localhost:27017/shopflow"
+DATABASE_URL=mongodb+srv://aymenbachiri99:fQhxuDHtEjafM4JI@cluster0.1xzfuy8.mongodb.net/shopFlow?retryWrites=true&w=majority&appName=Cluster0
 
 # NextAuth.js
-AUTH_SECRET="your-secret-key"
+AUTH_SECRET="jCmp6XaX/PkuRATrNgqaVhFQM3t3eINbOmxGTVLlzXk="
 NEXT_PUBLIC_API_URL="http://localhost:3000"
 
 ```
@@ -148,8 +148,3 @@ Interactive API documentation is available at `/reference` when the application 
 - **@scalar/nextjs-api-reference**: API documentation
 - **next-intl**: Internationalization
 - **clsx**: Conditional class names
-
-```
-
-
-```
