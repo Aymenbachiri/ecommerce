@@ -409,6 +409,66 @@ paths:
               example:
                 error: "Failed to update product"
                 message: "Database connection error"
+    delete:
+      summary: Delete product by ID
+      description: Delete an existing product by its unique identifier (Admin only)
+      tags:
+        - Products
+      security:
+        - sessionAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: Unique product identifier
+          schema:
+            type: string
+            example: "60f7b3b3b3b3b3b3b3b3b3b3"
+      responses:
+        "200":
+          description: Product deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteSuccess"
+              example:
+                success: true
+                message: "Product deleted successfully"
+        "400":
+          description: Missing product ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: "Missing product ID"
+        "401":
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: "Unauthorized"
+                message: "Authentication required"
+        "404":
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: "Product not found"
+                message: "Id not belong to any product"
+        "500":
+          description: Failed to delete product
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: "Failed to delete product"
+                message: "Database connection error"
 
 components:
   securitySchemes:
@@ -1026,6 +1086,20 @@ components:
                 description: Display order of the image
           description: Product images
       description: All fields are optional for partial updates. Only provided fields will be updated.
+    DeleteSuccess:
+      type: object
+      required:
+        - success
+        - message
+      properties:
+        success:
+          type: boolean
+          description: Indicates successful deletion
+          example: true
+        message:
+          type: string
+          description: Success message
+          example: "Product deleted successfully"
 
 tags:
   - name: Products
