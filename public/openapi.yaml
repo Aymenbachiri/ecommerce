@@ -180,6 +180,60 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /api/products/categories:
+    get:
+      summary: List all categories
+      description: Retrieve all categories with their subcategories (Admin only)
+      tags:
+        - Categories
+      security:
+        - sessionAuth: []
+      responses:
+        "200":
+          description: Successfully retrieved categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CategoryWithSubcategories"
+              example:
+                - id: "60f7b3b3b3b3b3b3b3b3b3b4"
+                  name: "Electronics"
+                  slug: "electronics"
+                  description: "Electronic devices and gadgets"
+                  image: "https://example.com/electronics.jpg"
+                  parentId: null
+                  createdAt: "2023-07-20T10:30:00.000Z"
+                  updatedAt: "2023-07-20T10:30:00.000Z"
+                  subcategories:
+                    - id: "60f7b3b3b3b3b3b3b3b3b3b5"
+                      name: "Smartphones"
+                      slug: "smartphones"
+                      description: "Mobile phones and accessories"
+                      image: "https://example.com/smartphones.jpg"
+                      parentId: "60f7b3b3b3b3b3b3b3b3b3b4"
+                      createdAt: "2023-07-20T11:00:00.000Z"
+                      updatedAt: "2023-07-20T11:00:00.000Z"
+                      subcategories: []
+        "401":
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: "Unauthorized"
+                message: "Authentication required"
+        "500":
+          description: Failed to retrieve categories
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: "Failed to get categories"
+                message: "Database connection error"
 
 components:
   securitySchemes:
@@ -468,6 +522,62 @@ components:
             name: ["String must contain at least 1 character(s)"]
             price: ["Number must be greater than 0"]
 
+  CategoryWithSubcategories:
+    type: object
+    required:
+      - id
+      - name
+      - slug
+      - createdAt
+      - updatedAt
+      - subcategories
+    properties:
+      id:
+        type: string
+        description: Unique category identifier
+        example: "60f7b3b3b3b3b3b3b3b3b3b4"
+      name:
+        type: string
+        description: Category name
+        example: "Electronics"
+      slug:
+        type: string
+        description: URL-friendly category name
+        example: "electronics"
+      description:
+        type: string
+        nullable: true
+        description: Category description
+        example: "Electronic devices and gadgets"
+      image:
+        type: string
+        nullable: true
+        description: Category image URL
+        example: "https://example.com/electronics.jpg"
+      parentId:
+        type: string
+        nullable: true
+        description: Parent category ID (null for root categories)
+        example: null
+      createdAt:
+        type: string
+        format: date-time
+        description: Category creation timestamp
+        example: "2023-07-20T10:30:00.000Z"
+      updatedAt:
+        type: string
+        format: date-time
+        description: Category last update timestamp
+        example: "2023-07-20T10:30:00.000Z"
+      subcategories:
+        type: array
+        items:
+          $ref: "#/components/schemas/CategoryWithSubcategories"
+        description: Array of subcategories
+        example: []
+
 tags:
   - name: Products
     description: Product management endpoints
+  - name: Categories
+    description: Category management endpoints
