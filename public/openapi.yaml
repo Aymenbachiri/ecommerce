@@ -321,6 +321,94 @@ paths:
               example:
                 error: "Failed to fetch product"
                 message: "Database connection error"
+    put:
+      summary: Update product by ID
+      description: Update an existing product by its unique identifier (Admin only)
+      tags:
+        - Products
+      security:
+        - sessionAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: Unique product identifier
+          schema:
+            type: string
+            example: "60f7b3b3b3b3b3b3b3b3b3b3"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProductRequest"
+            example:
+              name: "Updated Smartphone Pro"
+              description: "Enhanced smartphone with latest features"
+              price: 749.99
+              originalPrice: 849.99
+              stock: 30
+              featured: false
+              categoryIds:
+                ["60f7b3b3b3b3b3b3b3b3b3b4", "60f7b3b3b3b3b3b3b3b3b5"]
+              images:
+                - url: "https://example.com/updated-phone1.jpg"
+                  alt: "Updated phone front view"
+                  order: 1
+                - url: "https://example.com/updated-phone2.jpg"
+                  alt: "Updated phone back view"
+                  order: 2
+      responses:
+        "200":
+          description: Product updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductWithDetails"
+        "400":
+          description: Missing product ID or invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+              examples:
+                missing_id:
+                  summary: Missing product ID
+                  value:
+                    error: "Missing product ID"
+                invalid_body:
+                  summary: Invalid request body
+                  value:
+                    error: "Invalid request body"
+                    details:
+                      name: ["String must contain at least 1 character(s)"]
+                      price: ["Number must be greater than 0"]
+        "401":
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: "Unauthorized"
+                message: "Authentication required"
+        "404":
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: "Product not found"
+        "500":
+          description: Failed to update product
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: "Failed to update product"
+                message: "Database connection error"
 
 components:
   securitySchemes:
@@ -860,6 +948,84 @@ components:
           items:
             $ref: "#/components/schemas/CategoryOnProduct"
           description: Product categories with detailed category information
+    UpdateProductRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 200
+          description: Product name
+          example: "Updated Smartphone"
+        description:
+          type: string
+          minLength: 1
+          maxLength: 2000
+          description: Product description
+          example: "Enhanced model with improved features"
+        price:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 999999.99
+          description: Product price
+          example: 749.99
+        originalPrice:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 999999.99
+          description: Original price before discount
+          example: 849.99
+        stock:
+          type: integer
+          minimum: 0
+          maximum: 999999
+          description: Stock quantity
+          example: 30
+        sku:
+          type: string
+          minLength: 1
+          maxLength: 100
+          description: Stock Keeping Unit
+          example: "PHONE-001-V2"
+        featured:
+          type: boolean
+          description: Whether the product should be featured
+          example: false
+        published:
+          type: boolean
+          description: Whether the product should be published
+          example: true
+        categoryIds:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: Array of category IDs
+          example: ["60f7b3b3b3b3b3b3b3b3b3b4"]
+        images:
+          type: array
+          items:
+            type: object
+            required:
+              - url
+              - alt
+              - order
+            properties:
+              url:
+                type: string
+                format: uri
+                description: Image URL
+              alt:
+                type: string
+                maxLength: 200
+                description: Alternative text for the image
+              order:
+                type: integer
+                description: Display order of the image
+          description: Product images
+      description: All fields are optional for partial updates. Only provided fields will be updated.
 
 tags:
   - name: Products
