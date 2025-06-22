@@ -1,0 +1,121 @@
+openapi: 3.0.3
+info:
+  title: ShopBase API
+  version: 1.0.0
+  description: >
+    REST endpoints for product browsing, ordering, etc.
+servers:
+  - url: { { process.env.NEXT_PUBLIC_API_URL } }
+paths:
+  /api/products:
+    get:
+      summary: List products
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 10
+        - in: query
+          name: search
+          schema:
+            type: string
+        - in: query
+          name: minPrice
+          schema:
+            type: number
+        - in: query
+          name: maxPrice
+          schema:
+            type: number
+        - in: query
+          name: inStock
+          schema:
+            type: boolean
+        - in: query
+          name: featured
+          schema:
+            type: boolean
+        - in: query
+          name: sortBy
+          schema:
+            type: string
+            enum: [name, price, rating, createdAt]
+        - in: query
+          name: sortOrder
+          schema:
+            type: string
+            enum: [asc, desc]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductList"
+        "400":
+          description: Invalid query parameters
+components:
+  schemas:
+    ProductImage:
+      type: object
+      properties:
+        url:
+          type: string
+        alt:
+          type: string
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        images:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductImage"
+        categories:
+          type: array
+          items:
+            $ref: "#/components/schemas/Category"
+        averageRating:
+          type: number
+        reviewCount:
+          type: integer
+    ProductList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Product"
+        pagination:
+          type: object
+          properties:
+            page:
+              type: integer
+            limit:
+              type: integer
+            total:
+              type: integer
+            totalPages:
+              type: integer
+            hasMore:
+              type: boolean

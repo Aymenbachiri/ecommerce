@@ -1,5 +1,5 @@
 import { API_URL } from "@/lib/env/env";
-import { ProductWithRelations } from "@/lib/types/types";
+import type { ProductWithRelations } from "@/lib/types/types";
 
 type ApiResponse = {
   data: { products: ProductWithRelations[] };

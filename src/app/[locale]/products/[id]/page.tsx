@@ -1,8 +1,8 @@
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { ProductPage } from "./_components/product-page";
 import { getProduct } from "./_lib/get-product";
-import type { Metadata } from "next";
 import { getProducts } from "../_lib/get-products";
+import type { Metadata } from "next";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -24,9 +24,7 @@ export async function generateStaticParams(): Promise<{ id: string }[]> {
   const products = await getProducts();
   if (!products) return [];
 
-  return products.map((product) => ({
-    id: product.id,
-  }));
+  return products.map((product) => ({ id: product.id }));
 }
 
 export default async function page(): Promise<React.JSX.Element> {
