@@ -1,9 +1,8 @@
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { ProductPage } from "./_components/product-page";
 import { getProduct } from "./_lib/get-product";
-import { API_URL } from "@/lib/env/env";
 import type { Metadata } from "next";
-import type { ProductWithRelations } from "@/lib/types/types";
+import { getProducts } from "../_lib/get-products";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -22,11 +21,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams(): Promise<{ id: string }[]> {
-  const products = await fetch(`${API_URL}/api/products`).then((res) =>
-    res.json(),
-  );
+  const products = await getProducts();
+  if (!products) return [];
 
-  return products.data.map((product: ProductWithRelations) => ({
+  return products.map((product) => ({
     id: product.id,
   }));
 }
