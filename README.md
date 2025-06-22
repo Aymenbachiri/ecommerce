@@ -24,10 +24,10 @@ A modern, full-featured e-commerce application built with Next.js App Router, fe
 - **Framework**: Next.js 15.3.3 with App Router
 - **Runtime**: Bun
 - **Database**: MongoDB with Prisma ORM
-- **Authentication**: NextAuth.js v5
+- **Authentication**: Auth.js (NextAuth.js v5)
 - **State Management**: Jotai
 - **UI Components**: Radix UI primitives
-- **Styling**: Tailwind CSS
+- **Styling**: Tailwind CSS and Shadcn UI
 - **Forms**: React Hook Form with Zod validation
 - **Animations**: Framer Motion
 - **Theme**: next-themes
@@ -65,10 +65,7 @@ cp .env.example .env
 Then fill in your environment variables in the `.env` file:
 
 ```env
-# Database
 DATABASE_URL=mongodb+srv://aymenbachiri99:fQhxuDHtEjafM4JI@cluster0.1xzfuy8.mongodb.net/shopFlow?retryWrites=true&w=majority&appName=Cluster0
-
-# NextAuth.js
 AUTH_SECRET="jCmp6XaX/PkuRATrNgqaVhFQM3t3eINbOmxGTVLlzXk="
 NEXT_PUBLIC_API_URL="http://localhost:3000"
 
