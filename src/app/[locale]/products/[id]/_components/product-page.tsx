@@ -1,6 +1,5 @@
 "use client";
 
-import { mockProducts } from "@/lib/data/data";
 import { cartAtom } from "@/lib/store/store";
 import { CartItemWithRelations, ProductWithRelations } from "@/lib/types/types";
 import { useAtom } from "jotai";
@@ -15,6 +14,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { ProductSkeleton } from "./product-skeleton";
 import { useTranslations } from "next-intl";
+import { API_URL } from "@/lib/env/env";
 
 export function ProductPage(): React.JSX.Element {
   const params = useParams();
@@ -26,11 +26,31 @@ export function ProductPage(): React.JSX.Element {
   const t = useTranslations("ProductPage");
 
   useEffect(() => {
-    setTimeout(() => {
-      const foundProduct = mockProducts.find((p) => p.id === params.id);
-      setProduct(foundProduct || null);
-      setLoading(false);
-    }, 1000);
+    const fetchProduct = async () => {
+      if (!params.id) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/api/products/${params.id}`);
+        if (!response.ok) {
+          if (response.status === 404) {
+            setProduct(null);
+          }
+          throw new Error(`Error: ${response.statusText}`);
+        }
+        const data: ProductWithRelations = await response.json();
+        setProduct(data);
+      } catch (error) {
+        console.error("Failed to fetch product:", error);
+        setProduct(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
   }, [params.id]);
 
   const addToCart = () => {
@@ -95,7 +115,7 @@ export function ProductPage(): React.JSX.Element {
             transition={{ duration: 0.3 }}
           >
             <Image
-              src={images[selectedImage].url || "/placeholder.svg"}
+              src={images[selectedImage]?.url || "/placeholder.svg"}
               alt={product.name}
               width={600}
               height={600}
@@ -103,9 +123,9 @@ export function ProductPage(): React.JSX.Element {
             />
           </motion.div>
 
-          {images.length > 1 && (
+          {images?.length > 1 && (
             <div className="flex gap-2">
-              {images.map((image, index) => (
+              {images?.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
@@ -116,7 +136,7 @@ export function ProductPage(): React.JSX.Element {
                   }`}
                 >
                   <Image
-                    src={image.url || "/placeholder.svg"}
+                    src={image?.url || "/placeholder.svg"}
                     alt={`${product.name} ${index + 1}`}
                     width={80}
                     height={80}
@@ -158,7 +178,7 @@ export function ProductPage(): React.JSX.Element {
                 ))}
               </div>
               <span className="text-muted-foreground text-sm">
-                {product.averageRating as number} ({product.reviews.length}{" "}
+                {product.averageRating as number} ({product?.reviews?.length}{" "}
                 {t("reviews")})
               </span>
             </div>
