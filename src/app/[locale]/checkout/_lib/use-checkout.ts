@@ -1,5 +1,9 @@
 import { useRouter } from "@/i18n/navigation";
 import { cartAtom, cartTotalAtom, ordersAtom } from "@/lib/store/store";
+import { useAtom, useAtomValue } from "jotai";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { toast } from "sonner";
 import type {
   CartItemWithRelations,
   CustomerInfo,
@@ -8,10 +12,6 @@ import type {
   OrderWithRelations,
   PaymentStatus,
 } from "@/lib/types/types";
-import { useAtom, useAtomValue } from "jotai";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { toast } from "sonner";
 
 type PaymentInfo = {
   cardNumber: string;
