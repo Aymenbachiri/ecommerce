@@ -1,85 +1,25 @@
 "use client";
 
-import { cartAtom } from "@/lib/store/store";
-import { useAtom } from "jotai";
 import Image from "next/image";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { toast } from "sonner";
 import { motion } from "motion/react";
 import { Badge, Heart, Minus, Plus, ShoppingCart, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { ProductSkeleton } from "./product-skeleton";
-import { useTranslations } from "next-intl";
-import { API_URL } from "@/lib/env/env";
-import type {
-  CartItemWithRelations,
-  ProductWithRelations,
-} from "@/lib/types/types";
+import { useProduct } from "../_lib/use-product";
 
 export function ProductPage(): React.JSX.Element {
-  const params = useParams();
-  const [product, setProduct] = useState<ProductWithRelations | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [quantity, setQuantity] = useState(1);
-  const [selectedImage, setSelectedImage] = useState(0);
-  const [cart, setCart] = useAtom(cartAtom);
-  const t = useTranslations("ProductPage");
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      if (!params.id) {
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const response = await fetch(`${API_URL}/api/products/${params.id}`);
-        if (!response.ok) {
-          if (response.status === 404) {
-            setProduct(null);
-          }
-          throw new Error(`Error: ${response.statusText}`);
-        }
-        const data: ProductWithRelations = await response.json();
-        setProduct(data);
-      } catch (error) {
-        console.error("Failed to fetch product:", error);
-        setProduct(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProduct();
-  }, [params.id]);
-
-  const addToCart = () => {
-    if (!product) return;
-
-    const existingItem = cart.find((item) => item.product.id === product.id);
-
-    if (existingItem) {
-      setCart(
-        cart.map((item) =>
-          item.product.id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
-            : item,
-        ),
-      );
-    } else {
-      setCart([...cart, { product, quantity }] as CartItemWithRelations[]);
-    }
-
-    toast.success(
-      t("notification", {
-        quantity: quantity,
-        productName: product.name,
-      }),
-    );
-  };
+  const {
+    product,
+    loading,
+    quantity,
+    selectedImage,
+    setQuantity,
+    setSelectedImage,
+    addToCart,
+    t,
+  } = useProduct();
 
   if (loading) return <ProductSkeleton />;
 
