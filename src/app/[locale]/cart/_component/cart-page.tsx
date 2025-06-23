@@ -1,8 +1,5 @@
 "use client";
 
-import { cartAtom, cartTotalAtom } from "@/lib/store/store";
-import { useAtom } from "jotai";
-import { toast } from "sonner";
 import { motion } from "motion/react";
 import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,32 +7,10 @@ import { Link } from "@/i18n/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import { Separator } from "@radix-ui/react-select";
-import { useTranslations } from "next-intl";
+import { useCart } from "../_lib/use-cart";
 
 export function CartPage(): React.JSX.Element {
-  const [cart, setCart] = useAtom(cartAtom);
-  const [total] = useAtom(cartTotalAtom);
-  const t = useTranslations("CartPage");
-
-  const updateQuantity = (productId: string, newQuantity: number) => {
-    if (newQuantity === 0) {
-      removeItem(productId);
-      return;
-    }
-
-    setCart(
-      cart.map((item) =>
-        item.product.id === productId
-          ? { ...item, quantity: newQuantity }
-          : item,
-      ),
-    );
-  };
-
-  const removeItem = (productId: string) => {
-    setCart(cart.filter((item) => item.product.id !== productId));
-    toast.success(t("itemRemovedToast"));
-  };
+  const { cart, total, updateQuantity, removeItem, t } = useCart();
 
   if (cart.length === 0) {
     return (
