@@ -11,10 +11,8 @@ info:
     ## Rate Limiting
     API requests are rate-limited to prevent abuse.
 servers:
-  - url: { { NEXT_PUBLIC_API_URL } }
+  - url: https://shopflow-ab.vercel.app
     description: Production server
-  - url: http://localhost:3000
-    description: Development server
 
 paths:
   /api/products:
