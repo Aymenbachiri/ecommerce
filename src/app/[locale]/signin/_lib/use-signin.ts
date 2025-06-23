@@ -44,7 +44,7 @@ export function useSignIn(): UseSignInReturn {
       } else {
         toast.success(t("signinSuccess"));
         setTimeout(() => {
-          window.location.replace("/dashboard");
+          window.location.replace("/admin");
         }, 1000);
       }
     });

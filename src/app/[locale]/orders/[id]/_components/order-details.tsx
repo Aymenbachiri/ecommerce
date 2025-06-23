@@ -104,7 +104,7 @@ export function OrderDetails(): React.JSX.Element {
                       className="flex gap-4 rounded-lg border p-4"
                     >
                       <Image
-                        src={item.product.images[0].url || "/placeholder.svg"}
+                        src={"/placeholder.svg"}
                         alt={item.product.name}
                         width={80}
                         height={80}
