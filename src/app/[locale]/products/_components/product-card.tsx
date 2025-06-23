@@ -1,51 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useAtom } from "jotai";
 import { motion } from "motion/react";
 import { ShoppingCart, Star, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { cartAtom } from "@/lib/store/store";
-import { toast } from "sonner";
-import { useTranslations } from "next-intl";
-import type {
-  CartItemWithRelations,
-  ProductWithRelations,
-} from "@/lib/types/types";
+import type { ProductWithRelations } from "@/lib/types/types";
+import { useProductCard } from "../_lib/use-product-card";
 
 type ProductCardProps = {
   product: ProductWithRelations;
 };
 
 export function ProductCard({ product }: ProductCardProps): React.JSX.Element {
-  const [cart, setCart] = useAtom(cartAtom);
-  const t = useTranslations("ProductsPage.ProductCard");
-
-  const addToCart = () => {
-    const existingItem = cart.find((item) => item.product.id === product.id);
-
-    if (existingItem) {
-      setCart(
-        cart.map((item) =>
-          item.product.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item,
-        ),
-      );
-    } else {
-      setCart([...cart, { product, quantity: 1 } as CartItemWithRelations]);
-    }
-
-    toast.success(t("notification", { productName: product.name }));
-  };
-
-  const discount = product.originalPrice
-    ? Math.round(
-        ((product.originalPrice - product.price) / product.originalPrice) * 100,
-      )
-    : 0;
+  const { addToCart, discount, t } = useProductCard(product);
 
   return (
     <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }}>
