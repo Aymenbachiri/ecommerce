@@ -2,96 +2,27 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { cartAtom, cartTotalAtom, ordersAtom } from "@/lib/store/store";
-import { useAtom } from "jotai";
-import { useState } from "react";
-import { toast } from "sonner";
 import { motion } from "motion/react";
 import { CreditCard, MapPin, User } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
-import { useRouter } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
-import type {
-  CustomerInfo,
-  Order,
-  OrderStatus,
-  OrderWithRelations,
-  PaymentStatus,
-} from "@/lib/types/types";
+import { useCheckout } from "../_lib/use-checkout";
 
 export function CheckoutPage(): React.JSX.Element {
-  const [cart, setCart] = useAtom(cartAtom);
-  const [total] = useAtom(cartTotalAtom);
-  const [orders, setOrders] = useAtom(ordersAtom);
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
-  const t = useTranslations("CheckoutPage");
-
-  const [customerInfo, setCustomerInfo] = useState<CustomerInfo>({
-    name: "",
-    email: "",
-    phone: "",
-    address: {
-      street: "",
-      city: "",
-      state: "",
-      zipCode: "",
-      country: "",
-    },
-  });
-
-  const [paymentInfo, setPaymentInfo] = useState({
-    cardNumber: "",
-    expiryDate: "",
-    cvv: "",
-    cardholderName: "",
-  });
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    setTimeout(() => {
-      const subtotal = total;
-      const tax = subtotal * 0.08;
-      const shipping = 10;
-      const finalTotal = subtotal + tax + shipping;
-
-      const newOrder: Order = {
-        id: Date.now().toString(),
-        userId: "temp-user-id",
-        status: "PENDING" as OrderStatus,
-        total: finalTotal,
-        subtotal: subtotal,
-        tax: tax,
-        shipping: shipping,
-        shippingAddressId: null,
-        billingAddressId: null,
-        paymentIntentId: null,
-        paymentStatus: "PENDING" as PaymentStatus,
-        notes: null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
-
-      const orderWithItems = {
-        ...newOrder,
-        items: [...cart],
-        customerInfo,
-      };
-
-      setOrders([...orders, orderWithItems] as OrderWithRelations[]);
-      setCart([]);
-
-      toast.success(t("orderPlacedSuccess", { orderId: newOrder.id }));
-
-      router.push(`/orders/${newOrder.id}`);
-      setLoading(false);
-    }, 2000);
-  };
+  const {
+    cart,
+    total,
+    loading,
+    customerInfo,
+    paymentInfo,
+    handleSubmit,
+    t,
+    setCustomerInfo,
+    setPaymentInfo,
+    router,
+  } = useCheckout();
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
