@@ -4,32 +4,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "@/i18n/navigation";
-import { ordersAtom } from "@/lib/store/store";
-import { useAtom } from "jotai";
 import { Eye, Package } from "lucide-react";
 import { motion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useOrders } from "../_lib/use-orders";
 
 export function OrdersPage(): React.JSX.Element {
-  const [orders] = useAtom(ordersAtom);
-  const t = useTranslations("OrdersPage");
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "delivered":
-        return "bg-green-500";
-      case "shipped":
-        return "bg-blue-500";
-      case "processing":
-        return "bg-yellow-500";
-      case "pending":
-        return "bg-gray-500";
-      case "cancelled":
-        return "bg-red-500";
-      default:
-        return "bg-gray-500";
-    }
-  };
+  const { orders, t, getStatusColor } = useOrders();
 
   if (orders.length === 0) {
     return (
