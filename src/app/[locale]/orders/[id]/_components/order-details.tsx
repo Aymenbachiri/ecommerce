@@ -2,23 +2,30 @@
 
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { ordersAtom } from "@/lib/store/store";
-import { useAtomValue } from "jotai";
 import { ArrowLeft, CheckCircle, Clock, Package, Truck } from "lucide-react";
-import { useParams } from "next/navigation";
 import { motion } from "motion/react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
-import { useTranslations } from "next-intl";
+import { useOrder } from "../_lib/use-order";
 
 export function OrderDetails(): React.JSX.Element {
-  const params = useParams();
-  const orders = useAtomValue(ordersAtom);
-  const t = useTranslations("OrderDetailsPage");
-
-  const order = orders.find((o) => o.id === params.id);
+  const { order, t, getStatusColor } = useOrder();
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case "delivered":
+        return <CheckCircle className="h-5 w-5 text-green-500" />;
+      case "shipped":
+        return <Truck className="h-5 w-5 text-blue-500" />;
+      case "processing":
+        return <Package className="h-5 w-5 text-yellow-500" />;
+      case "pending":
+        return <Clock className="h-5 w-5 text-gray-500" />;
+      default:
+        return <Clock className="h-5 w-5 text-gray-500" />;
+    }
+  };
 
   if (!order) {
     return (
@@ -35,38 +42,6 @@ export function OrderDetails(): React.JSX.Element {
       </div>
     );
   }
-
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case "delivered":
-        return <CheckCircle className="h-5 w-5 text-green-500" />;
-      case "shipped":
-        return <Truck className="h-5 w-5 text-blue-500" />;
-      case "processing":
-        return <Package className="h-5 w-5 text-yellow-500" />;
-      case "pending":
-        return <Clock className="h-5 w-5 text-gray-500" />;
-      default:
-        return <Clock className="h-5 w-5 text-gray-500" />;
-    }
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "delivered":
-        return "bg-green-500";
-      case "shipped":
-        return "bg-blue-500";
-      case "processing":
-        return "bg-yellow-500";
-      case "pending":
-        return "bg-gray-500";
-      case "cancelled":
-        return "bg-red-500";
-      default:
-        return "bg-gray-500";
-    }
-  };
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
